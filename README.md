@@ -134,27 +134,27 @@ That's it for step 1! Nothing appears to have changed, but we've laid the ground
 
 ```javascript
 const initialState = {
-	  activeChartIndex: 0
-	, charts: [ {
-		  labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ]
-		, name: "Example Chart"
-		, datasets: [
-			{
-				  label: "My First dataset"
-				, data: [65, 59, 90, 81, 56, 55, 40]
-			}
-			, {
-				  label: "My Second dataset"
-				, data: [28, 48, 40, 19, 96, 27, 100]
-			}
-		]
-	} ]
+    activeChartIndex: 0
+  , charts: [ {
+      labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ]
+    , name: "Example Chart"
+    , datasets: [
+      {
+          label: "My First dataset"
+        , data: [65, 59, 90, 81, 56, 55, 40]
+      }
+      , {
+          label: "My Second dataset"
+        , data: [28, 48, 40, 19, 96, 27, 100]
+      }
+    ]
+  } ]
 };
 
 export default function chart( state = initialState, action ) {
-	switch ( action.type ) {
-		default: return state;
-	}
+  switch ( action.type ) {
+    default: return state;
+  }
 }
 
 ```
@@ -191,10 +191,10 @@ import store from "./store";
 import App from "./components/App";
 
 ReactDOM.render(
-	<Provider store={ store }>
-		<App />
-	</Provider>,
-	document.getElementById( 'root' )
+  <Provider store={ store }>
+    <App />
+  </Provider>,
+  document.getElementById( 'root' )
 );
 
 ```
@@ -215,31 +215,31 @@ import NewChart from "./NewChart/NewChart";
 import Sidebar from "./Sidebar/Sidebar";
 
 class App extends Component {
-	render() {
-		return (
-			<div className="app">
-				<Sidebar />
-				<main className="app__main">
-					<header className="app__header">
-						<h1 className="app__title">Categorizer</h1>
+  render() {
+    return (
+      <div className="app">
+        <Sidebar />
+        <main className="app__main">
+          <header className="app__header">
+            <h1 className="app__title">Categorizer</h1>
 
-						<div className="app__new-chart">
-							<NewChart />
-						</div>
-					</header>
-				</main>
-			</div>
-		);
-	}
+            <div className="app__new-chart">
+              <NewChart />
+            </div>
+          </header>
+        </main>
+      </div>
+    );
+  }
 }
 
 export default connect(mapStateToProps)(App);
 
 function mapStateToProps( { activeChartIndex, charts } ) {
-	return {
-		  activeChart: charts[ activeChartIndex ]
-		, charts
-	};
+  return {
+      activeChart: charts[ activeChartIndex ]
+    , charts
+  };
 }
 ```
 
