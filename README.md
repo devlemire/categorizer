@@ -39,7 +39,9 @@ The first step will be focused on the initial setup required to make a Redux app
 * Connect the application to Redux in `src/index.js`
 * Connect the `App` component definition to Redux
 
-**Detailed Instructions**
+<details>
+
+<summary> Detailed Instructions </summary>
 
 Start by installing the following dependencies
 
@@ -61,18 +63,18 @@ Open up `src/ducks/chart.js` and start by creating an `initialState` variable. `
 , name: "Example Chart"
   // The data required for rendering values to the chart
 , datasets: [
-		{
-			  // The name of the dataset
-			  label: "My First dataset"
-			  // Each of these numbers corresponds to one of the labels above,
-			  // based on index
-			, data: [65, 59, 90, 81, 56, 55, 40]
-		}
-		, {
-			  label: "My Second dataset"
-			, data: [28, 48, 40, 19, 96, 27, 100]
-		}
-	]
+    {
+        // The name of the dataset
+        label: "My First dataset"
+        // Each of these numbers corresponds to one of the labels above,
+        // based on index
+      , data: [65, 59, 90, 81, 56, 55, 40]
+    }
+    , {
+        label: "My Second dataset"
+      , data: [28, 48, 40, 19, 96, 27, 100]
+    }
+  ]
 }
 ```
 
@@ -104,7 +106,7 @@ To finish connecting the `App` component definition we need to create a decorato
 
 ```javascript
 function mapStateToProps( state ) {
-    return state;
+  return state;
 }
 const decorator = connect( mapStateToProps );
 const decoratedComponent = decorator( App );
@@ -115,16 +117,16 @@ This is usually shortened to
 
 ```javascript
 function mapStateToProps( state ) {
-    return state;
+  return state;
 }
 export default connect( mapStateToProps )( App );
 ```
 
-___
-
 </details>
 
 That's it for step 1! Nothing appears to have changed, but we've laid the groundwork we'll build on over the next steps!
+
+</details>
 
 <details>
 
