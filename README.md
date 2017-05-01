@@ -1,9 +1,6 @@
 <img src="https://devmounta.in/img/logowhiteblue.png" width="250" align="right">
 
-# Categorizer
-<img src="https://raw.githubusercontent.com/DevMountain/categorizer/master/readme_assets/completed.png" />
-
-### Project Summary
+# Project Summary
 
 During this project we'll be building a web application that allows for easily categorizing information in radar charts. Users will be able to keep track of multiple categories, each category having multiple data sets. To keep track of this data and pass it to the correct components we'll make heavy use of Redux and React Redux.
 
@@ -12,8 +9,9 @@ This diagram can serve as a useful reference point on how data is flowing in the
 
 **A finished example can be found [here](https://devmountain.github.io/categorizer/)**
 
+<img src="https://raw.githubusercontent.com/DevMountain/categorizer/master/readme_assets/completed.png" />
 
-### Setup
+## Setup
 
 Get started with the usual steps: 
 
@@ -23,13 +21,13 @@ Get started with the usual steps:
 * `npm test` to start the test suite
 * `npm start` to spin up the development server
 
-### Step 1
+## Step 1
 
-**Summary**
+### Summary
 
 The first step will be focused on the initial setup required to make a Redux application. We will install the required dependencies, create a reducer and Redux store, and connect the application to Redux.
 
-**Instructions**
+### Instructions
 
 * Install Redux and React Redux
 * Create `src/ducks/chart.js`
@@ -128,9 +126,7 @@ That's it for step 1! Nothing appears to have changed, but we've laid the ground
 
 </details>
 
-<details>
-
-<summary><b>Code Solution</b></summary>
+### Solution
 
 <details>
 
@@ -246,8 +242,6 @@ function mapStateToProps( { activeChartIndex, charts } ) {
 	};
 }
 ```
-
-</details>
 
 </details>
 
