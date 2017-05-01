@@ -134,18 +134,18 @@ That's it for step 1! Nothing appears to have changed, but we've laid the ground
 
 ```javascript
 const initialState = {
-    activeChartIndex: 0
-  , charts: [ {
-      labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ]
-    , name: "Example Chart"
-    , datasets: [
+  activeChartIndex: 0,
+  charts: [ {
+    labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ],
+    name: "Example Chart", 
+    datasets: [
       {
-          label: "My First dataset"
-        , data: [65, 59, 90, 81, 56, 55, 40]
-      }
-      , {
-          label: "My Second dataset"
-        , data: [28, 48, 40, 19, 96, 27, 100]
+        label: "My First dataset",
+        data: [65, 59, 90, 81, 56, 55, 40]
+      },
+      {
+        label: "My Second dataset",
+        data: [28, 48, 40, 19, 96, 27, 100]
       }
     ]
   } ]
@@ -237,8 +237,8 @@ export default connect(mapStateToProps)(App);
 
 function mapStateToProps( { activeChartIndex, charts } ) {
   return {
-      activeChart: charts[ activeChartIndex ]
-    , charts
+    activeChart: charts[ activeChartIndex ],
+    charts
   };
 }
 ```
