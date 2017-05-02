@@ -917,6 +917,8 @@ Replace the static `<li>` element and its contents with the `pastCharts` variabl
 
 </details>
 
+### Solution
+
 <details>
 
 <summary><code>src/components/App.js</code></summary>
@@ -1078,7 +1080,7 @@ Sidebar.propTypes = {
 
 ## Step 8
 
-### Summary**
+### Summary
 
 In this step we will be creating the reducer logic that allows the adding of datasets.
 
@@ -1140,6 +1142,8 @@ Add the `AddDataset` component into `App`'s `render` method just below `ActiveCh
 You should now see the skeleton of the `AddDataset` component to the right of the chart. We can't do much with it, but we'll fix that in the next step!
 
 </details>
+
+### Solution
 
 <details>
 
@@ -1286,18 +1290,20 @@ export default connect( mapStateToProps, { addDataset, createChart, setActiveCha
 
 </details>
 
-## Step 6
+## Step 9
 
-**Summary**
+### Summary
 
 In this step we will be updating the `AddDataset` component so a user can add data to their charts.
 
-**Instructions**
+### Instructions
 
 * Alter the `AddDataset` component to display a dynamic list of `input`s based on a chart's labels
 * Alter the `AddDataset` component to handle user input and allow submitting of datasets
 
-**Detailed Instructions**
+<details>
+
+<summary> Detailed Instructions </summary>
 
 This step will take place in `src/components/AddDataset/AddDataset.js`. We'll get started by creating a `constructor` method and creating an initial state. Normally we would create a property on state for each input, but we could have any number of inputs. How should we set up state to handle a dynamic number of inputs? In our case, we'll use an array.
 
@@ -1383,12 +1389,15 @@ componentWillReceiveProps( nextProps ) {
 
 Bug fixed! We're all done here!
 
+</details>
+
+### Solution
+
 <details>
 
-<summary><b>Code Solution</b></summary>
+<summary> <code> src/components/AddDataset/AddDataset.js </code> </summary>
 
 ```jsx
-// src/components/AddDataset/AddDataset.js
 import React, { Component, PropTypes } from "react";
 
 import "./AddDataset.css";
@@ -1496,6 +1505,8 @@ export default class AddDataset extends Component {
 	}
 }
 ```
+
+</details>
 
 </details>
 
