@@ -236,6 +236,21 @@ Basically Redux is creating the store and calling our reducer `chart` with `unde
 
 </details>
 
+### Solution
+
+<details>
+
+<summary><code>src/store.js</code></summary>
+
+```javascript
+import { createStore } from "redux";
+import chart from "./ducks/chart";
+
+export default createStore( chart );
+```
+
+</details>
+
 ## Step 3
 
 ### Summary
@@ -245,7 +260,7 @@ In this step we'll connect Redux to our application.
 ### Instructions
 
 * Connect the application to Redux in `src/index.js`.
-* Connect the `App` component definition to Redux
+* Connect the `App` component definition to Redux in `src/components/App.js`.
 
 <details>
 
@@ -265,15 +280,15 @@ Next, let's wrap the `App` component with the `Provider` component and add a pro
 ```js
 ReactDOM.render(
   <Provider store={ store }>
-	  <App />
+    <App />
   </Provider>,
-	document.getElementById( 'root' )
+  document.getElementById( 'root' )
 );
 ```
 
-Finally, in `src/components/App.js` let's import `connect` from React Redux. We'll use this later to connect our `App` component. Next, let's create a function above our export statement named `mapStateToProps` that takes a single parameter called `state`. This function will be used to tell Redux which pieces of state a component is interested in as well as the format they are passed in. We want all of the state data, but with some minor tweaks. Let's have our `mapStateToProps` return an object with a `activeChart` and `charts` property.
+Finally, in `src/components/App.js` let's import `connect` from React Redux. We'll use this later to connect our `App` component. Next, let's create a function above our `export` statement named `mapStateToProps` that takes a single parameter called `state`. This function will be used to tell Redux which pieces of state our `App` component is interested in and also format state before reaching `App`. Let's have our `mapStateToProps` return an object with a `activeChart` and `charts` property.
 
-* `activeChart` should equal the actual object of the chart, we can do this by using our `activeChartIndex` we get from state and our `charts` array. (`charts[ state.activeChartIndex ]`)
+* `activeChart` should equal the actual object of the chart, we can do this by using our `activeChartIndex` we get from state and our `charts` array. ( `charts[ state.activeChartIndex ]` )
 * `charts` should equal the array of charts (`charts`);
 
 <details>
@@ -304,11 +319,9 @@ function mapStateToProps( state ) {
 }
 ```
 
-To finish connecting the `App` component definition we need to create a decorator by invoking `connect` and passing in `mapStateToProps`, then invoke the decorator passing in `App`. We'll then want to modify our `export` statement to equal the `decoratedComponent` instead of just `App`. Decorators can be created one of two ways:
+To finish connecting the `App` component definition we need to create a decorator by invoking `connect` and passing in `mapStateToProps`. This will return a function we need to then invoke and pass in our `App` component. Finally we'll then want to modify our `export` statement to equal the `decoratedComponent` instead of `App`. 
 
-<details>
-
-<summary>Decorator Example</summary>
+Decorators can be created one of two ways:
 
 ```js
 function mapStateToProps( state ) {
@@ -326,60 +339,11 @@ function mapStateToProps( state ) {
 export default connect( mapStateToProps )( App );
 ```
 
-</details>
-
 Either way accomplishes the same thing, but in the solutions to come I'll be using the shorter version.
 
 </details>
 
 ### Solution
-
-<details>
-
-<summary><code>src/ducks/chart.js</code></summary>
-
-```javascript
-const initialState = {
-  activeChartIndex: 0,
-  charts: [ {
-    labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ],
-    name: "Example Chart", 
-    datasets: [
-      {
-        label: "My First dataset",
-        data: [65, 59, 90, 81, 56, 55, 40]
-      },
-      {
-        label: "My Second dataset",
-        data: [28, 48, 40, 19, 96, 27, 100]
-      }
-    ]
-  } ]
-};
-
-export default function chart( state = initialState, action ) {
-  switch ( action.type ) {
-    default: return state;
-  }
-}
-
-```
-
-</details>
-
-<details>
-
-<summary><code>src/store.js</code></summary>
-
-```javascript
-import { createStore } from "redux";
-
-import chart from "./ducks/chart";
-
-export default createStore( chart );
-```
-
-</details>
 
 <details>
 
@@ -439,19 +403,19 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps)(App);
-
 function mapStateToProps( { activeChartIndex, charts } ) {
   return {
     activeChart: charts[ activeChartIndex ],
     charts
   };
 }
+
+export default connect(mapStateToProps)(App);
 ```
 
 </details>
 
-### Step 2
+## Step 4
 
 **Summary**
 
