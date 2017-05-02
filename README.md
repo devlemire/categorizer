@@ -23,18 +23,13 @@ The following diagram can serve as a useful reference point on how data is flowi
 
 ### Summary
 
-The first step will be focused on the initial setup required to make a Redux application. We will install the required dependencies, create a reducer and Redux store, and connect the application to Redux.
+In this step we'll download the necessary packages to use Redux and create a reducer for our charts.
 
 ### Instructions
 
 * Install Redux and React Redux using npm.
-  * `npm install redux react-redux`
 * Create a `chart.js` file in `src/ducks/`.
 * Create an initial state and reducer inside of the `chart.js` file you just created.
-* Create a `store.js` file in `src/`
-* Create a Redux store inside of the `store.js` file you just created.
-* Connect the application to Redux in `src/index.js`.
-* Connect the `App` component definition to Redux
 
 <details>
 
@@ -131,10 +126,11 @@ const initialState = {
 
 <br />
 
-Next, let's create our reducer. Create and export by default a function named `chart` which takes two parameters
+Next, let's create our reducer under our `initialState` variable. Create and export by default a function named `chart` which takes two parameters: `state` and `action`.
 
-* `state` - This will be an object representation of our application's current state. It should default to `initialState`.
-* `action` - An object containing information about what has occurred, and any data necessary to perform a state change.
+* `state` - This will be an object representation of our application's current state.
+  * It should default to `initialState`.
+* `action` - An object containing information about what has occurred and any data necessary to perform a state change.
 
 ```js
 export default function chart( state = initialState, action ) {
@@ -145,6 +141,8 @@ export default function chart( state = initialState, action ) {
 In `ES2015` we can set default parameters by using an `=` sign in the function's head. `state = initialState` means that whenever `chart` gets called and `state` is not defined, it will use the value of `initialState` instead.
 
 Now, let's add a `switch` statement to the `chart` function that checks `action.type`. Later it will check for specific types, but for now just give it a `default` case that returns `state`.
+
+Your chart reducer should now look like:
 
 <details>
 
@@ -161,20 +159,116 @@ export default function chart( state = initialState, action ) {
 
 </details>
 
+</details>
+
+## Step 2
+
+### Summary
+
+In this step we'll create a store that we'll use the reducer we made in the previous step.
+
+### Instructions
+
+* Create a `store.js` file in `src/`
+* Create a Redux store inside of the `store.js` file you just created.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
 <br />
 
-Now that our reducer is setup, let's can create the application's Redux store. Create a new file in `src` named `store.js`. Inside of `src/store.js` import `createStore` from Redux and `chart` from `src/chart.js`. Create the Redux store by invoking `createStore` and passing in `chart`, export the store by default.
+Now that our reducer is setup, let's can create the application's Redux store. Create a new file in `src` named `store.js`. Inside of `src/store.js` we'll want to import `createStore` from `redux` and `chart` from `src/chart.js`. Then we can use `createStore` by invoking it and passing in our chart reducer. We'll also want to export this by default.
 
-What is Redux doing behind the scenes here? When Redux first initializes it will call the `chart` reducer function passing `undefined` as the first argument and a dummy action as the second argument. Our function will return the default state value of `initialState`, giving Redux an initial value to work with.
+<details>
 
-Now to connect the React application to Redux. In `src/index.js` import `Provider` from React Redux and `store` from `src/store.js`. Wrap the `App` component in the `Provider` component, passing `store` as a prop to `Provider`.  `Provider` is simply a wrapper component that gives the rest of the application access to the `store`.
+<summary> <code> store.js </code> </summary>
 
-Finally, in `src/components/App.js` import `connect` from React Redux. Underneath the component definition create a function named ``mapStateToProps` that takes a single parameter `state`. This function is how we tell Redux which pieces of state a component is interested in as well as the format they are passed in. We want all of the state data, but we also want to make life a little easier on ourselves, so `mapStateToProps` will return an object with two properties:
+```js
+import { createStore } from 'redux';
+import chart from './ducks/chart';
 
-* `activeChart` - Set equal to `charts[ state.activeChartIndex ]`
-* `charts` - Set equal to `state.charts`
+export default createStore(chart);
+```
 
-Note that we aren't simply returning `{ activeChartIndex: state.activeChartIndex, charts: state.charts }`, instead we are grabbing a reference to the actual active chart itself. Now we can access it easily throughout our components!
+</details>
+
+<br />
+
+Basically Redux is creating the store and calling our reducer `chart` with `undefined` and a dummy action as arguments. This will then cause our reducer to return the `initialState` variable and give our store an initial state.
+
+</details>
+
+## Step 3
+
+### Summary
+
+In this step we'll connect Redux to our application.
+
+### Instructions
+
+* Connect the application to Redux in `src/index.js`.
+* Connect the `App` component definition to Redux
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's being by opening `src/index.js`, and importing `Provider` from React Redux and `store` from `src/store.js`. Then wrap the `App` component in the `Provider` component. Then create a store prop on Provider equal to `store` ( the store that we imported from `src/store.js` ).  
+
+Your `index.js` should now look similiar to:
+
+<details>
+
+<summary> <code> index.js </code> </summary>
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+
+import "./index.css";
+
+import store from './store';
+
+import App from "./components/App";
+
+ReactDOM.render(
+  <Provider store={ store }>
+	  <App />
+  </Provider>,
+	document.getElementById( 'root' )
+);
+
+```
+
+</details>
+
+<br />
+
+We use `Provider` as a wrapper component that gives the rest of the application access to our Redux store.
+
+Finally, in `src/components/App.js` let's import `connect` from React Redux. We'll use this later to connect our `App` component. Next, let's create a function undeneath our App class declaration named `mapStateToProps` that takes a single parameter called `state`. This function will be used to tell Redux which pieces of state a component is interested in as well as the format they are passed in. We want all of the state data, but with some minor tweaks. Let's have our `mapStateToProps` return an object with a `activeChart` and `charts` property.
+
+* `activeChart` should equal the actual object of the chart, we can do this by using our `activeChartIndex` we get from state and our `charts` array. (`charts[ state.activeChartIndex ]`)
+* `charts` should equal the array of charts (`charts`);
+
+<details>
+
+<summary> <code> mapStateToProps </code> </summary>
+
+```js
+function mapStateToProps( { activeChartIndex, charts } ) {
+  return {
+    activeChart: charts[ activeChartIndex ],
+    charts: charts
+  };
+}
+```
+
+</details>
 
 To finish connecting the `App` component definition we need to create a decorator by invoking `connect` and passing in `mapStateToProps`, then invoke the decorator passing in `App`. Export the decorated component by default. Decorators take some getting used to, so here's a reminder:
 
@@ -201,8 +295,6 @@ export default connect( mapStateToProps )( App );
 ```
 
 </details>
-
-That's it for step 1! Nothing appears to have changed, but we've laid the groundwork we'll build on over the next steps!
 
 </details>
 
