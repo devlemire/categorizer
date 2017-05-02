@@ -463,18 +463,20 @@ In the following giphy take note of which file the debugger is currently in:
 
 </details>
 
-## Step 4
+## Step 5
 
-**Summary**
+### Summary
 
 In this step we will be connecting a component to Redux, creating our first action type/creator, and modifying the reducer to be able to handle the action.
 
-**Instructions**
+### Instructions
 
-* Create a `CREATE_CHART` action type and corresponding action creator
-* Modify the `chart` reducer to handle to handle adding a new chart
+* Create a `CREATE_CHART` action type and corresponding action creator in `src/ducks/chart.js`.
+* Modify the `chart` reducer to handle adding a new chart in `src/ducks/chart.js`.
 
-**Detailed Instructions**
+<details>
+
+<summary> Detailed Instructions </summary>
 
 This step will be in `src/ducks/chart.js`. At the top of the file create an action type `CREATE_CHART` and set it equal to `"CREATE_CHART"`. This action type is just a description of what happened used by the reducer to determine how to change state.
 
@@ -528,12 +530,15 @@ We'll hook this action up to the GUI in the next step, but for now you can test 
 }
 ```
 
+</details>
+
+### Solution
+
 <details>
 
-<summary><b>Code Solution</b></summary>
+<summary> <code> src/ducks/chart.js </code> </summary>
 
-```javascript
-// src/ducks/chart.js
+```js
 const CREATE_CHART = "CREATE_CHART";
 
 const initialState = {
@@ -571,25 +576,26 @@ export function createChart( labels, name ) {
 		, type: CREATE_CHART
 	}
 }
-
 ```
 
 </details>
 
-### Step 3
+## Step 6
 
-**Summary**
+### Summary
 
 In this step we'll implement the ability to create charts in the `NewChart` component.
 
-**Instructions**
+### Instructions
 
 * Import and connect the `createChart` action creator in `App`
 * Pass the `createChart` to the `NewChart` component
 * Alter the `NewChart` component definition to allow for handling user input
 * Use the `createChart` function to pass the user input to Redux
 
-**Detailed Instructions**
+<details>
+
+<summary> Detailed Instructions </summary>
 
 We'll begin this step in `src/components/App.js`. Import `createChart` from `src/ducks/chart.js`. If we were to invoke `createChart` in our component right now, what would happen? Would Redux receive the action?
 
@@ -699,9 +705,9 @@ submitChart() {
 
 You're now able to send all the data necessary for creating a chart to the reducer! Unfortunately the chart isn't visible yet, but we'll cover that in the next step.
 
-<details>
+</details>
 
-<summary><b>Code Solution</b></summary>
+### Solution
 
 <details>
 
@@ -854,8 +860,6 @@ export default class NewChart extends Component {
 }
 
 ```
-
-</details>
 
 </details>
 
