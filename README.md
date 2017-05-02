@@ -2,12 +2,12 @@
 
 # Project Summary
 
-During this project we'll be building a web application that allows for easily categorizing information in radar charts. Users will be able to keep track of multiple categories, each category having multiple data sets. To keep track of this data and pass it to the correct components we'll make heavy use of Redux and React Redux.
+During this project we'll be building a web application that allows for easily categorizing information in radar charts. Users will be able to keep track of multiple categories, with each category having multiple data sets. To keep track of this data and pass it to the correct components we'll make heavy use of Redux and React Redux.
 
-This diagram can serve as a useful reference point on how data is flowing in the application if you ever get a little lost.
+The following diagram can serve as a useful reference point on how data is flowing in the application if you ever get a little lost.
 <img src="https://raw.githubusercontent.com/DevMountain/categorizer/solution/readme_assets/categorizer-redux-flow.png" />
 
-**A finished example can be found [here](https://devmountain.github.io/categorizer/)**
+**A live example can be found [here](https://devmountain.github.io/categorizer/)**
 
 <img src="https://raw.githubusercontent.com/DevMountain/categorizer/master/readme_assets/completed.png" />
 
@@ -15,11 +15,11 @@ This diagram can serve as a useful reference point on how data is flowing in the
 
 Get started with the usual steps: 
 
-* Fork and clone this repository
-* `cd` into the project directory
-* `npm i` to download the included dependencies
-* `npm test` to start the test suite
-* `npm start` to spin up the development server
+* `Fork` and `clone` this repository.
+* `cd` into the project directory.
+* Run `npm install` to download the included dependencies.
+* In one terminal window/tab run `npm test` to start the test suite.
+* In another terminal window/tab run `npm start` to spin up the development server.
 
 ## Step 1
 
@@ -29,54 +29,105 @@ The first step will be focused on the initial setup required to make a Redux app
 
 ### Instructions
 
-* Install Redux and React Redux
-* Create `src/ducks/chart.js`
-* Write an initial state and reducer inside of `src/ducks/chart.js`
-* Create `src/store.js`
-* Create the Redux store in `src/store.js`
-* Connect the application to Redux in `src/index.js`
+* Install Redux and React Redux using npm.
+  * `npm install redux react-redux`
+* Create a `chart.js` file in `src/ducks/`.
+* Create an initial state and reducer inside of the `chart.js` file you just created.
+* Create a `store.js` file in `src/`
+* Create a Redux store inside of the `store.js` file you just created.
+* Connect the application to Redux in `src/index.js`.
 * Connect the `App` component definition to Redux
 
 <details>
 
 <summary> Detailed Instructions </summary>
 
-Start by installing the following dependencies
+<br />
+
+Let's begin by installing the following dependencies we'll need in order to use Redux with our react application. Open up a third terminal window/tab and make sure you are still in the root directory of the project and then run `npm install redux react-redux`.
 
 * [`redux`](http://redux.js.org/) - A state container for JavaScript applications. This library allows us to easily store and access information  from across an entire application.
 * [`react-redux`](https://github.com/reactjs/react-redux) - The official bindings to seamlessly connect a React application to Redux.
 
-As those install, open the directory inside of `src` named `ducks`. This is the directory where our reducer will live. Inside of `src/ducks` create a file `chart.js`. `chart.js` will hold a reducer, action types, action creators, and the reducer's initial state.
+Next, open the `ducks` folder ( `src/ducks` ) and create a file called `chart.js`. This is where we'll create our reducer, action types, action creators, and the initial state for our reducer.
 
-Open up `src/ducks/chart.js` and start by creating an `initialState` variable. `initialState` should be an object with two properties:
+Now let's open `src/ducks/chart.js` and start by creating an `initialState` variable. `initialState` should be an object with two properties: `activeChartIndex` and `charts`.
 
-* `activeChartIndex` - This is where we will store the index of the chart that the user has chosen to display. It should default to `0`
-* `charts` - This will be an array of objects containing the data necessary to create the charts. We'll have it default to an array containing an example chart object that looks like this:
+* `activeChartIndex` - This is where we will store the index of the chart that the user has chosen to display.
+* `charts` - This will be an array of objects containing the data necessary to create the charts. 
 
-```javascript
+Let's set the value of `activeChartIndex` to `0` so it will always display the first chart and let's default `charts` to an array. We'll also add a default chart to the `charts` array.
+The `charts` array will contain an array of chart objects that will keep track of the following information:
+
+* labels (array of strings): The labels that will appear at the corners of the chart.
+* name (string): The name of the chart.
+* datasets (array of objects): Data required for rendering values on to the chart
+
+Our default chart will be the following object:
+
+<details>
+
+<summary> <code> Default Chart Object </code> </summary>
+
+```js
 {
-  // Labels corresponding to the corners of the chart.
-  labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ]
-  // The name of the chart
-, name: "Example Chart"
-  // The data required for rendering values to the chart
-, datasets: [
+  labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ], 
+  name: "Example Chart", 
+  datasets: [
     {
-        // The name of the dataset
-        label: "My First dataset"
-        // Each of these numbers corresponds to one of the labels above,
-        // based on index
-      , data: [65, 59, 90, 81, 56, 55, 40]
-    }
-    , {
-        label: "My Second dataset"
-      , data: [28, 48, 40, 19, 96, 27, 100]
+      label: "My First dataset", 
+      data: [65, 59, 90, 81, 56, 55, 40]
+    },
+    {
+      label: "My Second dataset",
+      data: [28, 48, 40, 19, 96, 27, 100]
     }
   ]
 }
 ```
 
-Once the `initialState` is created we can create our reducer. Create and export by default a function named `chart` which takes two parameters
+</details>
+
+To explain a little bit more on `datasets`, the `data` array contains the integer values for the labels. Let's take a look at the first dataset object:
+
+```js
+{
+  label: "My first dataset",
+  data: [65, 59, 90, 81, 56, 55, 40]
+} 
+```
+
+Since this chart has the labels: "Red", "Blue", "Yellow", "Green", "Purple", "Orange". The value for "Red" is 65, the value for "Blue" is 59, and so on till the the value for "Orange" is 40. This relationship is made through the index of the arrays.
+
+<details>
+
+<summary> <code> chart.js </code> </summary>
+
+```js
+const initialState = {
+  activeChartIndex: 0,
+  charts: [
+    {
+      labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ], 
+      name: "Example Chart", 
+      datasets: [
+        {
+          label: "My First dataset", 
+          data: [65, 59, 90, 81, 56, 55, 40]
+        },
+        {
+          label: "My Second dataset",
+          data: [28, 48, 40, 19, 96, 27, 100]
+        }
+      ]
+    }
+  ]
+};
+```
+
+</details>
+
+Next, let's create our reducer. Create and export by default a function named `chart` which takes two parameters
 
 * `state` - This will be an object representation of our application's current state. It should default to `initialState`.
 * `action` - An object containing information about what has occurred, and any data necessary to perform a state change.
