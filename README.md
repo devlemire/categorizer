@@ -417,6 +417,46 @@ export default connect(mapStateToProps)(App);
 
 ## Step 4
 
+### Summary 
+
+In this step we are going to dive deeper into the flow of data to remove any layers of abstraction that might have appeared. If you feel confident in the flow of data up to this point, feel free to skip this step.
+
+### Visualization
+
+So far we've create a reducer and a store and then hooked it up to our `App`. But what exactly is the order of events in these files we've created? The first event in this chain is in our `index.js`. When we `import` `store` it goes into `store.js` and then `store.js` imports `chart.js` which causes our `initialState` to be created. After that `store.js` then invokes `createStore(chart)` which calls our reducer in `chart.js`. It calls our reducer with `undefined` for the state parameter and an object with a type property equal to `"@@redux/INIT"` for the action parameter. 
+
+Since `state` was equal to undefined our default parameter sets `state` equal to our `initialState` variable in `chart.js`. Then our switch statement fires for `action.type` and returns `state` because of the `default` case. 
+
+We then go back to `index.js` which then `imports` `App.js`. This causes the export default for `App` to fire which calls our `mapStateToProps` function above the `export`. `mapStateToProps` is called with our initial state as an object:
+
+```js
+{
+  activeChartIndex: 0,
+  charts: [
+    {
+      labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ], 
+      name: "Example Chart", 
+      datasets: [
+        {
+          label: "My First dataset", 
+          data: [65, 59, 90, 81, 56, 55, 40]
+        },
+        {
+          label: "My Second dataset",
+          data: [28, 48, 40, 19, 96, 27, 100]
+        }
+      ]
+    }
+  ]
+}
+```
+
+`mapStateToProps` then modifies this object and returns a new object. This new object then becomes the `props` for the `App` component when it is rendered on the page.
+
+In the following giphy take note of which file the debugger is currently in:
+
+## Step 4
+
 **Summary**
 
 In this step we will be connecting a component to Redux, creating our first action type/creator, and modifying the reducer to be able to handle the action.

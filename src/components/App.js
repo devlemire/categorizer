@@ -8,6 +8,7 @@ import Sidebar from "./Sidebar/Sidebar";
 
 class App extends Component {
 	render() {
+    console.log('Props in App:', this.props);
 		return (
 			<div className="app">
 				<Sidebar />
@@ -26,6 +27,7 @@ class App extends Component {
 }
 
 function mapStateToProps( { activeChartIndex, charts } ) {
+  console.log('Map State to Props fired:', arguments[0]);
   return {
     activeChart: charts[ activeChartIndex ],
     charts: charts
