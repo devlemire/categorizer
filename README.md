@@ -94,7 +94,7 @@ To explain a little bit more on `datasets`, the `data` array contains the intege
 
 Since this chart has the labels: "Red", "Blue", "Yellow", "Green", "Purple", "Orange". The value for "Red" is 65, the value for "Blue" is 59, and so on till the the value for "Orange" is 40. This relationship is made through the index of the arrays.
 
-You `chart.js` should now look like:
+Your `chart.js` should now look like:
 
 <details>
 
@@ -215,7 +215,7 @@ In this step we'll create a store that we'll use the reducer we made in the prev
 
 <br />
 
-Now that our reducer is setup, let's can create the application's Redux store. Create a new file in `src` named `store.js`. Inside of `src/store.js` we'll want to import `createStore` from `redux` and `chart` from `src/chart.js`. Then we can use `createStore` by invoking it and passing in our chart reducer. We'll also want to export this by default.
+Create a new file in `src` named `store.js`. Inside of `src/store.js` we'll want to import `createStore` from `redux` and `chart` from `src/chart.js`. Then we can use `createStore` by invoking it and passing in our chart reducer. We'll also want to export this by default.
 
 <details>
 
@@ -253,41 +253,25 @@ In this step we'll connect Redux to our application.
 
 <br />
 
-Let's being by opening `src/index.js`, and importing `Provider` from React Redux and `store` from `src/store.js`. Then wrap the `App` component in the `Provider` component. Then create a store prop on Provider equal to `store` ( the store that we imported from `src/store.js` ).  
-
-Your `index.js` should now look similiar to:
-
-<details>
-
-<summary> <code> index.js </code> </summary>
+Let's being by importing `Provider` from `react-redux` and `store` from `src/store.js` in `src/index.js`. 
 
 ```js
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux';
+import store from './store.js';
+```
 
-import "./index.css";
+Next, let's wrap the `App` component with the `Provider` component and add a prop on `Provider` called `store` that's equal to the `store` we imported from `'./store.js'`. We use `Provider` as a wrapper component that gives the rest of the application access to our Redux store.
 
-import store from './store';
-
-import App from "./components/App";
-
+```js
 ReactDOM.render(
   <Provider store={ store }>
 	  <App />
   </Provider>,
 	document.getElementById( 'root' )
 );
-
 ```
 
-</details>
-
-<br />
-
-We use `Provider` as a wrapper component that gives the rest of the application access to our Redux store.
-
-Finally, in `src/components/App.js` let's import `connect` from React Redux. We'll use this later to connect our `App` component. Next, let's create a function undeneath our App class declaration named `mapStateToProps` that takes a single parameter called `state`. This function will be used to tell Redux which pieces of state a component is interested in as well as the format they are passed in. We want all of the state data, but with some minor tweaks. Let's have our `mapStateToProps` return an object with a `activeChart` and `charts` property.
+Finally, in `src/components/App.js` let's import `connect` from React Redux. We'll use this later to connect our `App` component. Next, let's create a function above our export statement named `mapStateToProps` that takes a single parameter called `state`. This function will be used to tell Redux which pieces of state a component is interested in as well as the format they are passed in. We want all of the state data, but with some minor tweaks. Let's have our `mapStateToProps` return an object with a `activeChart` and `charts` property.
 
 * `activeChart` should equal the actual object of the chart, we can do this by using our `activeChartIndex` we get from state and our `charts` array. (`charts[ state.activeChartIndex ]`)
 * `charts` should equal the array of charts (`charts`);
@@ -307,13 +291,26 @@ function mapStateToProps( { activeChartIndex, charts } ) {
 
 </details>
 
-To finish connecting the `App` component definition we need to create a decorator by invoking `connect` and passing in `mapStateToProps`, then invoke the decorator passing in `App`. Export the decorated component by default. Decorators take some getting used to, so here's a reminder:
+<br />
+
+Using `ES2015` we can destructure the object that gets passed into `mapStateToProps` by using `{ activeChartIndex, charts }`. This takes the object that would get passed in as the first parameter and turns its props into variables we can use in the function. This is the same thing as doing:
+
+```js
+function mapStateToProps( state ) {
+  return {
+    activeChart: state.charts[ state.activeChartIndex ],
+    charts: state.charts
+  }
+}
+```
+
+To finish connecting the `App` component definition we need to create a decorator by invoking `connect` and passing in `mapStateToProps`, then invoke the decorator passing in `App`. We'll then want to modify our `export` statement to equal the `decoratedComponent` instead of just `App`. Decorators can be created one of two ways:
 
 <details>
 
 <summary>Decorator Example</summary>
 
-```javascript
+```js
 function mapStateToProps( state ) {
   return state;
 }
@@ -322,9 +319,7 @@ const decoratedComponent = decorator( App );
 export default decoratedComponent;
 ```
 
-This is usually shortened to
-
-```javascript
+```js
 function mapStateToProps( state ) {
   return state;
 }
@@ -332,6 +327,8 @@ export default connect( mapStateToProps )( App );
 ```
 
 </details>
+
+Either way accomplishes the same thing, but in the solutions to come I'll be using the shorter version.
 
 </details>
 
