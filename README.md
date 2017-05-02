@@ -142,11 +142,28 @@ export default function chart( state = initialState, action ) {
 }
 ```
 
+In `ES2015` we can set default parameters by using an `=` sign in the function's head. `state = initialState` means that whenever `chart` gets called and `state` is not defined, it will use the value of `initialState` instead.
 
+Now, let's add a `switch` statement to the `chart` function that checks `action.type`. Later it will check for specific types, but for now just give it a `default` case that returns `state`.
 
-Add a `switch` statement to the `chart` function that checks `action.type`. Later it will check for specific types, but for now just give it a `default` case that returns `state`.
+<details>
 
-Now that the bones of the reducer are in place, we can create the application's Redux store. Create a new file in `src` named `store.js`. Inside of `src/store.js` import `createStore` from Redux and `chart` from `src/chart.js`. Create the Redux store by invoking `createStore` and passing in `chart`, export the store by default.
+<summary> <code> chart reducer </code> </summary>
+
+```js
+export default function chart( state = initialState, action ) {
+  switch(action.type) {
+    default:
+      return state;
+  }
+}
+```
+
+</details>
+
+<br />
+
+Now that our reducer is setup, let's can create the application's Redux store. Create a new file in `src` named `store.js`. Inside of `src/store.js` import `createStore` from Redux and `chart` from `src/chart.js`. Create the Redux store by invoking `createStore` and passing in `chart`, export the store by default.
 
 What is Redux doing behind the scenes here? When Redux first initializes it will call the `chart` reducer function passing `undefined` as the first argument and a dummy action as the second argument. Our function will return the default state value of `initialState`, giving Redux an initial value to work with.
 
