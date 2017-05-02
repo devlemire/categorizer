@@ -863,13 +863,13 @@ export default class NewChart extends Component {
 
 </details>
 
-### Step 4
+## Step 7
 
-**Summary**
+### Summary
 
-In this step we will be rendering the chart, and updating the sidebar to list all past charts.
+In this step we will be rendering the chart and updating the sidebar to list all past charts.
 
-**Instructions**
+### Instructions
 
 * Render the `ActiveChart` component into `App`
 * Pass the `activeChart` prop to the `ActiveChart` component
@@ -878,7 +878,9 @@ In this step we will be rendering the chart, and updating the sidebar to list al
 * Pass `charts` and `setActiveChartIndex` props to `Sidebar`
 * Refactor `Sidebar` to display a list of past charts
 
-**Detailed Instructions**
+<details>
+
+<summary> Detailed Instructions </summary>
 
 After all the hard work we've done so far, it's time to finally display a chart! Start by opening up `src/components/App.js` and import `ActiveChart` from `src/components/ActiveChart/ActiveChart`. At the top of the `render` method, destructure `activeChart` and `charts` from `this.props`. Inside of the `render` method's `return`, just beneath the closing `</header>` tag, add a div with the class `app__active-chart`. Place the `ActiveChart` component into this new div and give it a `chart` prop set equal to the `activeChart` object we are getting from Redux.
 
@@ -913,9 +915,7 @@ Open up `src/components/Sidebar/Sidebar.js`. We'll need to `map` over the charts
 
 Replace the static `<li>` element and its contents with the `pastCharts` variable. You should now be able to create multiple charts and navigate between them by clicking on the appropriate sidebar links.
 
-<details>
-
-<summary><b>Code Solution</b></summary>
+</details>
 
 <details>
 
@@ -1076,22 +1076,22 @@ Sidebar.propTypes = {
 
 </details>
 
-</details>
+## Step 8
 
-### Step 5
-
-**Summary**
+### Summary**
 
 In this step we will be creating the reducer logic that allows the adding of datasets.
 
-**Instructions**
+### Instructions
 
 * Create an `ADD_DATASET` action type and corresponding action creator
 * Alter the `chart` reducer to handle the new action type
 * Connect the `addDataset` action creator to `App`
 * Render the `AddDataset` component into `App`, passing the `addDataset` action creator as a prop
 
-**Detailed Instructions**
+<details>
+
+<summary> Detailed Instructions </summary>
 
 We'll begin this step in `src/ducks/chart.js`. Create a new action type of `ADD_DATASET` at the top of the file. Underneath the reducer create and export the corresponding action creator - `addDataset`. `addDataset` will take a single parameter `dataset` and return an object with two properties
 
@@ -1139,9 +1139,7 @@ Add the `AddDataset` component into `App`'s `render` method just below `ActiveCh
 
 You should now see the skeleton of the `AddDataset` component to the right of the chart. We can't do much with it, but we'll fix that in the next step!
 
-<details>
-
-<summary><b>Code Solution</b></summary>
+</details>
 
 <details>
 
@@ -1288,9 +1286,7 @@ export default connect( mapStateToProps, { addDataset, createChart, setActiveCha
 
 </details>
 
-</details>
-
-### Step 6
+## Step 6
 
 **Summary**
 
