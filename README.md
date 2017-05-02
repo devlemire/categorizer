@@ -421,7 +421,11 @@ export default connect(mapStateToProps)(App);
 
 In this step we are going to dive deeper into the flow of data to remove any layers of abstraction that might have appeared. If you feel confident in the flow of data up to this point, feel free to skip this step.
 
-### Visualization
+<details>
+
+<summary> Visualization </summary>
+
+<br />
 
 So far we've create a reducer and a store and then hooked it up to our `App`. But what exactly is the order of events in these files we've created? The first event in this chain is in our `index.js`. When we `import` `store` it goes into `store.js` and then `store.js` imports `chart.js` which causes our `initialState` variable to be created. After that `store.js` then invokes `createStore(chart)` which calls our reducer in `chart.js`. It calls our reducer with `undefined` for the state parameter and an object with a type property equal to `"@@redux/INIT"` for the action parameter. 
 
@@ -451,11 +455,13 @@ We then go back to `index.js` which then `imports` `App.js`. This causes the exp
 }
 ```
 
-`mapStateToProps` then modifies this object and returns a new object. This new object then becomes the `props` for the `App` component when. Be aware that there are other events happening in between these events, mostly by Redux, but at a high-level this the chain of events for the files we created.
+`mapStateToProps` then modifies this object and returns a new object. This new object then becomes the `props` for the `App` component. Be aware that there are other events happening in between these events, mostly by Redux, but at a high-level this is the chain of events for the files we created.
 
 In the following giphy take note of which file the debugger is currently in:
 
 <img src="https://github.com/DevMountain/categorizer/blob/solution/readme_assets/1g.gif" />
+
+</details>
 
 ## Step 4
 
