@@ -13,8 +13,6 @@ The following diagram can serve as a useful reference point on how data is flowi
 
 ## Setup
 
-Get started with the usual steps: 
-
 * `Fork` and `clone` this repository.
 * `cd` into the project directory.
 * Run `npm install` to download the included dependencies.
@@ -56,12 +54,12 @@ Now let's open `src/ducks/chart.js` and start by creating an `initialState` vari
 * `activeChartIndex` - This is where we will store the index of the chart that the user has chosen to display.
 * `charts` - This will be an array of objects containing the data necessary to create the charts. 
 
-Let's set the value of `activeChartIndex` to `0` so it will always display the first chart and let's default `charts` to an array. We'll also add a default chart to the `charts` array.
+Let's set the value of `activeChartIndex` to `0` so it will display the first chart and let's default `charts` to an array. We'll also add a default chart to the `charts` array.
 The `charts` array will contain an array of chart objects that will keep track of the following information:
 
-* labels (array of strings): The labels that will appear at the corners of the chart.
-* name (string): The name of the chart.
-* datasets (array of objects): Data required for rendering values on to the chart
+* `labels` (array of strings): The labels that will appear at the corners of the chart.
+* `name` (string): The name of the chart.
+* `datasets` (array of objects): Data required for rendering values on to the chart
 
 Our default chart will be the following object:
 
@@ -88,6 +86,8 @@ Our default chart will be the following object:
 
 </details>
 
+<br />
+
 To explain a little bit more on `datasets`, the `data` array contains the integer values for the labels. Let's take a look at the first dataset object:
 
 ```js
@@ -98,6 +98,8 @@ To explain a little bit more on `datasets`, the `data` array contains the intege
 ```
 
 Since this chart has the labels: "Red", "Blue", "Yellow", "Green", "Purple", "Orange". The value for "Red" is 65, the value for "Blue" is 59, and so on till the the value for "Orange" is 40. This relationship is made through the index of the arrays.
+
+You `chart.js` should now look like:
 
 <details>
 
@@ -127,10 +129,20 @@ const initialState = {
 
 </details>
 
+<br />
+
 Next, let's create our reducer. Create and export by default a function named `chart` which takes two parameters
 
 * `state` - This will be an object representation of our application's current state. It should default to `initialState`.
 * `action` - An object containing information about what has occurred, and any data necessary to perform a state change.
+
+```js
+export default function chart( state = initialState, action ) {
+
+}
+```
+
+
 
 Add a `switch` statement to the `chart` function that checks `action.type`. Later it will check for specific types, but for now just give it a `default` case that returns `state`.
 
