@@ -973,7 +973,7 @@ In this step we will continue to make our `NewChart` component functional by han
 * Bind `this` to `addLabel` at the bottom of the `constructor` method.
 * Add an `onSubmit` attribute to the `form` element with the `className` of `"new-chart__form-group"`.
   * It should call `this.addLabel`.
-* Change the span with the `className` of `"new-chart__labels"` to display the current labels from state inside the [ ].
+* Change the span with the `className` of `"new-chart__labels"` to display the current labels from state inside [ ].
   * For example, if I had the labels `green` and `red`:
     * "[ green, red ] (Min. 3)"
 * TEST:
