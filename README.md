@@ -767,7 +767,7 @@ export default connect(mapStateToProps, { createChart })(App);
 
 ### Summary
 
-In this step we will make our `NewChart` component functional by creating a `handleChange` method to handle user input and use `createChart` to fire off events to our `chart` reducer.
+In this step we will start making our `NewChart` component functional by creating a constructor method, state, and a `handleChange` method to handle user input.
 
 ### Instructions
 
@@ -880,52 +880,6 @@ Next let's repeat the same exact steps for the `input` element with the `classNa
   value={ newLabel }
 />
 ```
-
-
-
-Both `input` elements will need two new props:
-
-* `value` - set equal to `name` or `newLabel` respectively
-* `onChange` - set equal to `handleNameChange` or `handleNewLabelChange` respectively
-
-Next we need to add a way for users to save their labels, we'll do that by creating a new method `addLabel`. `addLabel` will take a single `event` parameter. What this method needs to do is call `event.preventDefault()`, add `this.state.newLabel` to `this.state.labels`, and reset `this.state.newLabel` to an empty string. It will look something like this:
-
-```javascript
-addLabel( event ) {
-	// We need to prevent default because this will be attached to a form
-	// element. Without this, the browser will reload!
-	event.preventDefault();
-
-	this.setState( {
-		  labels: [ ...this.state.labels, this.state.newLabel ]
-		, newLabel: ""
-	} );
-}
-```
-
-Bind `addLabel` in the `constructor` and then pass it to the `onSubmit` prop of the form containing the "Add Label" input. To let the user see what labels they have already added add the following code inside of the `[]` brackets in the `new-chart__labels` span - `{ labels.join( ", " ) }`. With these changes you should be able to enter labels and see them populate below as you hit enter.
-
-Finally we need to send all this data to our reducer! To do this we'll need one more method - `submitChart` which won't take any parameters. Destructure `labels` and `name` from `this.state` so we can do a little bit of form validation. If `name` is an empty string or there are less than 3 labels we will just return early. Next we need to call `this.props.createChart` (our action creator passed down from app) passing in `labels` and `name`. Lastly, reset `this.state` to its initial value. Bind `submitChart` in the `constructor` and pass it to the `onClick` handler of the submit button. It will look like this:
-
-```javascript
-submitChart() {
-	const { labels, name } = this.state;
-
-	if ( !name || labels.length < 3 ) {
-		return;
-	}
-
-	this.props.createChart( labels, name );
-
-	this.setState( {
-		  labels: []
-		, name: ""
-		, newLabel: ""
-	} );
-}
-```
-
-You're now able to send all the data necessary for creating a chart to the reducer! Unfortunately the chart isn't visible yet, but we'll cover that in the next step.
 
 </details>
 
@@ -1084,6 +1038,65 @@ export default class NewChart extends Component {
 ```
 
 </details>
+
+## Step 8
+
+### Summary
+
+In this step we will..
+
+### Instructions
+
+* Something
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Next we need to add a way for users to save their labels, we'll do that by creating a new method `addLabel`. `addLabel` will take a single `event` parameter. What this method needs to do is call `event.preventDefault()`, add `this.state.newLabel` to `this.state.labels`, and reset `this.state.newLabel` to an empty string. It will look something like this:
+
+```javascript
+addLabel( event ) {
+	// We need to prevent default because this will be attached to a form
+	// element. Without this, the browser will reload!
+	event.preventDefault();
+
+	this.setState( {
+		  labels: [ ...this.state.labels, this.state.newLabel ]
+		, newLabel: ""
+	} );
+}
+```
+
+Bind `addLabel` in the `constructor` and then pass it to the `onSubmit` prop of the form containing the "Add Label" input. To let the user see what labels they have already added add the following code inside of the `[]` brackets in the `new-chart__labels` span - `{ labels.join( ", " ) }`. With these changes you should be able to enter labels and see them populate below as you hit enter.
+
+Finally we need to send all this data to our reducer! To do this we'll need one more method - `submitChart` which won't take any parameters. Destructure `labels` and `name` from `this.state` so we can do a little bit of form validation. If `name` is an empty string or there are less than 3 labels we will just return early. Next we need to call `this.props.createChart` (our action creator passed down from app) passing in `labels` and `name`. Lastly, reset `this.state` to its initial value. Bind `submitChart` in the `constructor` and pass it to the `onClick` handler of the submit button. It will look like this:
+
+```javascript
+submitChart() {
+	const { labels, name } = this.state;
+
+	if ( !name || labels.length < 3 ) {
+		return;
+	}
+
+	this.props.createChart( labels, name );
+
+	this.setState( {
+		  labels: []
+		, name: ""
+		, newLabel: ""
+	} );
+}
+```
+
+You're now able to send all the data necessary for creating a chart to the reducer! Unfortunately the chart isn't visible yet, but we'll cover that in the next step.
+
+</details>
+
+### Solution
 
 ## Step 8
 
