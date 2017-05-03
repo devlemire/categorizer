@@ -485,9 +485,7 @@ In this step we will be creating our first action type and action creator. It wi
 ### Instructions
 
 * Open `chart.js`. ( `src/ducks/chart.js` )
-
 * Create a `CREATE_CHART` action type.
-
 * Create a `createChart` action creator underneathe the `chart` reducer.
   * This function should take two parameters:
     * `labels` - An array of labels that the chart will have.
@@ -498,7 +496,6 @@ In this step we will be creating our first action type and action creator. It wi
       * Since we do not get any `datasets` from this action, default it to an empty array.
     * `type` - A string that equals the action type, in this case `CREATE_CHART`.
   * Export this action creator function.
-  
 * Modify the `chart` reducer to handle adding a new chart:
   * Add a `case` to the `switch` statement in the reducer for `CREATE_CHART`.
   * Create and return a <b>new</b> state object with the following properties:
