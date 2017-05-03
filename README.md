@@ -781,7 +781,8 @@ In this step we will start making our `NewChart` component functional by creatin
 * Create a `handleChange` method for handling user input. It should take two parameters:
   * `field` - The name of the field that is changing.
   * `val` - The value of the element from the change event object.
-* Bind `this` to the `handleChange` method at the bottom of the `constructor` method.
+* Bind `this` to the `handleChange` method at the bottom of the `constructor` method:
+  * We are going to create two different variables, one for `handleNameChange` and one for `handleInputChange`, both should be equal to `this.handleChange.bind(this, "")` with the string being the property on state to update.
 * Deconstruct state at the top of the `render` method.
 * Update the input with the className of `"new-chart__name new-chart__input"`:
   * Create an `onChange` that calls an arrow function to capture the event. The arrow function should then call `this.handleChange("name", e.target.value)`
