@@ -482,7 +482,7 @@ In this step we will be connecting a component to Redux, creating our first acti
 
 <br />
 
-Let's begin by opening `src/ducks/chart.js`. At the top of the file create a variable called `CREATE_CHART` and set it equal to `"CREATE_CHART"`. This varialbe is our action type. You can think of action types as descriptions of what happened. The action types get used by the our reducer to determine how to change state.
+Let's begin by opening `src/ducks/chart.js`. At the top of the file create a variable called `CREATE_CHART` and set it equal to `"CREATE_CHART"`. This varialbe is our action type. You can think of action types as descriptions of what happened. The action types get used by our reducer to determine how to change state.
 
 ```js
 const CREATE_CHART = "CREATE_CHART";
