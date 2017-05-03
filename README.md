@@ -323,9 +323,20 @@ ReactDOM.render(
 
 ### Summary
 
-In this step we will..
+In this step we will connect the `App` component definition to Redux.
 
 ### Instructions
+
+* Open `App.js`. ( `src/components/App.js` )
+* Import `connect` from `react-redux`.
+* Create a `mapStateToProps` function above the `export` statement of `App`.
+  * This function should use object destructuring on the first parameter.
+  * This function should return an object with the following properties:
+    * `activeChart` - Should equal the actual object of the active chart.
+    * `charts` - Should equal the entire array of charts.
+* Modify the original `export` of `App` to export it's decorated version.
+  * Invoke `connect` and pass in `mapStateToProps` as the first parameter.
+  * Invoke the function it returns with `App` as the first parameter.
 
 * Connect the `App` component definition to Redux in `src/components/App.js`.
 
@@ -335,10 +346,10 @@ In this step we will..
 
 <br />
 
-Let's being by opening `src/components/App.js`. Next, import `connect` from React Redux. We'll use this later to connect our `App` component. Next, let's create a function above our `export` statement named `mapStateToProps` that takes a single parameter called `state`. This function will be used to tell Redux which pieces of state our `App` component is interested in and also format state before reaching `App`. Let's have our `mapStateToProps` return an object with a `activeChart` and `charts` property.
+Let's being by opening `src/components/App.js`. Next, import `connect` from `react-redux`. We'll use this later to connect our `App` component. Next, let's create a function above our `export` statement named `mapStateToProps` that destructures the first parameter ( `{ activeChartIndex, charts }` ). This function will be used to tell Redux which pieces of state our `App` component is interested in and also format state before reaching `App`. Let's have our `mapStateToProps` return an object with a `activeChart` and `charts` property.
 
-* `activeChart` should equal the actual object of the chart, we can do this by using our `activeChartIndex` we get from state and our `charts` array. ( `charts[ state.activeChartIndex ]` )
-* `charts` should equal the array of charts (`charts`);
+* `activeChart` should equal the actual object of the chart, we can do this by using our `activeChartIndex` with our `charts` array. ( `charts[ state.activeChartIndex ]` )
+* `charts` should equal the array of charts. ( `charts` )
 
 <details>
 
@@ -357,7 +368,7 @@ function mapStateToProps( { activeChartIndex, charts } ) {
 
 <br />
 
-Using `ES2015` we can destructure the object that gets passed into `mapStateToProps` by using `{ activeChartIndex, charts }`. This takes the object that would get passed in as the first parameter and turns its props into variables we can use in the function. This is the same thing as doing:
+Using `ES2015` we can destructure the object that gets passed into `mapStateToProps` by using `{ activeChartIndex, charts }`. This takes the object that would get passed in as the first parameter and turns its props into variables we can reference in the function. This is the same thing as doing:
 
 ```js
 function mapStateToProps( state ) {
