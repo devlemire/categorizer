@@ -593,11 +593,12 @@ export function createChart(labels, name) {
 
 ### Summary
 
-In this step we'll implement the ability to create charts in the `NewChart` component.
+In this step we'll import the `createChart` action creator into the `App` component, connect our action creator, and then pass it down as a `prop` into our `NewChart` component.
 
 ### Instructions
 
 * Import and connect the `createChart` action creator in the `App` component.
+* Deconstruct `props` at the top of the `render` method in the `App` component.
 * Pass the `createChart` action creator to the `NewChart` component.
 
 <details>
@@ -678,7 +679,7 @@ Now we can pass down our `createChart` prop where we render `NewChart`.
 
 ### Summary
 
-In this step we will..
+In this step we will make our `NewChart` component functional by creating a `handleChange` method to handle user input and use `createChart` to fire off events to our `chart` reducer.
 
 ### Instructions
 
