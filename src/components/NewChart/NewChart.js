@@ -17,6 +17,7 @@ export default class NewChart extends Component {
     this.handleNameChange = this.handleChange.bind( this, "name" );
     this.handleLabelChange = this.handleChange.bind( this, "newLabel" );
     this.addLabel = this.addLabel.bind( this );
+    this.submitChart = this.submitChart.bind( this );
   }
 
   handleChange(field, event) {
@@ -27,6 +28,19 @@ export default class NewChart extends Component {
     event.preventDefault();
     this.setState({
       labels: [ ...this.state.labels, this.state.newLabel ],
+      newLabel: ''
+    });
+  }
+
+  submitChart() {
+    if ( !this.state.name || this.state.labels < 3 ) {
+      return;
+    }
+
+    this.props.createChart(this.state.labels, this.state.name);
+    this.setState({ 
+      labels: [],
+      name: '',
       newLabel: ''
     });
   }

@@ -1128,27 +1128,60 @@ In this step we will finish the functionality for our `NewChart` component by se
 
 <summary> Detailed Instructions </summary>
 
-Finally we need to send all this data to our reducer! To do this we'll need one more method - `submitChart` which won't take any parameters. Destructure `labels` and `name` from `this.state` so we can do a little bit of form validation. If `name` is an empty string or there are less than 3 labels we will just return early. Next we need to call `this.props.createChart` (our action creator passed down from app) passing in `labels` and `name`. Lastly, reset `this.state` to its initial value. Bind `submitChart` in the `constructor` and pass it to the `onClick` handler of the submit button. It will look like this:
+<br />
 
-```javascript
+Let's begin by opening `NewChart.js` ( `src/components/NewChart/NewChart.js `). Next let's create our last class method called `submitChart`. This method won't need any parameters. The first thing the method should do is check to see if `this.state.name` is not falsy and that `this.state.labels` has 3 or more labels. If either of these conditions arne't met our method should call `return` to exit the method early.
+
+```js
 submitChart() {
-	const { labels, name } = this.state;
-
-	if ( !name || labels.length < 3 ) {
-		return;
-	}
-
-	this.props.createChart( labels, name );
-
-	this.setState( {
-		  labels: []
-		, name: ""
-		, newLabel: ""
-	} );
+  if ( !this.state.name || this.state.labels < 3 ) {
+    return;
+  }
 }
 ```
 
-You're now able to send all the data necessary for creating a chart to the reducer! Unfortunately the chart isn't visible yet, but we'll cover that in the next step.
+If both conditions are met then we should then call `this.props.createChart` with our `labels` and `name` from `state`.
+
+```js
+submitChart() {
+  if ( !this.state.name || this.state.labels < 3 ) {
+    return;
+  }
+
+  this.props.createChart(this.state.labels, this.state.name);
+}
+```
+
+Finally our method should reset all `state` values back to their default values using `setState`.
+
+```js
+submitChart() {
+  if ( !this.state.name || this.state.labels < 3 ) {
+    return;
+  }
+
+  this.props.createChart(this.state.labels, this.state.name);
+  this.setState({ 
+    labels: [],
+    name: '',
+    newLabel: ''
+  });
+}
+```
+
+Next, let's `bind` `this` to our method at the bottom of the `constructor` method.
+
+```js
+this.submitChart = this.submitChart.bind( this );
+```
+
+Now all that's left is to hook up our method to our `Submit` button using an `onClick` attribute. Locate the `button` element with the `className` of `"new-chart__submit"` and add an `onClick` that calls our `submitChart` method.
+
+```jsx
+<button className="new-chart__submit" onClick={ this.submitChart }>
+  Submit
+</button>
+```
 
 </details>
 
