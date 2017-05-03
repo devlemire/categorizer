@@ -1014,7 +1014,7 @@ Then we can assign an `onSubmit` attribute to the `form` element with the `class
 <form className="new-chart__form-group" onSubmit={ this.addLabel }>
 ```
 
-Finally we'll need to update the `span` element with the `className` of `"new-chart__labels"` to show our labels. Inside the [ ] we can use `{ }` to call on `labels`. Let's use the array prototype `join` to join our labels by `, `.
+Finally we'll need to update the `span` element with the `className` of `"new-chart__labels"` to show our labels. Inside the [ ] we can use `{ }` to call on `labels`. Let's use the array prototype `join` to join our labels by a comma and a space.
 
 ```jsx
 <span className="new-chart__labels">[ { labels.join(', ') } ] (Min. 3)</span>
