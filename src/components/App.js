@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import "./App.css";
 
+import { createChart } from '../ducks/chart';
+
 import NewChart from "./NewChart/NewChart";
 import Sidebar from "./Sidebar/Sidebar";
 
@@ -34,4 +36,4 @@ function mapStateToProps( { activeChartIndex, charts } ) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { createChart })(App);

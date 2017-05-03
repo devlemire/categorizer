@@ -606,13 +606,27 @@ In this step we'll implement the ability to create charts in the `NewChart` comp
 
 <summary> Detailed Instructions </summary>
 
-We'll begin this step in `src/components/App.js`. Import `createChart` from `src/ducks/chart.js`. If we were to invoke `createChart` in our component right now, what would happen? Would Redux receive the action?
+Let's begin by opening `src/components/App.js` and importing `createChart` from `src/ducks/chart.js`. Let's add this import statement after the import of `./App.css`.
 
-It wouldn't! `createChart` is just a function that returns an action object. To send the action to Redux we need to wrap it in Redux's [`dispatch`](http://redux.js.org/docs/api/Store.html#dispatch) function. Luckily React Redux's `connect` can do just that for us. As the second argument to `connect` (after `mapStateToProps`) pass an object containing the `createChart` function.
+```js
+import { createChart } from '../ducks/chart';
+```
+
+Now that `App.js` has access to our action creator we need a way for our `App` component to dispatch this action to our reducer. We can do this by adding an object after `mapStateToProps` where we export our decorated component.
+
+```js
+export default connect(mapStateToProps, { createChart })(App);
+```
+
+Basically this is allowing us to directly call `this.props.createChart` inside of our `App` component. Without doing it this way, you would have to the `dispatch` function with the action creator as a parameter. Redux automatically adds the `dispatch` function to `props`. It would look like: `this.props.dispatch(this.props.createChart)`. 
+
+Also another thing to note is that once we create this object of action creators, `dispatch` is no longer automatically added to `props`. Any future action creators will have to be added to this object as well in order to be used in the `App` component.
 
 <details>
 
 <summary>The magic behind <code>connect</code> wrapping action creators</summary>
+
+<br />
 
 It may feel a little like magic, but the wrapping of action creators in dispatch is fairly simple! The actual source code will be different, but this is accomplishing the same thing.
 
@@ -635,8 +649,6 @@ function wrapActionCreator( actionCreatorsObject ) {
 	return wrappedActionCreators;
 }
 ```
-
-___
 
 </details>
 
