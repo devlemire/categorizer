@@ -323,7 +323,7 @@ In this step we will connect the `App` component definition to Redux.
   * This function should return an object with the following properties:
     * `activeChart` - Should equal the actual object of the active chart.
     * `charts` - Should equal the entire array of charts.
-* Modify the original `export` of `App` to export it's decorated version.
+* Modify the original `export` of `App` to export it's decorated version:
   * Invoke `connect` and pass in `mapStateToProps` as the first parameter.
   * Invoke the function it returns with `App` as the first parameter.
 
