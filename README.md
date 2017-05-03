@@ -872,7 +872,7 @@ Locate the `input` element with the `className` of `"new-chart__name new-chart__
 />
 ```
 
-Next let's repeat the same exact steps for the `input` element with the `className` of `"new-chart__category new-chart__input"`. However, change the `value` attribute to equal `newLabel`.
+Next let's repeat the same exact steps for the `input` element with the `className` of `"new-chart__category new-chart__input"`. However, change the `onChange` attribute to equal `this.handleLabelChange` and change the `value` attribute to equal `newLabel`.
 
 ```jsx
 <input
