@@ -597,10 +597,10 @@ In this step we'll implement the ability to create charts in the `NewChart` comp
 
 ### Instructions
 
-* Import and connect the `createChart` action creator in `App`
-* Pass the `createChart` to the `NewChart` component
-* Alter the `NewChart` component definition to allow for handling user input
-* Use the `createChart` function to pass the user input to Redux
+* Import and connect the `createChart` action creator in the `App` component.
+* Pass the `createChart` action creator to the `NewChart` component.
+* Create a `handleChange` method in the `NewChart` component definition to allow for handling user input.
+* Use the `createChart` action creator to pass the user input to our `chart` reducer.
 
 <details>
 
@@ -654,37 +654,72 @@ function wrapActionCreator( actionCreatorsObject ) {
 
 </details>
 
-All that is left to do in `App` is to pass `createChart` as a prop to the `NewChart` component.
+<br />
 
-Open up `src/components/NewChart/NewChart.js`. Get started by writing a `constructor` method (don't forget to `super( props );`!) where we'll create a `state` object with three properties:
+Now that our action creator is ready to be used let's pass it down as a `prop` to our `NewChart` component.
+
+Open up `src/components/NewChart/NewChart.js`. Get started by writing a `constructor` method that takes `props` as its first parameter. Then call super with `props` as a parameter. Finally create a `state` object with three properties after `super(props)`:
 
 * `labels` - A list of the labels submitted so far. Defaults to an empty array
 * `name` - The text from the name input. Defaults to an empty string
 * `newLabel` - The text from the new label input. Defaults to an empty string
 
-Next up we'll need a `handleChange` method so we can accept user input. `handleChange` will take two arguments:
+```js
+constructor(props) {
+  super(props);
 
-* `field` - The name of the field that is changing, i.e `"name"` or `"newLabel"`
-* `event` - The DOM event triggering the change and carrying the new value
-
-All this method needs to do is update the specified field on state with the value on the event. It will look something like this: `this.setState( { [ field ]: event.target.value } );`.  Before we attach this method to the JSX, let's `bind` in the constructor. Because we have to handle changes from two different fields, we'll need to bind twice. It will look like this:
-
-```javascript
-constructor( props ) {
-	super( props );
-
-	this.state = {
-		  labels: []
-		, name: ""
-		, newLabel: ""
-	};
-
-	this.handleNameChange = this.handleChange.bind( this, "name" );
-	this.handleNewLabelChange = this.handleChange.bind( this, "newLabel" );
+  this.state = {
+    labels: [],
+    name: '',
+    newLabel: ''
+  };
 }
 ```
 
-Now we can dive into the JSX to make use of what we have so far! At the top of `render` destructure `labels`, `name`, and `newLabel` from `this.state`. Both `input` elements will need two new props:
+Next up we'll need a `handleChange` method so we can accept user input. `handleChange` will take two arguments:
+
+* `field` - The name of the field that is changing, in this case that will be `"name"` or `"newLabel"`.
+* `val` - The value of the input field.
+
+All this method needs to do is update the specified field on state with the value on the event. It will look something like this: `this.setState( { [ field ]: val } );`. 
+
+```js
+handleChange(field, val) {
+  this.setState({ [ field ]: val });
+}
+```
+
+Before we attach this method to the JSX, let's `bind` `this` to `handleChange` in the constructor.
+
+```javascript
+constructor( props ) {
+  super( props );
+
+  this.state = {
+      labels: []
+    , name: ""
+    , newLabel: ""
+  };
+
+  this.handleChange = this.handleChange.bind( this );
+}
+```
+
+Now let's destructure `labels`, `name`, and `newLabel` from `this.state` at the top of the `render` method so we can refer to them witout having to use `this.state`. 
+
+```js
+render() {
+  const {
+    labels,
+    name,
+    newLabel
+  } = this.state;
+}
+```
+
+
+
+Both `input` elements will need two new props:
 
 * `value` - set equal to `name` or `newLabel` respectively
 * `onChange` - set equal to `handleNameChange` or `handleNewLabelChange` respectively
