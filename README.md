@@ -894,99 +894,64 @@ import React, { Component, PropTypes } from "react";
 import "./NewChart.css";
 
 export default class NewChart extends Component {
-	static propTypes = { createChart: PropTypes.func.isRequired };
+  static propTypes = { createChart: PropTypes.func.isRequired };
 
-	constructor( props ) {
-		super( props );
+  constructor( props ) {
+    super( props );
 
-		this.state = {
-			  labels: []
-			, name: ""
-			, newLabel: ""
-		};
+    this.state = {
+      labels: [],
+      name: '',
+      newLabel: ''
+    };
 
-		this.handleNameChange = this.handleChange.bind( this, "name" );
-		this.handleNewLabelChange = this.handleChange.bind( this, "newLabel" );
-		this.addLabel = this.addLabel.bind( this );
-		this.submitChart = this.submitChart.bind( this );
-	}
+    this.handleChange = this.handleChange.bind( this );
+  }
 
-	handleChange( field, event ) {
-		this.setState( { [ field ]: event.target.value } );
-	}
+  handleChange(field, val) {
+    this.setState({ [field]: val });
+  }
 
-	addLabel( event ) {
-		event.preventDefault();
+  render() {
+    const {
+      labels,
+      name,
+      newLabel
+    } = this.state;
+    return (
+      <div className="new-chart">
+        <div className="new-chart__form-group">
+          <label className="new-chart__label">Chart Name:</label>
+          <input
+            className="new-chart__name new-chart__input"
+            type="text"
+            onChange={ (e) => this.handleChange("name", e.target.value) }
+            value={ name }
+          />
+        </div>
+        <form className="new-chart__form-group">
+          <label className="new-chart__label">Add Label:</label>
+          <input
+            className="new-chart__category new-chart__input"
+            required
+            type="text"
+            onChange={ (e) => this.handleChange("newLabel", e.target.value) }
+            value={ newLabel }
+          />
+        </form>
 
-		this.setState( {
-			  labels: [ ...this.state.labels, this.state.newLabel ]
-			, newLabel: ""
-		} );
-	}
+        <div className="new-chart__labels-wrapper">
+          <label className="new-chart__label">Labels:</label>
+          <span className="new-chart__labels">[](Min. 3)</span>
+        </div>
 
-	submitChart() {
-		const { labels, name } = this.state;
-
-		if ( !name || labels.length < 3 ) {
-			return;
-		}
-
-		this.props.createChart( labels, name );
-
-		this.setState( {
-			  labels: []
-			, name: ""
-			, newLabel: ""
-		} );
-	}
-
-	render() {
-		const {
-			  labels
-			, name
-			, newLabel
-		} = this.state;
-		return (
-			<div className="new-chart">
-				<div className="new-chart__form-group">
-					<label className="new-chart__label">Chart Name:</label>
-					<input
-						className="new-chart__name new-chart__input"
-						onChange={ this.handleNameChange }
-						type="text"
-						value={ name }
-					/>
-				</div>
-				<form
-					className="new-chart__form-group"
-					onSubmit={ this.addLabel }
-				>
-					<label className="new-chart__label">Add Label:</label>
-					<input
-						className="new-chart__category new-chart__input"
-						onChange={ this.handleNewLabelChange }
-						required
-						type="text"
-						value={ newLabel }
-					/>
-				</form>
-
-				<div className="new-chart__labels-wrapper">
-					<label className="new-chart__label">Labels:</label>
-					<span className="new-chart__labels">[{ labels.join( ", " ) }](Min. 3)</span>
-				</div>
-
-				<button
-					className="new-chart__submit"
-					onClick={ this.submitChart }
-				>
-					Submit
-				</button>
-			</div>
-		);
-	}
+        <button className="new-chart__submit">
+          Submit
+        </button>
+      </div>
+    );
+  }
 }
-
 ```
 
 </details>
@@ -995,11 +960,18 @@ export default class NewChart extends Component {
 
 ### Summary
 
-In this step we will..
+In this step we will continue to make our `NewChart` component functional by handling adding new `labels`.
 
 ### Instructions
 
-* Use the `createChart` action creator to pass the user input to our `chart` reducer.
+* Open `NewChart.js`. ( `src/components/NewChart/NewChart.js` )
+* Create a new class method called `addLabel` that takes an `event` object.
+  * This method should call `event.preventDefault();` so the browser doesn't refresh.
+  * Then the method should use `setState` to update the following properties on state:
+    * `labels` - Should equal the previous list of labels from state with the new label added to the end.
+    * `newLabel` - Should then be reset back to its default value of `''`.
+* Bind `this` to `addLabel` at the bottom of the `constructor` method.
+* Change the span with the `className` of `className="new-chart__labels"` to display the current labels from state inside the [ ].
 
 <details>
 
