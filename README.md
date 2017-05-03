@@ -252,7 +252,7 @@ In this step we'll connect Redux to our application in `index.js`.
 * Import `Provider` from `react-redux` and `store` from `src/store.js`.
 * In `ReactDOM.render()`:
   * Wrap the `<App />` component in a `Provider` component.
-  * Add a `store` prop to the `Provider` component that equals store.
+  * Add a `store` prop to the `Provider` component that equals `store`.
 
 <details>
 
@@ -338,10 +338,6 @@ Let's being by opening `src/components/App.js`. Next, import `connect` from `rea
 * `activeChart` should equal the actual object of the chart, we can do this by using our `activeChartIndex` with our `charts` array. ( `charts[ state.activeChartIndex ]` )
 * `charts` should equal the array of charts. ( `charts` )
 
-<details>
-
-<summary> <code> mapStateToProps </code> </summary>
-
 ```js
 function mapStateToProps( { activeChartIndex, charts } ) {
   return {
@@ -350,10 +346,6 @@ function mapStateToProps( { activeChartIndex, charts } ) {
   };
 }
 ```
-
-</details>
-
-<br />
 
 Using `ES2015` we can destructure the object that gets passed into `mapStateToProps` by using `{ activeChartIndex, charts }`. This takes the object that would get passed in as the first parameter and turns its props into variables we can reference in the function. This is the same thing as doing:
 
