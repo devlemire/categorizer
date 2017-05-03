@@ -1121,6 +1121,8 @@ In this step we will finish the functionality for our `NewChart` component by se
   * This method should exit if `this.state.name` is falsy or there aren't at least 3 labels.
   * Otherwise this method should call `this.props.createChart` with `labels` and `name` from `state`.
   * Then the method should use `this.setState` to set all `state` values back to their default values.
+* Bind `this` to `submitChart` at the bottom of the `constructor` method.
+* Add an `onClick` attribute that calls `submitChart` on the element with the `className` of `"new-chart__submit"`.
 
 <details>
 

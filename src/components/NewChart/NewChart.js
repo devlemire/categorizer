@@ -64,7 +64,7 @@ export default class NewChart extends Component {
           <span className="new-chart__labels">[ { labels.join(', ') } ] (Min. 3)</span>
         </div>
 
-        <button className="new-chart__submit">
+        <button className="new-chart__submit" onClick={ this.submitChart }>
           Submit
         </button>
       </div>
