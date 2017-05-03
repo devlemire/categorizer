@@ -626,9 +626,14 @@ In this step we'll import the `createChart` action creator into the `App` compon
 
 ### Instructions
 
-* Import and connect the `createChart` action creator in the `App` component.
-* Deconstruct `props` at the top of the `render` method in the `App` component.
-* Pass the `createChart` action creator to the `NewChart` component.
+* Open `App.js`. ( `src/components/App.js` )
+* Import `createChart` from `../ducks/chart.js`.
+* Connect the `createChart` action creator:
+  * Where we export our decorated `App` component add an `object` after `mapStateToProps` as a second parameter.
+  * Inside this new `object` add `createChart`.
+* Deconstruct `props` at the top of the `render` method.
+  * Hint: `mapStateToProps` can tell you what props `App` will have.
+* Create a `prop` where we `render` `NewChart` called `createChart` and set it equal to our `createChart` action creator.
 
 <details>
 
