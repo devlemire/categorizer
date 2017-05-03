@@ -789,7 +789,6 @@ In this step we will start making our `NewChart` component functional by creatin
 * Update the input with the className of `"new-chart__category new-chart__input"`:
   * Create an `onChange` that calls an arrow function to capture the event. The arrow function should then call `this.handleChange("newLabel", e.target.value)`.
   * Set a `value` attribute on the input element equal to `newLabel`.
-* Use the `createChart` action creator to pass the user input to our `chart` reducer.
 
 <details>
 
@@ -1047,7 +1046,7 @@ In this step we will..
 
 ### Instructions
 
-* Something
+* Use the `createChart` action creator to pass the user input to our `chart` reducer.
 
 <details>
 
