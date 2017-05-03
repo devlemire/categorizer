@@ -29,6 +29,7 @@ export default class NewChart extends Component {
 					<input
 						className="new-chart__name new-chart__input"
 						type="text"
+            onChange={ (e) => this.handleChange("name", e.target.value) }
 					/>
 				</div>
 				<form className="new-chart__form-group">

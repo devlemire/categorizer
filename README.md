@@ -728,7 +728,6 @@ import Sidebar from "./Sidebar/Sidebar";
 
 class App extends Component {
   render() {
-    console.log('Props in App:', this.props);
     const {
       activeChart,
       charts,
@@ -753,7 +752,6 @@ class App extends Component {
 }
 
 function mapStateToProps( { activeChartIndex, charts } ) {
-  console.log('Map State to Props fired:', arguments[0]);
   return {
     activeChart: charts[ activeChartIndex ],
     charts: charts
@@ -780,8 +778,14 @@ In this step we will make our `NewChart` component functional by creating a `han
     * `labels` - A list of the labels submitted so far. It should default to an empty array.
     * `name` - The text from the name input. It should default to an empty string.
     * `newLabel` - The text from the new label input. It should default to an empty string.
+* Create a `handleChange` method for handling user input. It should take two parameters:
+  * `field` - The name of the field that is changing.
+  * `val` - The value of the element from the change event object.
+* Bind `this` to the `handleChange` method at the bottom of the `constructor` method.
 * Deconstruct state at the top of the `render` method.
-* Create a `handleChange` method in the `NewChart` component definition to allow for handling user input.
+* Update the input with the className of `"new-chart__name new-chart__input"`:
+  * Add an arrow function to capture the event that calls `this.handleChange("name", e.target.value)`
+
 * Use the `createChart` action creator to pass the user input to our `chart` reducer.
 
 <details>
@@ -811,13 +815,13 @@ constructor( props ) {
 Next up we'll need a `handleChange` method so we can accept user input. `handleChange` will take two arguments:
 
 * `field` - The name of the field that is changing, in this case that will be `"name"` or `"newLabel"`.
-* `val` - The value of the input field.
+* `event` - The DOM event triggering the change and carrying the new value.
 
 All this method needs to do is update the specified field on state with the specified value.
 
 ```js
-handleChange(field, val) {
-  this.setState({ [ field ]: val });
+handleChange(field, event) {
+  this.setState({ [ field ]: event.target.value });
 }
 ```
 
