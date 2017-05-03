@@ -858,6 +858,29 @@ render() {
 
 Now let's hook up our `handleChange` method to the input fields for chart name and chart label. 
 
+Locate the `input` element with the `className` of `"new-chart__name new-chart__input"`. Let's add an `onChange` attribute to it that equals an arrow function that captures the `event`. We'll call this parameter `e`. Then let's have the arrow function call `this.handleChange("name", e.target.value)`. Since we bound `this` in the constructor, we are good to go. Next let's add a `value` attribute on the `input` element equal to `name`. Since we deconstructed `state` we didn't have to use `this.state.name`.
+
+```jsx
+<input
+  className="new-chart__name new-chart__input"
+  type="text"
+  onChange={ (e) => this.handleChange("name", e.target.value) }
+  value={ name }
+/>
+```
+
+Next let's repeat the same exact steps for the `input` element with the `className` of `"new-chart__category new-chart__input"`. However, change the `handleChange`'s first parameter from `"name"` to `"newLabel"` and change the `value` attribute to equal `newLabel`.
+
+```jsx
+<input
+  className="new-chart__category new-chart__input"
+  required
+  type="text"
+  onChange={ (e) => this.handleChange("newLabel", e.target.value) }
+  value={ newLabel }
+/>
+```
+
 
 
 Both `input` elements will need two new props:
