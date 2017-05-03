@@ -259,7 +259,13 @@ In this step we'll connect Redux to our application.
 
 ### Instructions
 
-* Connect the application to Redux in `src/index.js`.
+* Open `index.js`. ( `src/index.js` )
+* Import `Provider` from `react-redux` and `store` from `src/store.js`.
+* In `ReactDOM.render()`:
+  * Wrap the `<App />` component in a `Provider` component.
+  * Add a `store` prop to the `Provider` component that equals store.
+
+
 * Connect the `App` component definition to Redux in `src/components/App.js`.
 
 <details>
