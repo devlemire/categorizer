@@ -1189,7 +1189,7 @@ Now all that's left is to hook up our method to our `Submit` button using an `on
 
 <details>
 
-<summary> <code> NewChart.js </code> </summary>
+<summary> <code> src/components/NewChart/NewChart.js </code> </summary>
 
 ```jsx
 import React, { Component, PropTypes } from "react";
