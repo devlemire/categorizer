@@ -787,10 +787,10 @@ In this step we will start making our `NewChart` component functional by creatin
     * this.handleLabelChange = this.handleChange.bind(this, "newLabel");
 * Deconstruct state at the top of the `render` method.
 * Update the input with the className of `"new-chart__name new-chart__input"`:
-  * Create an `onChange` that calls an arrow function to capture the event. The arrow function should then call `this.handleChange("name", e.target.value)`
+  * Create an `onChange` that calls `this.handleNameChange`.
   * Set a `value` attribute on the input element equal to `name`.
 * Update the input with the className of `"new-chart__category new-chart__input"`:
-  * Create an `onChange` that calls an arrow function to capture the event. The arrow function should then call `this.handleChange("newLabel", e.target.value)`.
+  * Create an `onChange` that calls `this.handleLabelChange`.
   * Set a `value` attribute on the input element equal to `newLabel`.
 
 <details>

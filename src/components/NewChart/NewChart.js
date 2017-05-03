@@ -14,12 +14,13 @@ export default class NewChart extends Component {
       newLabel: ''
     };
 
-    this.handleChange = this.handleChange.bind( this );
+    this.handleNameChange = this.handleChange.bind( this, "name" );
+    this.handleLabelChange = this.handleChange.bind( this, "newLabel" );
     this.addLabel = this.addLabel.bind( this );
   }
 
-  handleChange(field, val) {
-    this.setState({ [field]: val });
+  handleChange(field, event) {
+    this.setState({ [field]: event.target.value });
   }
   
   addLabel(event) {
@@ -43,7 +44,7 @@ export default class NewChart extends Component {
           <input
             className="new-chart__name new-chart__input"
             type="text"
-            onChange={ (e) => this.handleChange("name", e.target.value) }
+            onChange={ this.handleNameChange }
             value={ name }
           />
         </div>
@@ -53,7 +54,7 @@ export default class NewChart extends Component {
             className="new-chart__category new-chart__input"
             required
             type="text"
-            onChange={ (e) => this.handleChange("newLabel", e.target.value) }
+            onChange={ this.handleLabelChange }
             value={ newLabel }
           />
         </form>
