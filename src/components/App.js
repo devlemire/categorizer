@@ -11,6 +11,12 @@ import Sidebar from "./Sidebar/Sidebar";
 class App extends Component {
 	render() {
     console.log('Props in App:', this.props);
+    const {
+      activeChart,
+      charts,
+      createChart
+    } = this.props;
+    
 		return (
 			<div className="app">
 				<Sidebar />
@@ -19,7 +25,7 @@ class App extends Component {
 						<h1 className="app__title">Categorizer</h1>
 
 						<div className="app__new-chart">
-							<NewChart />
+							<NewChart createChart={ createChart } />
 						</div>
 					</header>
 				</main>

@@ -656,7 +656,23 @@ function wrapActionCreator( actionCreatorsObject ) {
 
 <br />
 
-Now that our action creator is ready to be used let's pass it down as a `prop` to our `NewChart` component.
+Now that our action creator is ready to be used let's pass it down as a `prop` to our `NewChart` component. Let's deconstruct our `props` in the `App` component at the top of the `render` method. This will allow us to avoid having to use `this.props.propNameHere` every time we want to refer to a prop.
+
+```js
+render() {
+  const {
+      activeChart,
+      charts,
+      createChart
+  } = this.props;
+}
+```
+
+Now we can pass down our `createChart` prop where we render `NewChart`.
+
+```jsx
+<NewChart createChart={ createChart } />
+```
 
 Open up `src/components/NewChart/NewChart.js`. Get started by writing a `constructor` method that takes `props` as its first parameter. Then call super with `props` as a parameter. Finally create a `state` object with three properties after `super(props)`:
 
@@ -665,8 +681,8 @@ Open up `src/components/NewChart/NewChart.js`. Get started by writing a `constru
 * `newLabel` - The text from the new label input. Defaults to an empty string
 
 ```js
-constructor(props) {
-  super(props);
+constructor( props ) {
+  super( props );
 
   this.state = {
     labels: [],
@@ -681,7 +697,7 @@ Next up we'll need a `handleChange` method so we can accept user input. `handleC
 * `field` - The name of the field that is changing, in this case that will be `"name"` or `"newLabel"`.
 * `val` - The value of the input field.
 
-All this method needs to do is update the specified field on state with the value on the event. It will look something like this: `this.setState( { [ field ]: val } );`. 
+All this method needs to do is update the specified field on state with the specified value.
 
 ```js
 handleChange(field, val) {
@@ -696,9 +712,9 @@ constructor( props ) {
   super( props );
 
   this.state = {
-      labels: []
-    , name: ""
-    , newLabel: ""
+    labels: [],
+    name: '',
+    newLabel: ''
   };
 
   this.handleChange = this.handleChange.bind( this );
@@ -716,6 +732,8 @@ render() {
   } = this.state;
 }
 ```
+
+Now let's hook up our `handleChange` method to the input fields for chart name and chart label. 
 
 
 
