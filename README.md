@@ -39,9 +39,6 @@ In this step we'll download the necessary packages to use Redux and create a red
 
 Let's begin by installing the following dependencies we'll need in order to use Redux with our react application. Open up a third terminal window/tab and make sure you are still in the root directory of the project and then run `npm install redux react-redux`.
 
-* [`redux`](http://redux.js.org/) - A state container for JavaScript applications. This library allows us to easily store and access information  from across an entire application.
-* [`react-redux`](https://github.com/reactjs/react-redux) - The official bindings to seamlessly connect a React application to Redux.
-
 Next, open the `ducks` folder ( `src/ducks` ) and create a file called `chart.js`. This is where we'll create our reducer, action types, action creators, and the initial state for our reducer.
 
 Now let's open `src/ducks/chart.js` and start by creating an `initialState` variable. `initialState` should be an object with two properties: `activeChartIndex` and `charts`.
