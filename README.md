@@ -467,9 +467,7 @@ In the following giphy take note of which file the debugger is currently in:
 
 ### Summary
 
-In this step we will be creating our first action type and action creator. 
-
-In this step we will be connecting a component to Redux, creating our first action type/creator, and modifying the reducer to be able to handle the action.
+In this step we will be creating our first action type and action creator. We'll then update our reducer to handle our first action by returning a brand new state object. 
 
 ### Instructions
 
@@ -570,9 +568,6 @@ const initialState = {
 };
 
 export default function chart( state = initialState, action ) {
-  console.log('Chart reducer fired:');
-  console.log('State', state);
-  console.log('Action', action);
   switch(action.type) {
     case CREATE_CHART:
       return {
