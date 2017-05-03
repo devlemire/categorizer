@@ -9,7 +9,7 @@ import NewChart from "./NewChart/NewChart";
 import Sidebar from "./Sidebar/Sidebar";
 
 class App extends Component {
-	render() {
+  render() {
     console.log('Props in App:', this.props);
     const {
       activeChart,
@@ -17,21 +17,21 @@ class App extends Component {
       createChart
     } = this.props;
     
-		return (
-			<div className="app">
-				<Sidebar />
-				<main className="app__main">
-					<header className="app__header">
-						<h1 className="app__title">Categorizer</h1>
+    return (
+      <div className="app">
+        <Sidebar />
+        <main className="app__main">
+          <header className="app__header">
+            <h1 className="app__title">Categorizer</h1>
 
-						<div className="app__new-chart">
-							<NewChart createChart={ createChart } />
-						</div>
-					</header>
-				</main>
-			</div>
-		);
-	}
+            <div className="app__new-chart">
+              <NewChart createChart={ createChart } />
+            </div>
+          </header>
+        </main>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps( { activeChartIndex, charts } ) {
