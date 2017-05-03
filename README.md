@@ -620,7 +620,7 @@ Now that `App.js` has access to our action creator we need a way for our `App` c
 export default connect(mapStateToProps, { createChart })(App);
 ```
 
-Basically this is allowing us to directly call `this.props.createChart` inside of our `App` component. Without doing it this way, you would have to the `dispatch` function with the action creator as a parameter. Redux automatically adds the `dispatch` function to `props`. It would look like: `this.props.dispatch(this.props.createChart)`. 
+Basically this is allowing us to directly call `this.props.createChart` inside of our `App` component. Without doing it this way, you would have to use the `dispatch` function with the action creator as a parameter. Redux automatically adds the `dispatch` function to `props`. It would look like: `this.props.dispatch(this.props.createChart)`. 
 
 Also another thing to note is that once we create this object of action creators, `dispatch` is no longer automatically added to `props`. Any future action creators will have to be added to this object as well in order to be used in the `App` component.
 
@@ -635,20 +635,20 @@ It may feel a little like magic, but the wrapping of action creators in dispatch
 ```javascript
 // Take in an object of action creators, i.e { createChart }
 function wrapActionCreator( actionCreatorsObject ) {
-	// A new object that will hold the wrapped action creators
-	const wrappedActionCreators = {};
-	// Iterate over each action creator in the object
-	for ( let actionCreator in actionCreatorsObject ) {
-		// Creating a new function to capture arguments to the action creator
-		// such as "labels" and "name"
-		wrappedActionCreators[ actionCreator ] = ( ...args ) => {
-			// Create the action, passing in the captured arguments
-			const action = actionCreatorsObject[ actionCreator ]( ...args );
-			// Dispatch the action to Redux
-			dispatch( action );
-		}
-	}
-	return wrappedActionCreators;
+  // A new object that will hold the wrapped action creators
+  const wrappedActionCreators = {};
+  // Iterate over each action creator in the object
+  for ( let actionCreator in actionCreatorsObject ) {
+    // Creating a new function to capture arguments to the action creator
+    // such as "labels" and "name"
+    wrappedActionCreators[ actionCreator ] = ( ...args ) => {
+      // Create the action, passing in the captured arguments
+      const action = actionCreatorsObject[ actionCreator ]( ...args );
+      // Dispatch the action to Redux
+      dispatch( action );
+    }
+  }
+  return wrappedActionCreators;
 }
 ```
 
