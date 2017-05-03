@@ -785,8 +785,10 @@ In this step we will make our `NewChart` component functional by creating a `han
 * Deconstruct state at the top of the `render` method.
 * Update the input with the className of `"new-chart__name new-chart__input"`:
   * Create an `onChange` that calls an arrow function to capture the event. The arrow function should then call `this.handleChange("name", e.target.value)`
+  * Set a `value` attribute on the input element equal to `name`.
 * Update the input with the className of `"new-chart__category new-chart__input"`:
-  * Create an `onChange` that calls an arrow function to capture the event. The arrow function should then call `this.handleChange("newLabel", e.target.value)`
+  * Create an `onChange` that calls an arrow function to capture the event. The arrow function should then call `this.handleChange("newLabel", e.target.value)`.
+  * Set a `value` attribute on the input element equal to `newLabel`.
 * Use the `createChart` action creator to pass the user input to our `chart` reducer.
 
 <details>
@@ -821,8 +823,8 @@ Next up we'll need a `handleChange` method so we can accept user input. `handleC
 All this method needs to do is update the specified field on state with the specified value.
 
 ```js
-handleChange(field, event) {
-  this.setState({ [ field ]: event.target.value });
+handleChange(field, val) {
+  this.setState({ [ field ]: val });
 }
 ```
 
