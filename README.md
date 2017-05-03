@@ -482,7 +482,7 @@ In this step we will be connecting a component to Redux, creating our first acti
 
 <br />
 
-Let's begin by opening `src/ducks/chart.js`. At the top of the file create a variable called `CREATE_CHART` and set it equal to `"CREATE_CHART"`. This varialbe is our action type. You can think of action types as descriptions of what happened. The action types get used by our reducer to determine how to change state.
+Let's begin by opening `src/ducks/chart.js`. At the top of the file create a variable called `CREATE_CHART` and set it equal to `"CREATE_CHART"`. This variable is our action type. You can think of action types as descriptions of what happened. The action types get used by our reducer to determine how to change state.
 
 ```js
 const CREATE_CHART = "CREATE_CHART";
@@ -518,9 +518,9 @@ return {
 }
 ```
 
-With the action creator ready to go, we now need to update the reducer function itself to handle the action. Add a new `case` to the `switch` statement, above the default case, that checks for `CREATE_CHART`. This case should return a new state object where our new `chart` is at the beginning of the `charts` array has all of the previous state's charts after it. `activeChartIndex` should still be set to 0 since our new chart gets added to the beginning of the `charts` array.
+With the action creator ready to go, we now need to update the reducer function itself to handle the action. Add a new `case` to the `switch` statement, above the default case, that checks for `CREATE_CHART`. This case should return a new state object where our new `chart` is at the beginning of the `charts` array and has all of the previous state's charts after it. `activeChartIndex` should still be set to 0 since our new chart gets added to the beginning of the `charts` array.
 
-Remember not to mutate state! You should be returning a brand new object based on the values from the previous object.
+Remember not to mutate state! You should be returning a brand new object based on the values from the previous state object.
 
 ```js
 export default function chart( state = initialState, action ) {
