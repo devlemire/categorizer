@@ -327,8 +327,6 @@ In this step we will connect the `App` component definition to Redux.
   * Invoke `connect` and pass in `mapStateToProps` as the first parameter.
   * Invoke the function it returns with `App` as the first parameter.
 
-* Connect the `App` component definition to Redux in `src/components/App.js`.
-
 <details>
 
 <summary> Detailed Instructions </summary>
