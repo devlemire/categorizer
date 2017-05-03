@@ -490,17 +490,18 @@ In this step we will be creating our first action type and action creator. It wi
   * This function should take two parameters:
     * `labels` - An array of labels that the chart will have.
     * `name` - A string that equals the name of the chart.
-  * This should return an object with two properties:
+  * This function should return an object with two properties:
     * `chart` - An object containing the necessary chart data. 
-      * Since we do not get any `datasets` from this action, default it to an empty array.
       * Hint: `{ lables: [], name: string, datasets: [] }`
+      * Since we do not get any `datasets` from this action, default it to an empty array.
     * `type` - A string that equals the action type, in this case `CREATE_CHART`.
-  * Export this action creator.
-* Modify the `chart` reducer to handle adding a new chart in `src/ducks/chart.js`:
-  * Add a `case` to the `switch` in the reducer for `CREATE_CHART`.
+  * Export this action creator function.
+* Modify the `chart` reducer to handle adding a new chart:
+  * Add a `case` to the `switch` statement in the reducer for `CREATE_CHART`.
   * Create and return a <b>new</b> state object with the following properties:
-    * `activeChartIndex` - Should equal 0 because we add new `charts` to the beginning of the `chart` array.
+    * `activeChartIndex` - Should equal 0 because we add new `charts` to the beginning of the `charts` array.
     * `charts` - Should equal an array with the new chart in front and all the old charts after it.
+    * <b>Remember to not mutate old state</b>
 
 <details>
 
