@@ -1002,7 +1002,13 @@ addLabel(event) {
 }
 ```
 
-Next, let's `bind` `addLabel` at the bottom of the `constructor` method. Then we can assign an `onSubmit` attribute to the `form` element with the `className` of `"new-chart__form-group"`. This will allow us to press the `enter` key to execute our `addLabel` method. 
+Next, let's `bind` `addLabel` at the bottom of the `constructor` method. 
+
+```js
+this.addLabel = this.addLabel.bind( this );
+```
+
+Then we can assign an `onSubmit` attribute to the `form` element with the `className` of `"new-chart__form-group"`. This will allow us to press the `enter` key to execute our `addLabel` method. 
 
 ```jsx
 <form className="new-chart__form-group" onSubmit={ this.addLabel }>
