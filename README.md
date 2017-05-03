@@ -467,6 +467,8 @@ In the following giphy take note of which file the debugger is currently in:
 
 ### Summary
 
+In this step we will be creating our first action type and action creator. 
+
 In this step we will be connecting a component to Redux, creating our first action type/creator, and modifying the reducer to be able to handle the action.
 
 ### Instructions
@@ -478,24 +480,64 @@ In this step we will be connecting a component to Redux, creating our first acti
 
 <summary> Detailed Instructions </summary>
 
-This step will be in `src/ducks/chart.js`. At the top of the file create an action type `CREATE_CHART` and set it equal to `"CREATE_CHART"`. This action type is just a description of what happened used by the reducer to determine how to change state.
+<br />
 
-Underneath the `chart` reducer, create and export a function named `createChart`. `createChart` will take in two parameters:
+Let's begin by opening `src/ducks/chart.js`. At the top of the file create a variable called `CREATE_CHART` and set it equal to `"CREATE_CHART"`. This varialbe is our action type. You can think of action types as descriptions of what happened. The action types get used by the our reducer to determine how to change state.
+
+```js
+const CREATE_CHART = "CREATE_CHART";
+```
+
+Now let's create our action creator underneath the `chart` reducer. Create and export a function named `createChart` with two parameters: 
 
 * `labels` - An array of labels that the chart will have
-* `name` - The name of the chart specified by the user
+* `name` - A string that equals the name of the chart
 
-`createChart` should return an object with two properties:
+This function should return an object with two properties:
 
-* `chart` - An object containing the necessary chart data: `{ labels, name, datasets: [] }`
+* `chart` - An object containing the necessary chart data
 * `type` - The action type, in this case `CREATE_CHART`
 
-With the action creator ready to go, we now need to update the reducer function itself to handle the action. Add a new `case` to the `switch` statement that checks the `action.type` against `CREATE_CHART` (put this above the default case, or it will never run!). This case should return a new state object where
+We can determine what the necessary chart data is by looking at our `initialState` object and the first object in the `charts` array. ( `labels: [], name: string, datasets: []` ) 
 
-* `charts` is an array of `action.chart` and all the past `charts` on state
-* `activeChartIndex` is set to `0`, the index of the newly created chart.
+```js
+export function createChart(labels, name) {
+  return {
+    chart: { labels, name, datasets: [] },
+    type: CREATE_CHART
+  }
+}
+```
+
+In `ES2015` you can use shorthand notations for assigning properties on an object. The above solution is the same thing as doing:
+
+```js
+return {
+  chart: { labels: labels, name: name, datasets: [] },
+  type: CREATE_CHART
+}
+```
+
+With the action creator ready to go, we now need to update the reducer function itself to handle the action. Add a new `case` to the `switch` statement, above the default case, that checks for `CREATE_CHART`. This case should return a new state object where our new `chart` is at the beginning of the `charts` array has all of the previous state's charts after it. `activeChartIndex` should still be set to 0 since our new chart gets added to the beginning of the `charts` array.
 
 Remember not to mutate state! You should be returning a brand new object based on the values from the previous object.
+
+```js
+export default function chart( state = initialState, action ) {
+  switch(action.type) {
+    case CREATE_CHART:
+      return {
+        activeChartIndex: 0,
+        charts: [ action.chart, ...state.charts ]
+      };
+    default:
+      return state;
+  }
+}
+```
+
+
+
 
 We'll hook this action up to the GUI in the next step, but for now you can test your reducer by calling it manually and examining the result. `chart( undefined, createChart( [ "foo", "bar", "baz" ], "test" ) );` should return something like this:
 

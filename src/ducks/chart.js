@@ -1,3 +1,5 @@
+const CREATE_CHART = "CREATE_CHART";
+
 const initialState = {
   activeChartIndex: 0,
   charts: [
@@ -23,7 +25,19 @@ export default function chart( state = initialState, action ) {
   console.log('State', state);
   console.log('Action', action);
   switch(action.type) {
+    case CREATE_CHART:
+      return {
+        activeChartIndex: 0,
+        charts: [ action.chart, ...state.charts ]
+      };
     default:
       return state;
   }
+}
+
+export function createChart(labels, name) {
+  return {
+    chart: { labels, name, datasets: [] },
+    type: CREATE_CHART
+  };
 }
