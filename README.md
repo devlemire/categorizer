@@ -255,7 +255,7 @@ export default createStore( chart );
 
 ### Summary
 
-In this step we'll connect Redux to our application.
+In this step we'll connect Redux to our application in `index.js`.
 
 ### Instructions
 
@@ -264,9 +264,6 @@ In this step we'll connect Redux to our application.
 * In `ReactDOM.render()`:
   * Wrap the `<App />` component in a `Provider` component.
   * Add a `store` prop to the `Provider` component that equals store.
-
-
-* Connect the `App` component definition to Redux in `src/components/App.js`.
 
 <details>
 
@@ -292,7 +289,53 @@ ReactDOM.render(
 );
 ```
 
-Finally, in `src/components/App.js` let's import `connect` from React Redux. We'll use this later to connect our `App` component. Next, let's create a function above our `export` statement named `mapStateToProps` that takes a single parameter called `state`. This function will be used to tell Redux which pieces of state our `App` component is interested in and also format state before reaching `App`. Let's have our `mapStateToProps` return an object with a `activeChart` and `charts` property.
+</details>
+
+### Solution
+
+<details>
+
+<summary><code>src/index.js</code></summary>
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+
+import "./index.css";
+
+import store from "./store";
+
+import App from "./components/App";
+
+ReactDOM.render(
+  <Provider store={ store }>
+    <App />
+  </Provider>,
+  document.getElementById( 'root' )
+);
+
+```
+
+</details>
+
+## Step 4
+
+### Summary
+
+In this step we will..
+
+### Instructions
+
+* Connect the `App` component definition to Redux in `src/components/App.js`.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's being by opening `src/components/App.js`. Next, import `connect` from React Redux. We'll use this later to connect our `App` component. Next, let's create a function above our `export` statement named `mapStateToProps` that takes a single parameter called `state`. This function will be used to tell Redux which pieces of state our `App` component is interested in and also format state before reaching `App`. Let's have our `mapStateToProps` return an object with a `activeChart` and `charts` property.
 
 * `activeChart` should equal the actual object of the chart, we can do this by using our `activeChartIndex` we get from state and our `charts` array. ( `charts[ state.activeChartIndex ]` )
 * `charts` should equal the array of charts (`charts`);
@@ -353,33 +396,7 @@ Either way accomplishes the same thing, but in the solutions to come I'll be usi
 
 <details>
 
-<summary><code>src/index.js</code></summary>
-
-```jsx
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-
-import "./index.css";
-
-import store from "./store";
-
-import App from "./components/App";
-
-ReactDOM.render(
-  <Provider store={ store }>
-    <App />
-  </Provider>,
-  document.getElementById( 'root' )
-);
-
-```
-
-</details>
-
-<details>
-
-<summary><code>App.js</code></summary>
+<summary> <code> App.js </code> </summary>
 
 ```jsx
 import React, { Component } from "react";
@@ -420,6 +437,11 @@ export default connect(mapStateToProps)(App);
 ```
 
 </details>
+
+
+
+
+
 
 ## Step 4
 
