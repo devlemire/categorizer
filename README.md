@@ -459,7 +459,7 @@ We then go back to `index.js` which then `imports` `App.js`. This causes the exp
 
 In the following giphy take note of which file the debugger is currently in:
 
-<img src="https://github.com/DevMountain/categorizer/blob/solution/readme_assets/1g.gif" />
+<img src="https://github.com/DevMountain/categorizer/blob/solution/readme_assets/1-1g.gif" />
 
 </details>
 
@@ -1526,4 +1526,3 @@ If you see a problem or a typo, please fork, make the necessary changes, and cre
 <p align="center">
 <img src="https://devmounta.in/img/logowhiteblue.png" width="250">
 </p>
-
