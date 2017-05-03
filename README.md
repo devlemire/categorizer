@@ -606,7 +606,9 @@ In this step we'll implement the ability to create charts in the `NewChart` comp
 
 <summary> Detailed Instructions </summary>
 
-Let's begin by opening `src/components/App.js` and importing `createChart` from `src/ducks/chart.js`. Let's add this import statement after the import of `./App.css`.
+<br />
+
+Let's begin by opening `src/components/App.js`. Next let's import our `createChart` action creator from our `chart` reducer after the import of `./App.css`.
 
 ```js
 import { createChart } from '../ducks/chart';
