@@ -15,10 +15,19 @@ export default class NewChart extends Component {
     };
 
     this.handleChange = this.handleChange.bind( this );
+    this.addLabel = this.addLabel.bind( this );
   }
 
   handleChange(field, val) {
     this.setState({ [field]: val });
+  }
+  
+  addLabel(event) {
+    event.preventDefault();
+    this.setState({
+      labels: [ ...this.state.labels, this.state.newLabel ],
+      newLabel: ''
+    });
   }
 
   render() {
@@ -38,7 +47,7 @@ export default class NewChart extends Component {
             value={ name }
           />
         </div>
-        <form className="new-chart__form-group">
+        <form className="new-chart__form-group" onSubmit={ this.addLabel }>
           <label className="new-chart__label">Add Label:</label>
           <input
             className="new-chart__category new-chart__input"
@@ -51,7 +60,7 @@ export default class NewChart extends Component {
 
         <div className="new-chart__labels-wrapper">
           <label className="new-chart__label">Labels:</label>
-          <span className="new-chart__labels">[](Min. 3)</span>
+          <span className="new-chart__labels">[ { labels.join(', ') } ] (Min. 3)</span>
         </div>
 
         <button className="new-chart__submit">

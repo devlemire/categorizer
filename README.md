@@ -971,7 +971,11 @@ In this step we will continue to make our `NewChart` component functional by han
     * `labels` - Should equal the previous list of labels from state with the new label added to the end.
     * `newLabel` - Should then be reset back to its default value of `''`.
 * Bind `this` to `addLabel` at the bottom of the `constructor` method.
+* Add an `onSubmit` attribute to the `form` element with the `className` of `"new-chart__form-group"`.
+  * It should call `this.addLabel`.
 * Change the span with the `className` of `className="new-chart__labels"` to display the current labels from state inside the [ ].
+* TEST:
+  * Go into your app and try putting in labels by typing in the label `input` field and pressing enter. You should see the text underneath update every time you press enter.
 
 <details>
 
