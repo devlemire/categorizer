@@ -970,7 +970,7 @@ In this step we will continue to make our `NewChart` component functional by han
 ### Instructions
 
 * Open `NewChart.js`. ( `src/components/NewChart/NewChart.js` )
-* Create a new class method called `addLabel` that takes an `event` object.
+* Create a new class method called `addLabel` that takes an `event` object as the first parameter.
   * This method should call `event.preventDefault();` so the browser doesn't refresh.
   * Then the method should use `setState` to update the following properties on state:
     * `labels` - Should equal the previous list of labels from state with the new label added to the end.
@@ -990,22 +990,47 @@ In this step we will continue to make our `NewChart` component functional by han
 
 <br />
 
-Next we need to add a way for users to save their labels, we'll do that by creating a new method `addLabel`. `addLabel` will take a single `event` parameter. What this method needs to do is call `event.preventDefault()`, add `this.state.newLabel` to `this.state.labels`, and reset `this.state.newLabel` to an empty string. It will look something like this:
+Let's begin by opening `NewChart.js` ( `src/components/NewChart/NewChart.js` ). Next let's add a new class method called `addLabel`. `addLabel` will take a single `event` parameter. Which will be the change event object. This method should call `event.preventDefault()`, to prevent a browser refresh, and then use `this.setState()` to update two properties on state. It should update `this.state.labels` to equal a new array of all the previous labels with the new label at the end. It should also set `newLabel` back to it's default value afterwards.
 
-```javascript
-addLabel( event ) {
-	// We need to prevent default because this will be attached to a form
-	// element. Without this, the browser will reload!
-	event.preventDefault();
-
-	this.setState( {
-		  labels: [ ...this.state.labels, this.state.newLabel ]
-		, newLabel: ""
-	} );
+```js
+addLabel(event) {
+  event.preventDefault();
+  this.setState({
+    labels: [ ...this.state.labels, this.state.newLabel ],
+    newLabel: ''
+  });
 }
 ```
 
-Bind `addLabel` in the `constructor` and then pass it to the `onSubmit` prop of the form containing the "Add Label" input. To let the user see what labels they have already added add the following code inside of the `[]` brackets in the `new-chart__labels` span - `{ labels.join( ", " ) }`. With these changes you should be able to enter labels and see them populate below as you hit enter.
+Next, let's `bind` `addLabel` at the bottom of the `constructor` method. Then we can assign an `onSubmit` attribute to the `form` element with the `className` of `"new-chart__form-group"`. This will allow us to press the `enter` key to execute our `addLabel` method. 
+
+```jsx
+<form className="new-chart__form-group" onSubmit={ this.addLabel }>
+```
+
+Finally we'll need to update the `span` element with the `className` of `"new-chart__labels"` to show our labels. Inside the [ ] we can use `{ }` to call on `labels`. Let's use the array prototype `join` to join our labels by `, `.
+
+```jsx
+<span className="new-chart__labels">[ { labels.join(', ') } ] (Min. 3)</span>
+```
+
+</details>
+
+### Solution
+
+## Step 9
+
+### Summary
+
+In this step we will..
+
+### Instructions
+
+* Something..
+
+<details>
+
+<summary> Detailed Instructions </summary>
 
 Finally we need to send all this data to our reducer! To do this we'll need one more method - `submitChart` which won't take any parameters. Destructure `labels` and `name` from `this.state` so we can do a little bit of form validation. If `name` is an empty string or there are less than 3 labels we will just return early. Next we need to call `this.props.createChart` (our action creator passed down from app) passing in `labels` and `name`. Lastly, reset `this.state` to its initial value. Bind `submitChart` in the `constructor` and pass it to the `onClick` handler of the submit button. It will look like this:
 
@@ -1033,7 +1058,7 @@ You're now able to send all the data necessary for creating a chart to the reduc
 
 ### Solution
 
-## Step 8
+## Step 10
 
 ### Summary
 
