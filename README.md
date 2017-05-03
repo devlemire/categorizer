@@ -981,8 +981,6 @@ In this step we will continue to make our `NewChart` component functional by han
 * Change the span with the `className` of `"new-chart__labels"` to display the current labels from state inside [ ].
   * For example, if I had the labels `green` and `red`:
     * "[ green, red ] (Min. 3)"
-* TEST:
-  * Go into your app and try putting in labels by typing in the label `input` field and pressing enter. You should see the text underneath update every time you press enter.
 
 <details>
 
@@ -1105,6 +1103,10 @@ export default class NewChart extends Component {
 ```
 
 </details>
+
+<br />
+
+You should now be able to go into your app and try putting in labels by typing in the label `input` field and pressing enter. You should see the text underneath update every time you press enter.
 
 ## Step 9
 
