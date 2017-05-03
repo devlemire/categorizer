@@ -386,7 +386,7 @@ Either way accomplishes the same thing, but in the solutions to come I'll be usi
 
 <details>
 
-<summary> <code> App.js </code> </summary>
+<summary> <code> src/components/App.js </code> </summary>
 
 ```jsx
 import React, { Component } from "react";
@@ -713,7 +713,7 @@ Now we can pass down our `createChart` prop where we render `NewChart`.
 
 <details>
 
-<summary> <code> App.js </code> </summary>
+<summary> <code> src/components/App.js </code> </summary>
 
 ```jsx
 import React, { Component } from "react";
@@ -886,54 +886,7 @@ Next let's repeat the same exact steps for the `input` element with the `classNa
 
 <details>
 
-<summary><code>src/components/App.js</code></summary>
-
-```jsx
-import React, { Component } from "react";
-import { connect } from "react-redux";
-
-import "./App.css";
-
-import { createChart } from "../ducks/chart";
-
-import NewChart from "./NewChart/NewChart";
-import Sidebar from "./Sidebar/Sidebar";
-
-class App extends Component {
-	render() {
-		const { createChart } = this.props;
-		return (
-			<div className="app">
-				<Sidebar />
-				<main className="app__main">
-					<header className="app__header">
-						<h1 className="app__title">Categorizer</h1>
-
-						<div className="app__new-chart">
-							<NewChart createChart={ createChart } />
-						</div>
-					</header>
-				</main>
-			</div>
-		);
-	}
-}
-
-function mapStateToProps( { activeChartIndex, charts } ) {
-	return {
-		  activeChart: charts[ activeChartIndex ]
-		, charts
-	};
-}
-
-export default connect( mapStateToProps, { createChart } )( App );
-```
-
-</details>
-
-<details>
-
-<summary><code>src/components/NewChart/NewChart.js</code></summary>
+<summary> <code>src/components/NewChart/NewChart.js</code> </summary>
 
 ```jsx
 import React, { Component, PropTypes } from "react";
