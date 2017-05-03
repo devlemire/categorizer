@@ -1112,11 +1112,15 @@ You should now be able to go into your app and try putting in labels by typing i
 
 ### Summary
 
-In this step we will..
+In this step we will finish the functionality for our `NewChart` component by sending data to our reducer through the prop `createChart`.
 
 ### Instructions
 
-* Something..
+* Open `NewChart.js`. ( `src/components/NewChart/NewChart.js` )
+* Create a new class method called `submitChart`.
+  * This method should exit if `this.state.name` is falsy or there aren't at least 3 labels.
+  * Otherwise this method should call `this.props.createChart` with `labels` and `name` from `state`.
+  * Then the method should use `this.setState` to set all `state` values back to their default values.
 
 <details>
 
