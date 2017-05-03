@@ -217,20 +217,12 @@ In this step we'll create a store that we'll use the reducer we made in the prev
 
 Create a new file in `src` named `store.js`. Inside of `src/store.js` we'll want to import `createStore` from `redux` and `chart` from `src/chart.js`. Then we can use `createStore` by invoking it and passing in our chart reducer. We'll also want to export this by default.
 
-<details>
-
-<summary> <code> store.js </code> </summary>
-
 ```js
 import { createStore } from 'redux';
 import chart from './ducks/chart';
 
 export default createStore(chart);
 ```
-
-</details>
-
-<br />
 
 Basically Redux is creating the store and calling our reducer `chart` with `undefined` and a dummy action as arguments. This will then cause our reducer to return the `initialState` variable and give our store an initial state.
 
