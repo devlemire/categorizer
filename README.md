@@ -683,6 +683,14 @@ In this step we will make our `NewChart` component functional by creating a `han
 
 ### Instructions
 
+* Open `NewChart.js`. ( `src/components/NewChart/NewChart.js` )
+* Create a `constructor` method that takes `props` as a parameter.
+  * Call super with `props` as a parameter.
+  * Create a state object with the following properties:
+    * `labels` - A list of the labels submitted so far. It should default to an empty array.
+    * `name` - The text from the name input. It should default to an empty string.
+    * `newLabel` - The text from the new label input. It should default to an empty string.
+* Deconstruct state at the top of the `render` method.
 * Create a `handleChange` method in the `NewChart` component definition to allow for handling user input.
 * Use the `createChart` action creator to pass the user input to our `chart` reducer.
 
@@ -690,11 +698,13 @@ In this step we will make our `NewChart` component functional by creating a `han
 
 <summary> Detailed Instructions </summary>
 
-Let's begin by opening `src/components/NewChart/NewChart.js`. Get started by writing a `constructor` method that takes `props` as its first parameter. Then call super with `props` as a parameter. Finally create a `state` object with three properties after `super(props)`:
+<br />
 
-* `labels` - A list of the labels submitted so far. Defaults to an empty array
-* `name` - The text from the name input. Defaults to an empty string
-* `newLabel` - The text from the new label input. Defaults to an empty string
+Let's begin by opening `src/components/NewChart/NewChart.js`. Next let's add a `constructor` method that takes `props` as its first parameter. Then call super with `props` as a parameter. Finally create a `state` object with three properties after `super(props)`:
+
+* `labels` - A list of the labels submitted so far. It should default to an empty array.
+* `name` - The text from the name input. It should default to an empty string.
+* `newLabel` - The text from the new label input. It should default to an empty string.
 
 ```js
 constructor( props ) {
