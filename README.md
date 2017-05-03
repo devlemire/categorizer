@@ -599,8 +599,6 @@ In this step we'll implement the ability to create charts in the `NewChart` comp
 
 * Import and connect the `createChart` action creator in the `App` component.
 * Pass the `createChart` action creator to the `NewChart` component.
-* Create a `handleChange` method in the `NewChart` component definition to allow for handling user input.
-* Use the `createChart` action creator to pass the user input to our `chart` reducer.
 
 <details>
 
@@ -656,7 +654,7 @@ function wrapActionCreator( actionCreatorsObject ) {
 
 <br />
 
-Now that our action creator is ready to be used let's pass it down as a `prop` to our `NewChart` component. Let's deconstruct our `props` in the `App` component at the top of the `render` method. This will allow us to avoid having to use `this.props.propNameHere` every time we want to refer to a prop.
+Now that our action creator is ready to be used let's pass it down as a `prop` to our `NewChart` component. Before we pass down our prop, let's deconstruct our `props` in the `App` component at the top of the `render` method. This will allow us to avoid having to use `this.props.propNameHere` every time we want to refer to a prop.
 
 ```js
 render() {
@@ -674,7 +672,24 @@ Now we can pass down our `createChart` prop where we render `NewChart`.
 <NewChart createChart={ createChart } />
 ```
 
-Open up `src/components/NewChart/NewChart.js`. Get started by writing a `constructor` method that takes `props` as its first parameter. Then call super with `props` as a parameter. Finally create a `state` object with three properties after `super(props)`:
+</details>
+
+## Step 7
+
+### Summary
+
+In this step we will..
+
+### Instructions
+
+* Create a `handleChange` method in the `NewChart` component definition to allow for handling user input.
+* Use the `createChart` action creator to pass the user input to our `chart` reducer.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+Let's begin by opening `src/components/NewChart/NewChart.js`. Get started by writing a `constructor` method that takes `props` as its first parameter. Then call super with `props` as a parameter. Finally create a `state` object with three properties after `super(props)`:
 
 * `labels` - A list of the labels submitted so far. Defaults to an empty array
 * `name` - The text from the name input. Defaults to an empty string
@@ -939,7 +954,7 @@ export default class NewChart extends Component {
 
 </details>
 
-## Step 7
+## Step 8
 
 ### Summary
 
@@ -1154,7 +1169,7 @@ Sidebar.propTypes = {
 
 </details>
 
-## Step 8
+## Step 9
 
 ### Summary
 
@@ -1366,7 +1381,7 @@ export default connect( mapStateToProps, { addDataset, createChart, setActiveCha
 
 </details>
 
-## Step 9
+## Step 10
 
 ### Summary
 
