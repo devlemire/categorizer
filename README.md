@@ -2332,6 +2332,8 @@ We can then add an `onChange` event to our `input` element where we mapped over 
 }
 ```
 
+We're now able to modify both properties on state. In the next step we'll create a method to send our state data to our `chart` reducer.
+
 </details>
 
 ### Solution
