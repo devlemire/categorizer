@@ -1929,6 +1929,8 @@ You should now see the skeleton of the `AddDataset` component to the right of th
 
 ### Solution
 
+<details>
+
 <summary><code>src/components/App.js</code></summary>
 
 ```jsx
