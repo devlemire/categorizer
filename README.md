@@ -230,12 +230,16 @@ export default function chart( state = initialState, action ) {
 
 ### Summary
 
-In this step we'll create a store that we'll use the reducer we made in the previous step.
+In this step we'll create a store that weill use the reducer we made in the previous step.
 
 ### Instructions
 
-* Create a `store.js` file in `src/`
-* Create a Redux store inside of the `store.js` file you just created.
+* Create a `store.js` file in `src/`.
+* Create a Redux store inside of the `store.js` file you just created:
+  * Import `createStore` from `'redux'`.
+  * Import the `chart` reducer we made in the previous step.
+  * Call the `createStore` function with `chart` as the first parameter.
+    * This function call should be exported by default.
 
 <details>
 
