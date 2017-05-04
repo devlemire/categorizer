@@ -1741,11 +1741,6 @@ In this step we will update our `chart` reducer to handle an action for adding n
       * The order of the datasets must remain the same. 
       * The new dataset must be added to the end of the datasets array.
 
-
-* Alter the `chart` reducer to handle the new action type
-* Connect the `addDataset` action creator to `App`
-* Render the `AddDataset` component into `App`, passing the `addDataset` action creator as a prop
-
 <details>
 
 <summary> Detailed Instructions </summary>
@@ -1912,11 +1907,12 @@ export function addDataSet(dataset) {
 
 ### Summary
 
-In this step we will..
+In this step we will connect our `addDataSet` action creator in the `App` component. We'll then `render` the `AddDataSet` component in `App` and pass down the `addDataSet` action creator as a prop to it.
 
 ### Instructions
 
-* Something
+* Connect the `addDataset` action creator to `App`
+* Render the `AddDataset` component into `App`, passing the `addDataset` action creator as a prop
 
 <details>
 
