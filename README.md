@@ -1782,7 +1782,7 @@ case ADD_DATASET: {
 
 There is a lot going on here, let's break it down. We start by creating a new array for `charts`. Next we want to keep the charts in the same order so we need to put all the charts before the active chart at the beginning of the `charts` array. Using the `ES2015` spread operator we can combine it with `slice` to get all the charts up until our active chart. Then we can insert our active chart as a <b>new</b> object that has `datasets` modified to be an array of all the previous `datasets` with our new `dataset` from `action` at the end of the array. Then using the spread operator again we can get all the charts after our active chart and add it to the end of `charts` array.
 
-In addition to this we can also deconstruct state so we don't have to use `state.` every where. Our finaly solution would look like:
+In addition to this we can also deconstruct state so we don't have to use `state.` every where. Our final solution would look like:
 
 ```js
 case ADD_DATASET: {
