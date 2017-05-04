@@ -1434,14 +1434,18 @@ export default connect(mapStateToProps, { createChart })(App);
 
 ### Summary
 
-In this step will update our `SideBar` component to display a list of charts that have been created. This will allow us to navigate between created charts.
+In this step we will update our `chart` reducer to handle an action for setting the new active chart.
 
 ### Instructions
 
-* Create `SET_ACTIVE_CHART_INDEX` action type/creator
-* Connect the `setActiveChartIndex` action creator to `App`
-* Pass `charts` and `setActiveChartIndex` props to `Sidebar`
-* Refactor `Sidebar` to display a list of past charts
+* Open `src/ducks/chart.js`.
+* Create an action type called `SET_ACTIVE_CHART_INDEX` that equals `"SET_ACTIVE_CHART_INDEX"`.
+* Create and export an action creator called `setActiveChartIndex`:
+  * This function should take in one parameter:
+    * `index` - This will be an integer of the new active chart's index.
+  * This function should return an object with two properties:
+    * `index` - This should equal the passed in index.
+    * `type` - This should equal `SET_ACTIVE_CHART_INDEX`.
 
 <details>
 
@@ -1475,31 +1479,6 @@ case SET_ACTIVE_CHART_INDEX:
     charts: state.charts
   }
 ```
-
-Our reducer is now ready to go. Let's transition over to `App.js` ( `src/components/App.js` ).
-
-Head back over to `src/components/App.js` and import the new `setActiveChartIndex` action creator. Add `setActiveChartIndex` as another property to the action creators object passed to `connect`. Destructure `setActiveChartIndex` in `App`'s `render` method. Pass two new props to `Sidebar` - `charts` and `setActiveChartIndex`.
-
-Open up `src/components/Sidebar/Sidebar.js`. We'll need to `map` over the charts passed to this component to create a list of charts. Above the `return` create a new variable named `pastCharts` and set it equal to the result of mapping over `charts` and returning the following JSX:
-
-```jsx
-<li
-	className="sidebar__past-chart"
-	key={ chart.name }
->
-	<p
-		className="sidebar__chart-name"
-		// Remember that .map will provide the element's index
-		// as a second parameter
-		onClick={ () => setActiveChartIndex( index ) }
-	>
-		{ chart.name }
-	</p>
-	<p className="sidebar__chart-datasets">{ chart.datasets.length } Datasets</p>
-</li>
-```
-
-Replace the static `<li>` element and its contents with the `pastCharts` variable. You should now be able to create multiple charts and navigate between them by clicking on the appropriate sidebar links.
 
 </details>
 
@@ -1815,6 +1794,47 @@ export default connect( mapStateToProps, { addDataset, createChart, setActiveCha
 ```
 
 </details>
+
+## Step 12
+
+### Summary
+
+In this step we will update our `SideBar` component to display a list of charts that have been created. This will allow us to navigate between created charts.
+
+### Instructions
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+Head back over to `src/components/App.js` and import the new `setActiveChartIndex` action creator. Add `setActiveChartIndex` as another property to the action creators object passed to `connect`. Destructure `setActiveChartIndex` in `App`'s `render` method. Pass two new props to `Sidebar` - `charts` and `setActiveChartIndex`.
+
+Open up `src/components/Sidebar/Sidebar.js`. We'll need to `map` over the charts passed to this component to create a list of charts. Above the `return` create a new variable named `pastCharts` and set it equal to the result of mapping over `charts` and returning the following JSX:
+
+```jsx
+<li
+	className="sidebar__past-chart"
+	key={ chart.name }
+>
+	<p
+		className="sidebar__chart-name"
+		// Remember that .map will provide the element's index
+		// as a second parameter
+		onClick={ () => setActiveChartIndex( index ) }
+	>
+		{ chart.name }
+	</p>
+	<p className="sidebar__chart-datasets">{ chart.datasets.length } Datasets</p>
+</li>
+```
+
+Replace the static `<li>` element and its contents with the `pastCharts` variable. You should now be able to create multiple charts and navigate between them by clicking on the appropriate sidebar links.
+
+</details>
+
+### Solution
+
+
 
 ## Step 10
 
