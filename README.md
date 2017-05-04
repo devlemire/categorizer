@@ -29,7 +29,35 @@ In this step we'll download the necessary packages to use Redux and create a red
 
 * Install Redux and React Redux using npm.
 * Create a `chart.js` file in `src/ducks/`.
-* Create an initial state and reducer inside of the `chart.js` file you just created.
+* Create an initial state object called `initialState` with the following properties:
+  * `activeChartIndex` - The index of the active chart. This should default to value of `0`.
+  * `charts` - The array of charts. This should default to the following chart:
+  * <details> 
+
+    <summary> <code> Default Chart Code </code> </summary>
+
+    ```js
+    {
+      labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ], 
+      name: "Example Chart", 
+      datasets: [
+        {
+          label: "My First dataset", 
+          data: [65, 59, 90, 81, 56, 55, 40]
+        },
+        {
+          label: "My Second dataset",
+          data: [28, 48, 40, 19, 96, 27, 100]
+        }
+      ]
+    }
+    ```
+
+    </details>
+
+and reducer inside of the `chart.js` file you just created.
+
+
 
 <details>
 
