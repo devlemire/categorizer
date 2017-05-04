@@ -2214,18 +2214,18 @@ In this step we will dynamically `render` the labels of the active chart using a
       <summary> <code> JSX </code> </summary>
 
       ```jsx
-          <div className="add-dataset__form-group" key={ label }>
-          <label className="add-dataset__label">{ label }:</label>
-          <input
-            className="add-dataset__input"
-            max="100"
-            min="0"
-            required
-            type="number"
-            value={ data[ index ] }
-            onChange={ () => this.handleDataChange(index) }
-          />
-        </div>
+      <div className="add-dataset__form-group" key={ label }>
+        <label className="add-dataset__label">{ label }:</label>
+        <input
+          className="add-dataset__input"
+          max="100"
+          min="0"
+          required
+          type="number"
+          value={ data[ index ] }
+          onChange={ () => this.handleDataChange(index) }
+        />
+      </div>
       ```
 
       </summary>
