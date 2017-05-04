@@ -2211,14 +2211,9 @@ In this step we will dynamically `render` the labels of the active chart using a
 
 <summary> Detailed Instructions </summary>
 
-Let's begin by changing the value and create the dynamic data inputs. First, let's destructure `labels` and from `this.props` as well as `data` and `label` from `this.state`. 
+<br />
 
-```js
-const { labels } = this.props;
-const { data } = this.state;
-```
-
-Next, let's create a map over `labels` just below the `div` with a `className` of `"add-dataset__form-group"` and just above the `button` with a `className` of `"add-dataset__submit"`. This map should keep track of the `label` and the `index`.
+Let's begin by mapping over `labels` just below the `div` with a `className` of `"add-dataset__form-group"` and just above the `button` with a `className` of `"add-dataset__submit"`. This map should keep track of the `label` and the `index`:
 
 ```jsx
 <div className="add-dataset__form-group">
