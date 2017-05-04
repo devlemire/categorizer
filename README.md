@@ -1438,8 +1438,6 @@ In this step will update our `SideBar` component to display a list of charts tha
 
 ### Instructions
 
-* Render the `ActiveChart` component into `App`
-* Pass the `activeChart` prop to the `ActiveChart` component
 * Create `SET_ACTIVE_CHART_INDEX` action type/creator
 * Connect the `setActiveChartIndex` action creator to `App`
 * Pass `charts` and `setActiveChartIndex` props to `Sidebar`
@@ -1451,11 +1449,34 @@ In this step will update our `SideBar` component to display a list of charts tha
 
 <br />
 
-Now that we can create and actually _see_ multiple charts (even if we can't add data to them yet) we need a way to navigate between them. We'll set up the logic for this in`src/ducks/chart.js`. At the top of the file create a new action type of `SET_ACTIVE_CHART_INDEX` set equal to `"SET_ACTIVE_CHART_INDEX"`.
+Let's being by opening `src/ducks/chart.js`. At the top of the file create a new action type of `SET_ACTIVE_CHART_INDEX` set equal to `"SET_ACTIVE_CHART_INDEX"`.
 
-Underneath the reducer create a `setActiveChartIndex` action creator that takes a single parameter `index` and returns an object with a `type` property of `SET_ACTIVE_CHART_INDEX` and an `index` property set equal to the `index` parameter.
+```js
+const SET_ACTIVE_CHART_INDEX = "SET_ACTIVE_CHART_INDEX";
+```
 
-Lastly we need to handle this action in the `chart` reducer, luckily this will be pretty easy. Add a `case` checking against `SET_ACTIVE_CHART_INDEX`, this `case` should return a new state object where `activeChartIndex` is set equal to `action.index` and `charts` is set equal to `state.charts`.
+Next, underneath the reducer create a `setActiveChartIndex` action creator that takes a single parameter `index`. This action creator should return an object with two properties: `index` and `type`. `index` should equal the passed in `index` and `type` should equal `SET_ACTIVE_CHART_INDEX` ( the action type we just created ). 
+
+```js
+export function setActiveChartIndex(index) {
+  return {
+    index,
+    type: SET_ACTIVE_CHART_INDEX
+  }
+}
+```
+
+Next, let's update our `chart` reducer to handle this new action. Add a `case` checking against `SET_ACTIVE_CHART_INDEX`. This `case` should return a new state object where `activeChartIndex` is set equal to `action.index` and `charts` is set equal to `state.charts`.
+
+```js
+case SET_ACTIVE_CHART_INDEX:
+  return {
+    activeChartIndex: action.index,
+    charts: state.charts
+  }
+```
+
+Our reducer is now ready to go. Let's transition over to `App.js` ( `src/components/App.js` ).
 
 Head back over to `src/components/App.js` and import the new `setActiveChartIndex` action creator. Add `setActiveChartIndex` as another property to the action creators object passed to `connect`. Destructure `setActiveChartIndex` in `App`'s `render` method. Pass two new props to `Sidebar` - `charts` and `setActiveChartIndex`.
 
