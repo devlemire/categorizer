@@ -1488,57 +1488,102 @@ case SET_ACTIVE_CHART_INDEX:
 
 <summary><code>src/ducks/chart.js</code></summary>
 
-```javascript
+```js
 const CREATE_CHART = "CREATE_CHART";
 const SET_ACTIVE_CHART_INDEX = "SET_ACTIVE_CHART_INDEX";
 
 const initialState = {
-	  activeChartIndex: 0
-	, charts: [ {
-		  labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ]
-		, name: "Example Chart"
-		, datasets: [
-			{
-				  label: "My First dataset"
-				, data: [65, 59, 90, 81, 56, 55, 40]
-			}
-			, {
-				  label: "My Second dataset"
-				, data: [28, 48, 40, 19, 96, 27, 100]
-			}
-		]
-	} ]
+  activeChartIndex: 0,
+  charts: [
+    {
+      labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ], 
+      name: "Example Chart", 
+      datasets: [
+        {
+          label: "My First dataset", 
+          data: [65, 59, 90, 81, 56, 55, 40]
+        },
+        {
+          label: "My Second dataset",
+          data: [28, 48, 40, 19, 96, 27, 100]
+        }
+      ]
+    }
+  ]
 };
 
 export default function chart( state = initialState, action ) {
-	switch ( action.type ) {
-		case CREATE_CHART:
-			return {
-				  activeChartIndex: 0
-				, charts: [ action.chart, ...state.charts ]
-			};
-		case SET_ACTIVE_CHART_INDEX:
-			return {
-				  activeChartIndex: action.index
-				, charts: state.charts
-			};
-		default: return state;
-	}
+  switch(action.type) {
+    case CREATE_CHART:
+      return {
+        activeChartIndex: 0,
+        charts: [ action.chart, ...state.charts ]
+      };
+    case SET_ACTIVE_CHART_INDEX:
+      return {
+        activeChartIndex: action.index,
+        charts: state.charts
+      }
+    default:
+      return state;
+  }
 }
 
-export function createChart( labels, name ) {
-	return {
-		  chart: { labels, name, datasets: [] }
-		, type: CREATE_CHART
-	}
+export function createChart(labels, name) {
+  return {
+    chart: { labels, name, datasets: [] },
+    type: CREATE_CHART
+  };
 }
 
-export function setActiveChartIndex( index ) {
-	return { index, type: SET_ACTIVE_CHART_INDEX };
+export function setActiveChartIndex(index) {
+  return {
+    index,
+    type: SET_ACTIVE_CHART_INDEX
+  }
 }
 ```
 
 </details>
+
+## Step 12
+
+### Summary
+
+In this step we will update our `SideBar` component to display a list of charts that have been created. This will allow us to navigate between created charts.
+
+### Instructions
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+Head back over to `src/components/App.js` and import the new `setActiveChartIndex` action creator. Add `setActiveChartIndex` as another property to the action creators object passed to `connect`. Destructure `setActiveChartIndex` in `App`'s `render` method. Pass two new props to `Sidebar` - `charts` and `setActiveChartIndex`.
+
+Open up `src/components/Sidebar/Sidebar.js`. We'll need to `map` over the charts passed to this component to create a list of charts. Above the `return` create a new variable named `pastCharts` and set it equal to the result of mapping over `charts` and returning the following JSX:
+
+```jsx
+<li
+	className="sidebar__past-chart"
+	key={ chart.name }
+>
+	<p
+		className="sidebar__chart-name"
+		// Remember that .map will provide the element's index
+		// as a second parameter
+		onClick={ () => setActiveChartIndex( index ) }
+	>
+		{ chart.name }
+	</p>
+	<p className="sidebar__chart-datasets">{ chart.datasets.length } Datasets</p>
+</li>
+```
+
+Replace the static `<li>` element and its contents with the `pastCharts` variable. You should now be able to create multiple charts and navigate between them by clicking on the appropriate sidebar links.
+
+</details>
+
+### Solution
 
 <details>
 
@@ -1582,6 +1627,18 @@ Sidebar.propTypes = {
 ```
 
 </details>
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Step 9
 
@@ -1794,47 +1851,6 @@ export default connect( mapStateToProps, { addDataset, createChart, setActiveCha
 ```
 
 </details>
-
-## Step 12
-
-### Summary
-
-In this step we will update our `SideBar` component to display a list of charts that have been created. This will allow us to navigate between created charts.
-
-### Instructions
-
-<details>
-
-<summary> Detailed Instructions </summary>
-
-Head back over to `src/components/App.js` and import the new `setActiveChartIndex` action creator. Add `setActiveChartIndex` as another property to the action creators object passed to `connect`. Destructure `setActiveChartIndex` in `App`'s `render` method. Pass two new props to `Sidebar` - `charts` and `setActiveChartIndex`.
-
-Open up `src/components/Sidebar/Sidebar.js`. We'll need to `map` over the charts passed to this component to create a list of charts. Above the `return` create a new variable named `pastCharts` and set it equal to the result of mapping over `charts` and returning the following JSX:
-
-```jsx
-<li
-	className="sidebar__past-chart"
-	key={ chart.name }
->
-	<p
-		className="sidebar__chart-name"
-		// Remember that .map will provide the element's index
-		// as a second parameter
-		onClick={ () => setActiveChartIndex( index ) }
-	>
-		{ chart.name }
-	</p>
-	<p className="sidebar__chart-datasets">{ chart.datasets.length } Datasets</p>
-</li>
-```
-
-Replace the static `<li>` element and its contents with the `pastCharts` variable. You should now be able to create multiple charts and navigate between them by clicking on the appropriate sidebar links.
-
-</details>
-
-### Solution
-
-
 
 ## Step 10
 
