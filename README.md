@@ -1322,7 +1322,7 @@ export default class NewChart extends Component {
 
 ### Summary
 
-In this step we will be rendering the chart and updating the sidebar to list all past charts.
+In this step we will be rendering the active chart.
 
 ### Instructions
 
@@ -1333,12 +1333,6 @@ In this step we will be rendering the chart and updating the sidebar to list all
 * Render the `ActiveChart` component in this new div:
   * Add a `prop` to `ActiveChart` called `chart`.
   * `chart` should equal the `activeChart` object from `App`'s props.
-* Render the `ActiveChart` component into `App`
-* Pass the `activeChart` prop to the `ActiveChart` component
-* Create `SET_ACTIVE_CHART_INDEX` action type/creator
-* Connect the `setActiveChartIndex` action creator to `App`
-* Pass `charts` and `setActiveChartIndex` props to `Sidebar`
-* Refactor `Sidebar` to display a list of past charts
 
 <details>
 
@@ -1368,38 +1362,7 @@ return (
 );
 ```
 
-Next, let's give our `ActiveChart` component a prop called `chart` that is equal to the `activeChart` object from `App`'s props.
-
-
-
-Now that we can create and actually _see_ multiple charts (even if we can't add data to them yet) we need a way to navigate between them. We'll set up the logic for this in`src/ducks/chart.js`. At the top of the file create a new action type of `SET_ACTIVE_CHART_INDEX` set equal to `"SET_ACTIVE_CHART_INDEX"`.
-
-Underneath the reducer create a `setActiveChartIndex` action creator that takes a single parameter `index` and returns an object with a `type` property of `SET_ACTIVE_CHART_INDEX` and an `index` property set equal to the `index` parameter.
-
-Lastly we need to handle this action in the `chart` reducer, luckily this will be pretty easy. Add a `case` checking against `SET_ACTIVE_CHART_INDEX`, this `case` should return a new state object where `activeChartIndex` is set equal to `action.index` and `charts` is set equal to `state.charts`.
-
-Head back over to `src/components/App.js` and import the new `setActiveChartIndex` action creator. Add `setActiveChartIndex` as another property to the action creators object passed to `connect`. Destructure `setActiveChartIndex` in `App`'s `render` method. Pass two new props to `Sidebar` - `charts` and `setActiveChartIndex`.
-
-Open up `src/components/Sidebar/Sidebar.js`. We'll need to `map` over the charts passed to this component to create a list of charts. Above the `return` create a new variable named `pastCharts` and set it equal to the result of mapping over `charts` and returning the following JSX:
-
-```jsx
-<li
-	className="sidebar__past-chart"
-	key={ chart.name }
->
-	<p
-		className="sidebar__chart-name"
-		// Remember that .map will provide the element's index
-		// as a second parameter
-		onClick={ () => setActiveChartIndex( index ) }
-	>
-		{ chart.name }
-	</p>
-	<p className="sidebar__chart-datasets">{ chart.datasets.length } Datasets</p>
-</li>
-```
-
-Replace the static `<li>` element and its contents with the `pastCharts` variable. You should now be able to create multiple charts and navigate between them by clicking on the appropriate sidebar links.
+Next, let's give our `ActiveChart` component a prop called `chart` that is equal to the `activeChart` object from `App`'s props. If we take a look at our application now in the browser, we should see that it is showing our first chart from `initialState` in `chart.js`. Also if we add a new chart, we should see that new chart render for us.
 
 </details>
 
@@ -1563,6 +1526,61 @@ Sidebar.propTypes = {
 ```
 
 </details>
+
+## Step 11
+
+### Summary
+
+In this step will update our `SideBar` component to display a list of charts that have been created. This will allow us to navigate between created charts.
+
+### Instructions
+
+* Render the `ActiveChart` component into `App`
+* Pass the `activeChart` prop to the `ActiveChart` component
+* Create `SET_ACTIVE_CHART_INDEX` action type/creator
+* Connect the `setActiveChartIndex` action creator to `App`
+* Pass `charts` and `setActiveChartIndex` props to `Sidebar`
+* Refactor `Sidebar` to display a list of past charts
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Now that we can create and actually _see_ multiple charts (even if we can't add data to them yet) we need a way to navigate between them. We'll set up the logic for this in`src/ducks/chart.js`. At the top of the file create a new action type of `SET_ACTIVE_CHART_INDEX` set equal to `"SET_ACTIVE_CHART_INDEX"`.
+
+Underneath the reducer create a `setActiveChartIndex` action creator that takes a single parameter `index` and returns an object with a `type` property of `SET_ACTIVE_CHART_INDEX` and an `index` property set equal to the `index` parameter.
+
+Lastly we need to handle this action in the `chart` reducer, luckily this will be pretty easy. Add a `case` checking against `SET_ACTIVE_CHART_INDEX`, this `case` should return a new state object where `activeChartIndex` is set equal to `action.index` and `charts` is set equal to `state.charts`.
+
+Head back over to `src/components/App.js` and import the new `setActiveChartIndex` action creator. Add `setActiveChartIndex` as another property to the action creators object passed to `connect`. Destructure `setActiveChartIndex` in `App`'s `render` method. Pass two new props to `Sidebar` - `charts` and `setActiveChartIndex`.
+
+Open up `src/components/Sidebar/Sidebar.js`. We'll need to `map` over the charts passed to this component to create a list of charts. Above the `return` create a new variable named `pastCharts` and set it equal to the result of mapping over `charts` and returning the following JSX:
+
+```jsx
+<li
+	className="sidebar__past-chart"
+	key={ chart.name }
+>
+	<p
+		className="sidebar__chart-name"
+		// Remember that .map will provide the element's index
+		// as a second parameter
+		onClick={ () => setActiveChartIndex( index ) }
+	>
+		{ chart.name }
+	</p>
+	<p className="sidebar__chart-datasets">{ chart.datasets.length } Datasets</p>
+</li>
+```
+
+Replace the static `<li>` element and its contents with the `pastCharts` variable. You should now be able to create multiple charts and navigate between them by clicking on the appropriate sidebar links.
+
+</details>
+
+### Solution
+
 
 ## Step 9
 
