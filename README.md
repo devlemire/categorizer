@@ -1735,7 +1735,7 @@ In this step we will update our `chart` reducer to handle an action for adding n
 * Add a case for `SET_ACTIVE_CHART_INDEX` to the `switch` statement in the `chart` reducer:
   * This case should return an object with two properties:
     * `activeChartIndex` - This should equal the `activeChartIndex` on state.
-    * `charts` - This should equal a <b>new</b> array of charts:
+    * `charts` - This should equal a <b>new</b> array of charts from state:
       * The order of charts must remain the same.
       * The chart we are adding a dataset to must be a <b>new</b> object.
       * The order of the datasets must remain the same. 
