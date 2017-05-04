@@ -1446,6 +1446,10 @@ In this step we will update our `chart` reducer to handle an action for setting 
   * This function should return an object with two properties:
     * `index` - This should equal the passed in index.
     * `type` - This should equal `SET_ACTIVE_CHART_INDEX`.
+* Add a case `SET_ACTIVE_CHART_INDEX` to the `switch` statement in the `chart` reducer:
+  * This case should return an object with two properties:
+    * `activeChartIndex` - This should equal the index given on `action`.
+    * `charts` - This should equal the charts array on `state`.
 
 <details>
 
@@ -1720,7 +1724,14 @@ In this step we will update our `chart` reducer to handle an action for adding n
 
 ### Instructions
 
-* Create an `ADD_DATASET` action type and corresponding action creator
+* Open `src/ducks/chart/js`.
+* Create an action type called `ADD_DATASET` that equals `"ADD_DATA_SET"`.
+* Create and export an action creator called `addDataSet`:
+  * This function should take in one parameter:
+    * `dataset` - This will be an array of numbers that correspond to the labels on the chart.
+  * This function should return an object with two properties:
+    * `dataset` - This should equal the value of the `datasets` parameter.
+    * `type` - This should equal `ADD_DATASET`.
 * Alter the `chart` reducer to handle the new action type
 * Connect the `addDataset` action creator to `App`
 * Render the `AddDataset` component into `App`, passing the `addDataset` action creator as a prop
@@ -1807,7 +1818,7 @@ case ADD_DATASET: {
 
 <summary><code>src/ducks/chart.js</code></summary>
 
-```javascript
+```js
 const CREATE_CHART = "CREATE_CHART";
 const SET_ACTIVE_CHART_INDEX = "SET_ACTIVE_CHART_INDEX";
 const ADD_DATASET = "ADD_DATASET";
@@ -1833,9 +1844,6 @@ const initialState = {
 };
 
 export default function chart( state = initialState, action ) {
-  console.log('Chart reducer fired:');
-  console.log('State', state);
-  console.log('Action', action);
   switch(action.type) {
     case CREATE_CHART:
       return {
