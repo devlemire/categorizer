@@ -2293,7 +2293,7 @@ Pass `handleDataChange` to the data inputs, binding in `render` and passing `ind
 
 ### Summary
 
-In this step we will..
+In this step we will create a class method that will handle sending our data from state to our reducer. We will also create a life cycle method `componentWillReceiveProps` to update our state with new props.
 
 ### Instructions
 
