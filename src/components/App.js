@@ -34,7 +34,7 @@ class App extends Component {
           </header>
           <div className="app__active-chart">
             <ActiveChart chart={ activeChart } />
-            <AddDataset />
+            <AddDataset addDataset={ addDataset } labels={ activeChart.labels } />
           </div>
         </main>
       </div>
