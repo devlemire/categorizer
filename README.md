@@ -1554,11 +1554,46 @@ In this step we will update our `SideBar` component to display a list of charts 
 
 ### Instructions
 
+* Open `src/components/App.js`.
+* Add `setActiveChartIndex` to the `import` of action creators.
+* Add `setActiveChartIndex` to the action creators object in the `connect` statement.
+* Destructure `setActiveChartIndex` from `App`'s props in the `render` method.
+* Add two props where we `render` `SideBar`:
+  * `charts` - Should equal `charts` from `App`'s props.
+  * `setActiveChartIndex` - Should equal `setActiveChartIndex` from `App`'s props.
+
 <details>
 
 <summary> Detailed Instructions </summary>
 
-Head back over to `src/components/App.js` and import the new `setActiveChartIndex` action creator. Add `setActiveChartIndex` as another property to the action creators object passed to `connect`. Destructure `setActiveChartIndex` in `App`'s `render` method. Pass two new props to `Sidebar` - `charts` and `setActiveChartIndex`.
+Head back over to `src/components/App.js` and import the new `setActiveChartIndex` action creator so the `App` component can have access to it. 
+
+```js
+import { createChart, setActiveChartIndex } from '../ducks/chart';
+```
+
+Now let's add `setActiveChartIndex` as another property to the action creators object passed to `connect`. Now we don't have to worry about calling `dispatch` when calling our `setActiveChartIndex` action creator. 
+
+```js
+export default connect(mapStateToProps, { createChart, setActiveChartIndex })(App);
+```
+
+Next, let's destructure `setActiveChartIndex` from `props` in the `render` method.
+
+```js
+const {
+  activeChart,
+  charts,
+  createChart,
+  setActiveChartIndex
+} = this.props;
+```
+
+We now have everything we need from our reducer and we can focus on updating our `SideBar` component. Let's create two new `props` where the `SideBar` component gets rendered. One called `charts` and another called `setActiveChartIndex`. The `charts` prop should equal `charts` from `App`'s props and `setActiveChartIndex` prop should equal `setActiveChartIndex` from `App`'s props.
+
+```jsx
+<Sidebar charts={ charts } setActiveChartIndex={ setActiveChartIndex } />
+```
 
 Open up `src/components/Sidebar/Sidebar.js`. We'll need to `map` over the charts passed to this component to create a list of charts. Above the `return` create a new variable named `pastCharts` and set it equal to the result of mapping over `charts` and returning the following JSX:
 
