@@ -1329,7 +1329,7 @@ In this step we will be rendering the chart and updating the sidebar to list all
 * Open `App.js`. ( `src/components/App.js` )
 * Import the `ActiveChart` component underneath the `import` of the `SideBar` component.
 * Create a new `div` with the `className` of `"app__active-chart"`:
-  * Add this new `div` underneath the closing `</header>` tag.
+  * Add this new `div` underneath the closing `</header>` tag in the `return` of the `render` method.
 * Render the `ActiveChart` component in this new div:
   * Add a `prop` to `ActiveChart` called `chart`.
   * `chart` should equal the `activeChart` object from `App`'s props.
