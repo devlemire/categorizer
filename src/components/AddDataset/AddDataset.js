@@ -16,7 +16,6 @@ export default class AddDataset extends Component {
     };
 
     this.handleLabelChange = this.handleLabelChange.bind( this );
-    this.handleDataChange = this.handleDataChange.bind( this );
   }
 
   handleLabelChange(event) {
@@ -24,7 +23,6 @@ export default class AddDataset extends Component {
   }
 
   handleDataChange(changedIndex, event) {
-    console.log('sadfsdfdsg')
     const { data } = this.state;
     this.setState({
       data: [
@@ -62,7 +60,7 @@ export default class AddDataset extends Component {
                 required
                 type="number"
                 value={ data[ index ] }
-                onChange={ (event) => this.handleDataChange( index, event ) }
+                onChange={ this.handleDataChange.bind(this, index) }
               />
             </div>
           ))

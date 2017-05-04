@@ -2278,11 +2278,25 @@ handleDataChange( changedIndex, event ) {
 }
 ```
 
-Next, let's bind `this` to `handleDataChange` at the bottom of the `constructor` method.
-We can then add an `onChange` event to our `input` element where we mapped over `labels`.
+We can then add an `onChange` event to our `input` element where we mapped over `labels`. When we call `handleDataChange` `bind` `this` and the `index` to it.
 
 ```js
-
+{
+  labels.map( ( label, index ) => (
+    <div className="add-dataset__form-group" key={ label }>
+      <label className="add-dataset__label">{ label }:</label>
+      <input
+        className="add-dataset__input"
+        max="100"
+        min="0"
+        required
+        type="number"
+        value={ data[ index ] }
+        onChange={ this.handleDataChange.bind(this, index) }
+      />
+    </div>
+  ))
+}
 ```
 
 </details>
