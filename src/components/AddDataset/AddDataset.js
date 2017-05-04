@@ -16,10 +16,23 @@ export default class AddDataset extends Component {
     };
 
     this.handleLabelChange = this.handleLabelChange.bind( this );
+    this.handleDataChange = this.handleDataChange.bind( this );
   }
 
   handleLabelChange(event) {
     this.setState({ label: event.target.value });
+  }
+
+  handleDataChange(changedIndex, event) {
+    console.log('sadfsdfdsg')
+    const { data } = this.state;
+    this.setState({
+      data: [
+        ...data.slice( 0, changedIndex ), 
+        parseInt( event.target.value, 10 ),
+        ...data.slice( changedIndex + 1, data.length )
+      ]
+    });
   }
 
   render() {
@@ -49,6 +62,7 @@ export default class AddDataset extends Component {
                 required
                 type="number"
                 value={ data[ index ] }
+                onChange={ (event) => this.handleDataChange( index, event ) }
               />
             </div>
           ))

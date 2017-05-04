@@ -2248,39 +2248,42 @@ Let's have our `map` return the following JSX:
         required
         type="number"
         value={ data[ index ] }
+        onChange={ () => this.handleDataChange(index) }
       />
     </div>
   ))
 }
 ```
 
-We should now see a `label` and a `input` element render on our application for every label a chart has. Let's create a class method that will update our `data` property on state.
+We should now see a `label` and a `input` element render on our application for every label a chart has. Let's create a class method that will update our `data` property on state. Let's call this method `handleDataChange` and have it take two parameters: `changedIndex` and `event`.
 
-
-
-Render `labelInputs` just below the `div` with a class of `add-dataset__form-group`. While we're here, let's update the "Dataset Label" input. Pass the input a `value` prop set equal to `label`.
-
-Now we've got a list of inputs all defaulting to 0, let's write a method to edit them! Create a new method `handleDataChange` that takes two paremeters:
-
-* `changedIndex` - The index of the data input that changed
-* `event` - The DOM event that triggered the change handler and carries the new value
-
-This method will work in a very similar way as the `ADD_DATASET` handler in our `chart` reducer. We need to grab a copy of all the elements before the changed index, insert the updated value, and grab a copy of all the elements after the changed index. It will look something like this:
-
-```javascript
+```js
 handleDataChange( changedIndex, event ) {
-	const { data } = this.state;
-	this.setState( {
-		data: [
-			  ...data.slice( 0, changedIndex )
-			, parseInt( event.target.value, 10 )
-			, ...data.slice( changedIndex + 1, data.length )
-		]
-	} );
+
 }
 ```
 
-Pass `handleDataChange` to the data inputs, binding in `render` and passing `index` as an argument: `onChange={ this.handleDataChange.bind( this, index ) }`.
+This method will work in a very similar way as the `ADD_DATASET` handler in our `chart` reducer. We need to grab a copy of all the elements before the changed index, insert the updated value, and then grab a copy of all the elements after the changed index. It will look like:
+
+```js
+handleDataChange( changedIndex, event ) {
+  const { data } = this.state;
+  this.setState({
+    data: [
+      ...data.slice( 0, changedIndex ), 
+      parseInt( event.target.value, 10 ),
+      ...data.slice( changedIndex + 1, data.length )
+    ]
+  });
+}
+```
+
+Next, let's bind `this` to `handleDataChange` at the bottom of the `constructor` method.
+We can then add an `onChange` event to our `input` element where we mapped over `labels`.
+
+```js
+
+```
 
 </details>
 
