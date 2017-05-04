@@ -1561,6 +1561,8 @@ In this step we will update our `SideBar` component to display a list of charts 
 * Add two props where we `render` `SideBar`:
   * `charts` - Should equal `charts` from `App`'s props.
   * `setActiveChartIndex` - Should equal `setActiveChartIndex` from `App`'s props.
+* Open `src/components/SideBar/SideBar.js`.
+* 
 
 <details>
 
@@ -1597,28 +1599,54 @@ We now have everything we need from our reducer and we can focus on updating our
 <Sidebar charts={ charts } setActiveChartIndex={ setActiveChartIndex } />
 ```
 
-
-
-Open up `src/components/Sidebar/Sidebar.js`. We'll need to `map` over the charts passed to this component to create a list of charts. Above the `return` create a new variable named `pastCharts` and set it equal to the result of mapping over `charts` and returning the following JSX:
+Next, let's configure our `SideBar` component to use these props. Open up `src/components/Sidebar/Sidebar.js`. We'll need to `map` over the charts passed to this component to create a list of charts. Let's remove the `<li>` element in the `<ul>` element with the `className` of `"sidebar__past-charts"`.
 
 ```jsx
-<li
-	className="sidebar__past-chart"
-	key={ chart.name }
->
-	<p
-		className="sidebar__chart-name"
-		// Remember that .map will provide the element's index
-		// as a second parameter
-		onClick={ () => setActiveChartIndex( index ) }
-	>
-		{ chart.name }
-	</p>
-	<p className="sidebar__chart-datasets">{ chart.datasets.length } Datasets</p>
-</li>
+export default function Sidebar( { charts, setActiveChartIndex } ) {
+	return (
+		<aside className="sidebar">
+			<h3 className="sidebar__title">Past Charts</h3>
+
+			<ul className="sidebar__past-charts">
+				
+			</ul>
+		</aside>
+	);
+}
 ```
 
-Replace the static `<li>` element and its contents with the `pastCharts` variable. You should now be able to create multiple charts and navigate between them by clicking on the appropriate sidebar links.
+Inside of the `<ul>` elment let's create our map by breaking out JSX with `{ }`. Map over `charts` and keep track of the current `chart` and the current `index`.
+
+```jsx
+<ul className="sidebar__past-charts">
+  {
+    charts.map( ( chart, index ) => (
+
+    ));
+  }
+</ul>
+```
+
+Next, inside the map, let's return the following JSX:
+
+```jsx
+<ul className="sidebar__past-charts">
+  {
+    charts.map( ( chart, index ) => (
+      <li className="sidebar__past-chart" key={ chart.name }>
+
+        <p className="sidebar__chart-name" onClick={ () => setActiveChartIndex( index ) }>
+          { chart.name }
+        </p>
+
+        <p className="sidebar__chart-datasets">{ chart.datasets.length } Datasets</p>
+      </li>
+    ));
+  }
+</ul>
+```
+
+You should now be able to click on different charts in the `SideBar` and see the active chart render in on the right.
 
 </details>
 
