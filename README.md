@@ -1364,6 +1364,12 @@ return (
 
 Next, let's give our `ActiveChart` component a prop called `chart` that is equal to the `activeChart` object from `App`'s props. If we take a look at our application now in the browser, we should see that it is showing our first chart from `initialState` in `chart.js`. Also if we add a new chart, we should see that new chart render for us.
 
+```jsx
+<div className="app__active-chart">
+  <ActiveChart chart={ activeChart } />
+</div>
+```
+
 </details>
 
 ### Solution
