@@ -38,16 +38,13 @@ export default function chart( state = initialState, action ) {
         charts: state.charts
       }
     case ADD_DATASET: {
-      const activeChart = state.charts[ state.activeChartIndex ];
+      const { activeChartIndex, charts } = state;
+      const activeChart = charts[ activeChartIndex ];
       return {
-          activeChartIndex: state.activeChartIndex, 
+          activeChartIndex, 
           charts: [
-            ...charts.slice( 0, state.activeChartIndex ), 
-            Object.assign(
-              {}, 
-              activeChart, 
-              { datasets: [ ...activeChart.datasets, action.dataset ] }
-            ), 
+            ...charts.slice( 0, activeChartIndex ), 
+            Object.assign({}, activeChart, { datasets: [ ...activeChart.datasets, action.dataset ] }), 
             ...charts.slice( activeChartIndex + 1, charts.length )
         ]
       }
