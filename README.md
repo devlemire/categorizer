@@ -2143,110 +2143,186 @@ import React, { Component, PropTypes } from "react";
 import "./AddDataset.css";
 
 export default class AddDataset extends Component {
-	static propTypes = {
-		  addDataset: PropTypes.func.isRequired
-		, labels: PropTypes.arrayOf( PropTypes.string ).isRequired
-	};
+  static propTypes = {
+      addDataset: PropTypes.func.isRequired
+    , labels: PropTypes.arrayOf( PropTypes.string ).isRequired
+  };
 
-	constructor( props ) {
-		super( props );
+  constructor(props) {
+    super(props);
+    this.state = {
+      label: '',
+      data: new Array( props.labels.length ).fill(0)
+    };
 
-		this.state = {
-			  data: new Array( props.labels.length ).fill( 0 )
-			, label: ""
-		};
+    this.handleLabelChange = this.handleLabelChange.bind( this );
+  }
 
-		this.handleLabelChange = this.handleLabelChange.bind( this );
-		this.handleSubmit = this.handleSubmit.bind( this );
-	}
+  handleLabelChange(event) {
+    this.setState({ label: event.target.value });
+  }
 
-	componentWillReceiveProps( nextProps ) {
-		if ( nextProps !== this.props ) {
-			this.setState( { data: new Array( nextProps.labels.length ).fill( 0 ) } );
-		}
-	}
-
-	handleDataChange( changedIndex, event ) {
-		const { data } = this.state;
-		this.setState( {
-			data: [
-				  ...data.slice( 0, changedIndex )
-				, parseInt( event.target.value, 10 )
-				, ...data.slice( changedIndex + 1, data.length )
-			]
-		} );
-	}
-
-	handleLabelChange( event ) {
-		this.setState( { label: event.target.value } );
-	}
-
-	handleSubmit( event ) {
-		event.preventDefault();
-
-		const { data, label } = this.state;
-		const { addDataset, labels } = this.props;
-
-		addDataset( { data: data.map( datum => parseInt( datum, 10 ) ), label } );
-
-		this.setState( {
-			  data: new Array( labels.length ).fill( 0 )
-			, label: ""
-		} );
-	}
-
-	render() {
-		const { labels } = this.props;
-		const { data, label } = this.state;
-
-		const labelInputs = labels.map( ( label, index ) => (
-			<div
-				className="add-dataset__form-group"
-				key={ label }
-			>
-				<label className="add-dataset__label">{ label }:</label>
-				<input
-					className="add-dataset__input"
-					max="100"
-					min="0"
-					onChange={ this.handleDataChange.bind( this, index ) }
-					required
-					type="number"
-					value={ data[ index ] }
-				/>
-			</div>
-		) );
-
-		return (
-			<form
-				className="add-dataset"
-				onSubmit={ this.handleSubmit }
-			>
-				<h3 className="add-dataset__header">Add Dataset</h3>
-				<div className="add-dataset__form-group">
-					<label className="add-dataset__label">Dataset Label:</label>
-					<input
-						className="add-dataset__input"
-						onChange={ this.handleLabelChange }
-						required
-						type="text"
-						value={ label }
-					/>
-				</div>
-				{ labelInputs }
-				<button
-					className="add-dataset__submit"
-					type="submit"
-				>
-					Submit
-				</button>
-			</form>
-		);
-	}
+  render() {
+    const { labels } = this.props;
+    const { data, label } = this.state;
+    return (
+      <form className="add-dataset">
+        <h3 className="add-dataset__header">Add Dataset</h3>
+        <div className="add-dataset__form-group">
+          <label className="add-dataset__label">Dataset Label:</label>
+          <input
+            className="add-dataset__input"
+            required
+            type="text"
+            value={ label }
+            onChange={ this.handleLabelChange }
+          />
+        </div>
+        {
+          labels.map( ( label, index ) => (
+            <div className="add-dataset__form-group" key={ label }>
+              <label className="add-dataset__label">{ label }:</label>
+              <input
+                className="add-dataset__input"
+                max="100"
+                min="0"
+                required
+                type="number"
+                value={ data[ index ] }
+              />
+            </div>
+          ))
+        }
+        <button className="add-dataset__submit" type="submit">
+          Submit
+        </button>
+      </form>
+    );
+  }
 }
 ```
 
 </details>
+
+</details>
+
+## Step 16
+
+### Summary
+
+In this step we will..
+
+### Instructions
+
+* Something
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+Let's begin by changing the value and create the dynamic data inputs. First, let's destructure `labels` and from `this.props` as well as `data` and `label` from `this.state`. 
+
+```js
+const { labels } = this.props;
+const { data } = this.state;
+```
+
+Next, let's create a map over `labels` just below the `div` with a `className` of `"add-dataset__form-group"` and just above the `button` with a `className` of `"add-dataset__submit"`. This map should keep track of the `label` and the `index`.
+
+```jsx
+<div className="add-dataset__form-group">
+  <label className="add-dataset__label">Dataset Label:</label>
+  <input
+    className="add-dataset__input"
+    required
+    type="text"
+  />
+</div>
+{
+  labels.map( ( label, index ) => (
+
+  ))
+}
+<button className="add-dataset__submit" type="submit">
+  Submit
+</button>
+```
+
+Let's have our `map` return the following JSX:
+
+```jsx
+{
+  labels.map( ( label, index ) => (
+    <div className="add-dataset__form-group" key={ label }>
+      <label className="add-dataset__label">{ label }:</label>
+      <input
+        className="add-dataset__input"
+        max="100"
+        min="0"
+        onChange={ this.handleDataChange.bind( this, index ) }
+        required
+        type="number"
+        value={ data[ index ] }
+      />
+    </div>
+  ))
+}
+```
+
+
+Render `labelInputs` just below the `div` with a class of `add-dataset__form-group`. While we're here, let's update the "Dataset Label" input. Pass the input a `value` prop set equal to `label`.
+
+Now we've got a list of inputs all defaulting to 0, let's write a method to edit them! Create a new method `handleDataChange` that takes two paremeters:
+
+* `changedIndex` - The index of the data input that changed
+* `event` - The DOM event that triggered the change handler and carries the new value
+
+This method will work in a very similar way as the `ADD_DATASET` handler in our `chart` reducer. We need to grab a copy of all the elements before the changed index, insert the updated value, and grab a copy of all the elements after the changed index. It will look something like this:
+
+```javascript
+handleDataChange( changedIndex, event ) {
+	const { data } = this.state;
+	this.setState( {
+		data: [
+			  ...data.slice( 0, changedIndex )
+			, parseInt( event.target.value, 10 )
+			, ...data.slice( changedIndex + 1, data.length )
+		]
+	} );
+}
+```
+
+We'll also need a method to handle a change from the label input. `handleLabelChange` will take a single `event` parameter and will update `label` on state to equal `event.target.value`.
+
+Bind `handleLabelChange` in the constructor and pass it to the appropriate input's `onChange` prop. Pass `handleDataChange` to the data inputs, binding in `render` and passing `index` as an argument: `onChange={ this.handleDataChange.bind( this, index ) }`.
+
+Lastly we need to be able to submit these datasets to Redux. Create a method `handleSubmit` that takes in an `event` parameter. This method will do the following:
+
+* Call `event.preventDefault` to stop the browser from taking its default action
+* Destructure `data` and `label` from `this.state`
+* Destructure `addDataset` and `labels` from `this.props`
+* Call the `addDataSet` action creator, passing an object with two properties as an argument
+	* `data` - Set equal to `data.map( datum => parseInt( datum, 10 ) )`
+	* `label` - Set equal to the `label` variable
+* Reset state back to its initial value
+
+Finally, bind `handleSubmit` in the constructor and pass it to the `form` element's `onSubmit` prop. You should now be able to create charts, navigate between charts, add datasets to existing charts, and see those datasets display!
+
+**But wait! A bug?**
+
+Uh oh, it looks like creating a chart with more labels than the active chart doesn't work properly! The extra inputs won't be given a default value and React will throw some angry warnings. What is happening here?
+
+The constructor is only invoked once, when the component is first created. This means that we are only creating the `data` array on state a single time, it never updates. To fix this we need to make use of one of React's lifecycle methods - `componentWillReceiveprops`. `componentWillReceiveProps` is called whenever props are passed to the component and takes a single argument `nextProps` - the new props being passed. What we need to do is check if `nextProps` does not equal `this.props`, and update `this.state.data` accordingly. It will look like this:
+
+```javascript
+componentWillReceiveProps( nextProps ) {
+	if ( nextProps !== this.props ) {
+		this.setState( { data: new Array( nextProps.labels.length ).fill( 0 ) } );
+	}
+}
+```
+
+Bug fixed! We're all done here!
 
 </details>
 
