@@ -33,7 +33,8 @@ export default class NewChart extends Component {
   }
 
   submitChart() {
-    if ( !this.state.name || this.state.labels < 3 ) {
+    console.log('@@@@@@@', this.state.labels < 3);
+    if ( !this.state.name || this.state.labels.length < 3 ) {
       return;
     }
 

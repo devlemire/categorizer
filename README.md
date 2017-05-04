@@ -1169,7 +1169,7 @@ Let's begin by opening `NewChart.js` ( `src/components/NewChart/NewChart.js `). 
 
 ```js
 submitChart() {
-  if ( !this.state.name || this.state.labels < 3 ) {
+  if ( !this.state.name || this.state.labels.length < 3 ) {
     return;
   }
 }
@@ -1179,7 +1179,7 @@ If both conditions are met then we should then call `this.props.createChart` wit
 
 ```js
 submitChart() {
-  if ( !this.state.name || this.state.labels < 3 ) {
+  if ( !this.state.name || this.state.labels.length < 3 ) {
     return;
   }
 
@@ -1191,7 +1191,7 @@ Finally our method should reset all `state` values back to their default values 
 
 ```js
 submitChart() {
-  if ( !this.state.name || this.state.labels < 3 ) {
+  if ( !this.state.name || this.state.labels.length < 3 ) {
     return;
   }
 
@@ -1262,7 +1262,7 @@ export default class NewChart extends Component {
   }
 
   submitChart() {
-    if ( !this.state.name || this.state.labels < 3 ) {
+    if ( !this.state.name || this.state.labels.length < 3 ) {
       return;
     }
 
