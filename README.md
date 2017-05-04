@@ -1739,7 +1739,7 @@ const ADD_DATASET = "ADD_DATASET";
 
 Underneath the reducer create and export the corresponding action creator: `addDataset`. `addDataset` will take a single parameter `dataset` and should return an object with two properties:
 
-* `dataset` - This will be an array of numbers that corresponds to the labels on the chart. Should equal `dataset`.
+* `dataset` - This will be an array of numbers that corresponds to the labels on the chart. This should equal the value of the `dataset` parameter.
 * `type` - Should equal our action type: `ADD_DATASET`.
 
 ```js
