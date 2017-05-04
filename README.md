@@ -1914,10 +1914,10 @@ In this step we will connect our `addDataset` action creator in the `App` compon
 * Add `addDataset` to the action creators object in the `connect` statement.
 * Destructure `addDataset` from `App`'s props in the `render` method.
 * Import the `AddDataset` component from `src/components/AddDataset/AddDataset.js`.
-
-
-* Connect the `addDataset` action creator to `App`
-* Render the `AddDataset` component into `App`, passing the `addDataset` action creator as a prop
+* Render the `AddDataset` component underneath the `ActiveChart` component.
+  * Add two props to the `AddDataset` component:
+    * `addDataset` - This should equal the `addDataset` action creator.
+    * `labels` - This should equal the array of labels from the `activeChart` prop.
 
 <details>
 
@@ -1975,13 +1975,6 @@ return (
   </div>
 );
 ```
-
-
-
-passing two props:
-
-* `addDataset` - The `addDataset` action creator
-* `labels` - Set equal to `activeChart.labels`
 
 You should now see the skeleton of the `AddDataset` component to the right of the chart. We can't do much with it, but we'll fix that in the next step!
 
