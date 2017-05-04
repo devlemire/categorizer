@@ -2254,6 +2254,9 @@ Let's have our `map` return the following JSX:
 }
 ```
 
+We should now see a `label` and a `input` element render on our application for every label a chart has. Let's create a class method that will update our `data` property on state.
+
+
 
 Render `labelInputs` just below the `div` with a class of `add-dataset__form-group`. While we're here, let's update the "Dataset Label" input. Pass the input a `value` prop set equal to `label`.
 
