@@ -1337,9 +1337,33 @@ In this step we will be rendering the chart and updating the sidebar to list all
 
 <summary> Detailed Instructions </summary>
 
-After all the hard work we've done so far, it's time to finally display a chart! Start by opening up `src/components/App.js` and import `ActiveChart` from `src/components/ActiveChart/ActiveChart`. At the top of the `render` method, destructure `activeChart` and `charts` from `this.props`. Inside of the `render` method's `return`, just beneath the closing `</header>` tag, add a div with the class `app__active-chart`. Place the `ActiveChart` component into this new div and give it a `chart` prop set equal to the `activeChart` object we are getting from Redux.
+<br />
 
-The example chart from initial state should now be showing up in the page! And if you create another chart, the new one will replace the example.
+Let's begin by opening up `src/components/App.js` and import `ActiveChart` from `src/components/ActiveChart/ActiveChart`. This will be the component that will display our active chart. Inside of the `render` method's `return` in `App.js`, just beneath the closing `</header>` tag, add a div with the `className` of `app__active-chart`. Then `render` the `ActiveChart` component into this new div. 
+
+```jsx
+return (
+  <div className="app">
+    <Sidebar />
+    <main className="app__main">
+      <header className="app__header">
+        <h1 className="app__title">Categorizer</h1>
+
+        <div className="app__new-chart">
+          <NewChart createChart={ createChart } />
+        </div>
+      </header>
+      <div className="app__active-chart">
+        <ActiveChart />
+      </div>
+    </main>
+  </div>
+);
+```
+
+Next, let's give our `ActiveChart` component a prop called `chart` that is equal to the `activeChart` object from `App`'s props.
+
+
 
 Now that we can create and actually _see_ multiple charts (even if we can't add data to them yet) we need a way to navigate between them. We'll set up the logic for this in`src/ducks/chart.js`. At the top of the file create a new action type of `SET_ACTIVE_CHART_INDEX` set equal to `"SET_ACTIVE_CHART_INDEX"`.
 
