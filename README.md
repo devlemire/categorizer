@@ -2238,7 +2238,7 @@ In this step we will dynamically `render` the labels of the active chart using a
     * The index that is changing should equal the value of the `event` in <b>integer</b> format.
 * Add an `onChange` event to the `input` element where we mapped over labels:
   * It should call `handleDataChange`.
-  * It should `bind` the index from the map and `this`.
+  * It should `bind` the index from the map and `this` to `handleDataChange`.
 
 <details>
 
