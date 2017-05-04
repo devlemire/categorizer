@@ -32,6 +32,28 @@ In this step we'll download the necessary packages to use Redux and create a red
 * Create an initial state object at the top of `chart.js` called `initialState` with the following properties:
   * `activeChartIndex` - The index of the active chart. This should default to value of `0`.
   * `charts` - The array of charts. Each chart will be an object. This array should default to having one chart. The following chart code can be found below under `Default Chart Code`.
+    * <details> 
+
+      <summary> <code> Default Chart Code </code> </summary>
+
+      ```js
+      {
+        labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ], 
+        name: "Example Chart", 
+        datasets: [
+          {
+            label: "My First dataset", 
+            data: [65, 59, 90, 81, 56, 55, 40]
+          },
+          {
+            label: "My Second dataset",
+            data: [28, 48, 40, 19, 96, 27, 100]
+          }
+        ]
+      }
+      ```
+
+      </details>
 * Create a reducer function underneath the `initialState` called `chart`:
   * This function should be exported by default.
   * This function should have two parameters:
@@ -39,32 +61,6 @@ In this step we'll download the necessary packages to use Redux and create a red
     * `action` - An object containing information about what has occurred and any data necessary to perform a state change.
   * This function should use a `switch` statement on the `action.type`:
     * Add a default case that returns `state`.
-
-
-<details> 
-
-<summary> <code> Default Chart Code </code> </summary>
-
-```js
-{
-  labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ], 
-  name: "Example Chart", 
-  datasets: [
-    {
-      label: "My First dataset", 
-      data: [65, 59, 90, 81, 56, 55, 40]
-    },
-    {
-      label: "My Second dataset",
-      data: [28, 48, 40, 19, 96, 27, 100]
-    }
-  ]
-}
-```
-
-</details>
-
-<br />
 
 <details>
 
