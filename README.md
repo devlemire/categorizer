@@ -1901,8 +1901,6 @@ export function addDataSet(dataset) {
 
 </details>
 
-<details>
-
 ## Step 14
 
 ### Summary
