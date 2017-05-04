@@ -1446,7 +1446,7 @@ In this step we will update our `chart` reducer to handle an action for setting 
   * This function should return an object with two properties:
     * `index` - This should equal the passed in index.
     * `type` - This should equal `SET_ACTIVE_CHART_INDEX`.
-* Add a case `SET_ACTIVE_CHART_INDEX` to the `switch` statement in the `chart` reducer:
+* Add a case for `SET_ACTIVE_CHART_INDEX` to the `switch` statement in the `chart` reducer:
   * This case should return an object with two properties:
     * `activeChartIndex` - This should equal the index given on `action`.
     * `charts` - This should equal the charts array on `state`.
@@ -1732,6 +1732,16 @@ In this step we will update our `chart` reducer to handle an action for adding n
   * This function should return an object with two properties:
     * `dataset` - This should equal the value of the `datasets` parameter.
     * `type` - This should equal `ADD_DATASET`.
+* Add a case for `SET_ACTIVE_CHART_INDEX` to the `switch` statement in the `chart` reducer:
+  * This case should return an object with two properties:
+    * `activeChartIndex` - This should equal the `activeChartIndex` on state.
+    * `charts` - This should equal a <b>new</b> array of charts:
+      * The order of charts must remain the same.
+      * The chart we are adding a dataset to must be a <b>new</b> object.
+      * The order of the datasets must remain the same. 
+      * The new dataset must be added to the end of the datasets array.
+
+
 * Alter the `chart` reducer to handle the new action type
 * Connect the `addDataset` action creator to `App`
 * Render the `AddDataset` component into `App`, passing the `addDataset` action creator as a prop
