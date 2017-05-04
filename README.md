@@ -2059,14 +2059,74 @@ In this step we will be updating the `AddDataset` component so a user can add da
 
 <summary> Detailed Instructions </summary>
 
-This step will take place in `src/components/AddDataset/AddDataset.js`. We'll get started by creating a `constructor` method and creating an initial state. Normally we would create a property on state for each input, but we could have any number of inputs. How should we set up state to handle a dynamic number of inputs? In our case, we'll use an array.
+<br />
 
-`this.state` should have two properties:
+Let's begin by opening `src/components/AddDataset/AddDataset.js`. We'll get started by creating a `constructor` method and creating an initial state. Normally we would create a property on state for each input, but we could have any number of inputs in this case. We'll get around this by creating an array that is the length of the `labels` prop and fill their values with `0`. We also create a `label` property on state to keep track of the new dataset's name. `label` should default to an empty array.
 
-* `label` - The name of the dataset currently being created, corresponds to our one static input. Defaults to an empty string
-* `data` - The array where we will be storing values for the dataset. It will default to `new Array( props.labels.length ).fill( 0 )`. This will create an array with a length equal to the length of our data labels, then fill each index with `0`.
+```js
+constructor(props) {
+  super(props);
+  this.state = {
+    label: '',
+    data: new Array( props.labels.length ).fill(0)
+  }
+}
+```
 
-With our `state` set up, let's jump into `render` and create the dynamic data inputs. Destructure `labels` from `this.props` as well as `data` and `label` from `this.state`. Create a new variable `labelInputs` and set it equal to the result of `map`ping over `labels` and returning the following JSX:
+With our `state` set up, let's jump into `render` and create the dynamic data inputs. First, let's destructure `labels` and from `this.props` as well as `data` and `label` from `this.state`. 
+
+```js
+const { labels } = this.props;
+const { data } = this.state;
+```
+
+Next, let's create a map over `labels` just below the `div` with a `className` of `"add-dataset__form-group"` and just above the `button` with a `className` of `"add-dataset__submit"`. This map should keep track of the `label` and the `index`.
+
+```jsx
+<div className="add-dataset__form-group">
+  <label className="add-dataset__label">Dataset Label:</label>
+  <input
+    className="add-dataset__input"
+    required
+    type="text"
+  />
+</div>
+{
+  labels.map( ( label, index ) => (
+
+  ))
+}
+<button className="add-dataset__submit" type="submit">
+  Submit
+</button>
+```
+
+Let's have our `map` return the following JSX:
+
+```jsx
+{
+  labels.map( ( label, index ) => (
+    <div className="add-dataset__form-group" key={ label }>
+      <label className="add-dataset__label">{ label }:</label>
+      <input
+        className="add-dataset__input"
+        max="100"
+        min="0"
+        onChange={ this.handleDataChange.bind( this, index ) }
+        required
+        type="number"
+        value={ data[ index ] }
+      />
+    </div>
+  ))
+}
+```
+
+
+
+
+
+Create a new variable `labelInputs` and set it equal to the result of `map`ping over `labels` and returning the following JSX:
 
 ```jsx
 <div
