@@ -31,7 +31,7 @@ In this step we'll download the necessary packages to use Redux and create a red
 * Create a `chart.js` file in `src/ducks/`.
 * Create an initial state object at the top of `chart.js` called `initialState` with the following properties:
   * `activeChartIndex` - The index of the active chart. This should default to value of `0`.
-  * `charts` - The array of charts. Each chart will be an object. This array should default to having one chart. The following chart code can be found below under `Default Chart Code`.
+  * `charts` - The array of charts. Each chart will be an object. This array should default to having one chart.
     * <details> 
 
       <summary> <code> Default Chart Code </code> </summary>
