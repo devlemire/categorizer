@@ -1562,7 +1562,27 @@ In this step we will update our `SideBar` component to display a list of charts 
   * `charts` - Should equal `charts` from `App`'s props.
   * `setActiveChartIndex` - Should equal `setActiveChartIndex` from `App`'s props.
 * Open `src/components/SideBar/SideBar.js`.
-* 
+* Locate the `<ul>` element with the `className` of `"sidebar__past-charts"`:
+  * Remove the static `<li>` element that is already there and replace it with `{ }` that contains a map inside.
+  * Map over `charts` and keep track of the `chart` and `index`:
+    * Call the first parameter of the map function `chart`.
+    * Call the second parameter of the map function `index`.
+  * Have the map return the following `JSX`:
+    * <details>
+      
+      <summary> JSX </summary>
+
+      ```jsx
+      <li className="sidebar__past-chart" key={ chart.name }>
+        <p className="sidebar__chart-name" onClick={ () => setActiveChartIndex( index ) }>
+          { chart.name }
+        </p>
+
+        <p className="sidebar__chart-datasets">{ chart.datasets.length } Datasets</p>
+      </li>
+      ```
+
+      </details>
 
 <details>
 
@@ -1603,15 +1623,15 @@ Next, let's configure our `SideBar` component to use these props. Open up `src/c
 
 ```jsx
 export default function Sidebar( { charts, setActiveChartIndex } ) {
-	return (
-		<aside className="sidebar">
-			<h3 className="sidebar__title">Past Charts</h3>
+  return (
+    <aside className="sidebar">
+      <h3 className="sidebar__title">Past Charts</h3>
 
-			<ul className="sidebar__past-charts">
-				
-			</ul>
-		</aside>
-	);
+      <ul className="sidebar__past-charts">
+        
+      </ul>
+    </aside>
+  );
 }
 ```
 
@@ -1622,7 +1642,7 @@ Inside of the `<ul>` elment let's create our map by breaking out JSX with `{ }`.
   {
     charts.map( ( chart, index ) => (
 
-    ));
+    ))
   }
 </ul>
 ```
@@ -1641,7 +1661,7 @@ Next, inside the map, let's return the following JSX:
 
         <p className="sidebar__chart-datasets">{ chart.datasets.length } Datasets</p>
       </li>
-    ));
+    ))
   }
 </ul>
 ```
