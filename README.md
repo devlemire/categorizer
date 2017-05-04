@@ -1923,6 +1923,8 @@ In this step we will connect our `addDataset` action creator in the `App` compon
 
 <summary> Detailed Instructions </summary>
 
+<br />
+
 Let's begin by opening `src/components/App.js` and import the `addDataset` action creator so the `App` component can have access to it.
 
 ```js
