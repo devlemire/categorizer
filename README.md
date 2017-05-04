@@ -1726,7 +1726,7 @@ In this step we will update our `chart` reducer to handle an action for adding n
 
 * Open `src/ducks/chart/js`.
 * Create an action type called `ADD_DATASET` that equals `"ADD_DATA_SET"`.
-* Create and export an action creator called `addDataSet`:
+* Create and export an action creator called `addDataset`:
   * This function should take in one parameter:
     * `dataset` - This will be an array of numbers that correspond to the labels on the chart.
   * This function should return an object with two properties:
@@ -1759,7 +1759,7 @@ Underneath the reducer create and export the corresponding action creator: `addD
 * `type` - Should equal our action type: `ADD_DATASET`.
 
 ```js
-export function addDataSet(dataset) {
+export function addDataset(dataset) {
   return {
     dataset,
     type: ADD_DATASET
@@ -1891,7 +1891,7 @@ export function setActiveChartIndex(index) {
   }
 }
 
-export function addDataSet(dataset) {
+export function addDataset(dataset) {
   return {
     dataset,
     type: ADD_DATASET
@@ -1905,9 +1905,16 @@ export function addDataSet(dataset) {
 
 ### Summary
 
-In this step we will connect our `addDataSet` action creator in the `App` component. We'll then `render` the `AddDataSet` component in `App` and pass down the `addDataSet` action creator as a prop to it.
+In this step we will connect our `addDataset` action creator in the `App` component. We'll then `render` the `AddDataset` component in `App` and pass down the `addDataset` action creator as a prop to it.
 
 ### Instructions
+
+* Open `src/components/App.js`.
+* Add `addDataset` to the `import` of action creators.
+* Add `addDataset` to the action creators object in the `connect` statement.
+* Destructure `addDataset` from `App`'s props in the `render` method.
+* Import the `AddDataset` component from `src/components/AddDataset/AddDataset.js`.
+
 
 * Connect the `addDataset` action creator to `App`
 * Render the `AddDataset` component into `App`, passing the `addDataset` action creator as a prop
@@ -1916,9 +1923,62 @@ In this step we will connect our `addDataSet` action creator in the `App` compon
 
 <summary> Detailed Instructions </summary>
 
-Let's begin by opening `src/components/App.js`. Import `addDataset` from `src/ducks/chart.js` and `AddDataset` from `src/components/AddDataset/AddDataset.js`. Add `addDataset` to the action creators object that is being passed to `connect` and destructure it from `this.props` in `render`.
+Let's begin by opening `src/components/App.js` and import the `addDataset` action creator so the `App` component can have access to it.
 
-Add the `AddDataset` component into `App`'s `render` method just below `ActiveChart`, passing two props:
+```js
+import { createChart, setActiveChartIndex, addDataset } from '../ducks/chart';
+```
+
+Now let's add `addDataset` as another property to the action creator object passed to `connect` so don't have to worry about calling `dispatch` when calling our `addDataset` action creator.
+
+```js
+export default connect(mapStateToProps, { createChart, setActiveChartIndex, addDataset })(App);
+```
+
+Next, let's destructure `addDataset` from `props` in the `render` method so we don't have to refer to it as `this.props.addDataset`.
+
+```js
+const {
+  activeChart,
+  charts,
+  createChart,
+  setActiveChartIndex,
+  addDataset
+} = this.props;
+```
+
+We now have everything we need from our reducer and we can focus on our `AddDataset` component. Let's begin by importing it into our `App` component.
+
+```js
+import AddDataset from './AddDataset/AddDataset';
+```
+
+Next, let's add the `AddDataset` component into `App`'s `render` method just below `ActiveChart` component. This component should have two props: `addDataset` and `labels`. `addDataset` should equal our `addDataset` action creator and `labels` should equal the `activeChart`'s labels array.
+
+```jsx
+return (
+  <div className="app">
+    <Sidebar charts={ charts } setActiveChartIndex={ setActiveChartIndex } />
+    <main className="app__main">
+      <header className="app__header">
+        <h1 className="app__title">Categorizer</h1>
+
+        <div className="app__new-chart">
+          <NewChart createChart={ createChart } />
+        </div>
+      </header>
+      <div className="app__active-chart">
+        <ActiveChart chart={ activeChart } />
+        <AddDataset addDataset={ addDataset } labels={ activeChart.labels } />
+      </div>
+    </main>
+  </div>
+);
+```
+
+
+
+passing two props:
 
 * `addDataset` - The `addDataset` action creator
 * `labels` - Set equal to `activeChart.labels`

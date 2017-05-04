@@ -68,7 +68,7 @@ export function setActiveChartIndex(index) {
   }
 }
 
-export function addDataSet(dataset) {
+export function addDataset(dataset) {
   return {
     dataset,
     type: ADD_DATASET
