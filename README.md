@@ -1978,7 +1978,7 @@ return (
 );
 ```
 
-You should now see the skeleton of the `AddDataset` component to the right of the chart. We can't do much with it, but we'll fix that in the next step!
+You should now see the skeleton of the `AddDataset` component to the right of the chart.
 
 </details>
 
@@ -1994,78 +1994,57 @@ import { connect } from "react-redux";
 
 import "./App.css";
 
-import { addDataset, createChart, setActiveChartIndex } from "../ducks/chart";
+import { createChart, setActiveChartIndex, addDataset } from '../ducks/chart';
 
-import ActiveChart from "./ActiveChart/ActiveChart";
-import AddDataset from "./AddDataset/AddDataset";
 import NewChart from "./NewChart/NewChart";
 import Sidebar from "./Sidebar/Sidebar";
+import ActiveChart from "./ActiveChart/ActiveChart";
+import AddDataset from './AddDataset/AddDataset';
 
 class App extends Component {
-	render() {
-		const {
-			  activeChart
-			, addDataset
-			, charts
-			, createChart
-			, setActiveChartIndex
-		} = this.props;
+  render() {
+    const {
+      activeChart,
+      charts,
+      createChart,
+      setActiveChartIndex,
+      addDataset
+    } = this.props;
+    
+    return (
+      <div className="app">
+        <Sidebar charts={ charts } setActiveChartIndex={ setActiveChartIndex } />
+        <main className="app__main">
+          <header className="app__header">
+            <h1 className="app__title">Categorizer</h1>
 
-		return (
-			<div className="app">
-				<Sidebar
-					charts={ charts }
-					setActiveChartIndex={ setActiveChartIndex }
-				/>
-				<main className="app__main">
-					<header className="app__header">
-						<h1 className="app__title">Categorizer</h1>
-
-						<div className="app__new-chart">
-							<NewChart createChart={ createChart } />
-						</div>
-					</header>
-					<div className="app__active-chart">
-						<ActiveChart chart={ activeChart } />
-						<AddDataset
-							addDataset={ addDataset }
-							labels={ activeChart.labels }
-						/>
-					</div>
-				</main>
-			</div>
-		);
-	}
+            <div className="app__new-chart">
+              <NewChart createChart={ createChart } />
+            </div>
+          </header>
+          <div className="app__active-chart">
+            <ActiveChart chart={ activeChart } />
+            <AddDataset />
+          </div>
+        </main>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps( { activeChartIndex, charts } ) {
-	return {
-		  activeChart: charts[ activeChartIndex ]
-		, charts
-	};
+  return {
+    activeChart: charts[ activeChartIndex ],
+    charts: charts
+  };
 }
 
-export default connect( mapStateToProps, { addDataset, createChart, setActiveChartIndex } )( App );
-
+export default connect(mapStateToProps, { createChart, setActiveChartIndex, addDataset })(App);
 ```
 
 </details>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Step 10
+## Step 15
 
 ### Summary
 
