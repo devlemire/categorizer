@@ -2052,6 +2052,14 @@ In this step we will be updating the `AddDataset` component so a user can add da
 
 ### Instructions
 
+* Open `src/components/AddDataset/AddDataset.js`.
+* Create a constructor method:
+  * This constructor method have on parameter called `props`.
+  * This constructor method should call `super` and pass `props` in as the first parameter.
+  * This constructor method should create a state object with two properties:
+    * `label` - This should default to an empty array. This will keep track of the label for a new dataset.
+    * `data` - The array of values for the chart's labels. This should default to an array of `0`s that is the length of the chart's labels.
+
 * Alter the `AddDataset` component to display a dynamic list of `input`s based on a chart's labels
 * Alter the `AddDataset` component to handle user input and allow submitting of datasets
 
@@ -2061,7 +2069,7 @@ In this step we will be updating the `AddDataset` component so a user can add da
 
 <br />
 
-Let's begin by opening `src/components/AddDataset/AddDataset.js`. We'll get started by creating a `constructor` method and creating an initial state. Normally we would create a property on state for each input, but we could have any number of inputs in this case. We'll get around this by creating an array that is the length of the `labels` prop and fill their values with `0`. We also create a `label` property on state to keep track of the new dataset's name. `label` should default to an empty array.
+Let's begin by opening `src/components/AddDataset/AddDataset.js`. We'll get started by creating a `constructor` method and creating an initial state. Normally we would create a property on state for each input, but we could have any number of inputs in this case. We'll get around this by creating a `data` property that will equal an array. `data` will be the length of the `labels` prop and fill their values with `0`. We also create a `label` property on state to keep track of the new dataset's name. `label` should default to an empty array.
 
 ```js
 constructor(props) {
@@ -2073,7 +2081,7 @@ constructor(props) {
 }
 ```
 
-With our `state` set up, let's jump into `render` and create the dynamic data inputs. First, let's destructure `labels` and from `this.props` as well as `data` and `label` from `this.state`. 
+With our `state` set up, let's jump into the `render` method. Let's begin by changing the value and create the dynamic data inputs. First, let's destructure `labels` and from `this.props` as well as `data` and `label` from `this.state`. 
 
 ```js
 const { labels } = this.props;
@@ -2122,32 +2130,6 @@ Let's have our `map` return the following JSX:
 }
 ```
 
-
-
-
-
-Create a new variable `labelInputs` and set it equal to the result of `map`ping over `labels` and returning the following JSX:
-
-```jsx
-<div
-	className="add-dataset__form-group"
-	key={ label }
->
-	<label className="add-dataset__label">{ label }:</label>
-	<input
-		className="add-dataset__input"
-		max="100"
-		min="0"
-		required
-		type="number"
-		// Here is where we connect to this.state
-		// If we ever re-ordered our list this wouldn't work!
-		// Can you think of a solution that works even if the
-		// list were to be sorted or reversed?
-		value={ data[ index ] }
-	/>
-</div>
-```
 
 Render `labelInputs` just below the `div` with a class of `add-dataset__form-group`. While we're here, let's update the "Dataset Label" input. Pass the input a `value` prop set equal to `label`.
 
