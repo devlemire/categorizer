@@ -2054,14 +2054,11 @@ In this step we will be updating the `AddDataset` component so a user can add da
 
 * Open `src/components/AddDataset/AddDataset.js`.
 * Create a constructor method:
-  * This constructor method have on parameter called `props`.
+  * This constructor method should have one parameter called `props`.
   * This constructor method should call `super` and pass `props` in as the first parameter.
   * This constructor method should create a state object with two properties:
     * `label` - This should default to an empty array. This will keep track of the label for a new dataset.
-    * `data` - The array of values for the chart's labels. This should default to an array of `0`s that is the length of the chart's labels.
-
-* Alter the `AddDataset` component to display a dynamic list of `input`s based on a chart's labels
-* Alter the `AddDataset` component to handle user input and allow submitting of datasets
+    * `data` - The array of values for the chart's labels. This should default to an array of `0`s that is the length of `labels`. ( `lables` is passed in as a prop ).
 
 <details>
 
