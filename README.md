@@ -2178,21 +2178,6 @@ export default class AddDataset extends Component {
             onChange={ this.handleLabelChange }
           />
         </div>
-        {
-          labels.map( ( label, index ) => (
-            <div className="add-dataset__form-group" key={ label }>
-              <label className="add-dataset__label">{ label }:</label>
-              <input
-                className="add-dataset__input"
-                max="100"
-                min="0"
-                required
-                type="number"
-                value={ data[ index ] }
-              />
-            </div>
-          ))
-        }
         <button className="add-dataset__submit" type="submit">
           Submit
         </button>
@@ -2259,7 +2244,6 @@ Let's have our `map` return the following JSX:
         className="add-dataset__input"
         max="100"
         min="0"
-        onChange={ this.handleDataChange.bind( this, index ) }
         required
         type="number"
         value={ data[ index ] }
