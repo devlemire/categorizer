@@ -13,12 +13,18 @@ export default class AddDataset extends Component {
     this.state = {
       label: '',
       data: new Array( props.labels.length ).fill(0)
-    }
+    };
+
+    this.handleLabelChange = this.handleLabelChange.bind( this );
+  }
+
+  handleLabelChange(event) {
+    this.setState({ label: event.target.value });
   }
 
   render() {
     const { labels } = this.props;
-    const { data } = this.state;
+    const { data, label } = this.state;
     return (
       <form className="add-dataset">
         <h3 className="add-dataset__header">Add Dataset</h3>
@@ -28,6 +34,8 @@ export default class AddDataset extends Component {
             className="add-dataset__input"
             required
             type="text"
+            value={ label }
+            onChange={ this.handleLabelChange }
           />
         </div>
         {
@@ -38,7 +46,6 @@ export default class AddDataset extends Component {
                 className="add-dataset__input"
                 max="100"
                 min="0"
-                onChange={ this.handleDataChange.bind( this, index ) }
                 required
                 type="number"
                 value={ data[ index ] }

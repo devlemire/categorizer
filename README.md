@@ -2060,13 +2060,14 @@ In this step we will be updating the `AddDataset` component so a user can add da
     * `label` - This should default to an empty array. This will keep track of the label for a new dataset.
     * `data` - The array of values for the chart's labels. This should default to an array of `0`s that is the length of `labels`. ( `lables` is passed in as a prop ).
 
+
 <details>
 
 <summary> Detailed Instructions </summary>
 
 <br />
 
-Let's begin by opening `src/components/AddDataset/AddDataset.js`. We'll get started by creating a `constructor` method and creating an initial state. Normally we would create a property on state for each input, but we could have any number of inputs in this case. We'll get around this by creating a `data` property that will equal an array. `data` will be the length of the `labels` prop and fill their values with `0`. We also create a `label` property on state to keep track of the new dataset's name. `label` should default to an empty array.
+Let's begin by opening `src/components/AddDataset/AddDataset.js`. We'll get started by creating a `constructor` method and creating an initial state. Normally we would create a property on state for each input, but we could have any number of inputs in this case. We'll get around this by creating a `data` property that will equal an array. `data` will be the length of the `labels` prop and fill their values with `0`. We also create a `label` property on state to keep track of the new dataset's name. `label` should default to an empty string.
 
 ```js
 constructor(props) {
@@ -2078,7 +2079,67 @@ constructor(props) {
 }
 ```
 
-With our `state` set up, let's jump into the `render` method. Let's begin by changing the value and create the dynamic data inputs. First, let's destructure `labels` and from `this.props` as well as `data` and `label` from `this.state`. 
+Next, let's deconstruct our `props` and `state` for later use.
+
+```js
+const { labels } = this.props;
+const { data, label } = this.state;
+```
+
+Now, let's add the functionality to update our `label` property on state. To begin, locate the `input` element with the `className` of `"add-dataset__input"` and add a `value` attribute that equals `label`.
+
+```js
+<input
+  className="add-dataset__input"
+  required
+  type="text"
+  value={ label }
+/>
+```
+
+Next, let's create a `handleLabelChange` class method that will update the value of `label` on state. This method should only need to take a single parameter called `event`.
+
+```js
+handleLabelChange(event) {
+  this.setState({ label: event.target.value });
+}
+```
+
+Now let's bind `this` to the method at the bottom of the `constructor` method and add an `onChange` attribute to the `input` element with the `className` of `"add-dataset__input"` to call our method.
+
+```js
+constructor(props) {
+  super(props);
+  this.state = {
+    label: '',
+    data: new Array( props.labels.length ).fill(0)
+  };
+
+  this.handleLabelChange = this.handleLabelChange.bind( this );
+}
+```
+
+```js
+<input
+  className="add-dataset__input"
+  required
+  type="text"
+  value={ label }
+  onChange={ this.handleLabelChange }
+/>
+```
+
+
+
+
+
+
+
+
+
+
+
+Let's begin by changing the value and create the dynamic data inputs. First, let's destructure `labels` and from `this.props` as well as `data` and `label` from `this.state`. 
 
 ```js
 const { labels } = this.props;
