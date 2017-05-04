@@ -33,9 +33,7 @@ In this step we'll download the necessary packages to use Redux and create a red
   * `activeChartIndex` - The index of the active chart. This should default to value of `0`.
   * `charts` - The array of charts. This should default to the following chart:
   * <details> 
-
     <summary> <code> Default Chart Code </code> </summary>
-
     ```js
     {
       labels: [ "Red", "Blue", "Yellow", "Green", "Purple", "Orange" ], 
@@ -52,7 +50,6 @@ In this step we'll download the necessary packages to use Redux and create a red
       ]
     }
     ```
-
     </details>
 
 and reducer inside of the `chart.js` file you just created.
