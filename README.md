@@ -2059,7 +2059,13 @@ In this step we will begin making our `AddDataset` component functional. We'll c
   * This constructor method should create a state object with two properties:
     * `label` - This should default to an empty array. This will keep track of the label for a new dataset.
     * `data` - The array of values for the chart's labels. This should default to an array of `0`s that is the length of `labels`. ( `lables` is passed in as a prop ).
-
+* Create a class method called `handleLabelChange`.
+  * This method should have one parameter called `event`.
+  * This method should use `setState` to update the `label` property to the value of the `event`.
+* Bind `this` to handleLabelChange at the bottom of the `constructor` method.
+* Update the `input` element with the `className` of `"add-dataset__input"`:
+  * Add a `value` attribute equal to `label`.
+  * Add a `onChange` attribute that calls `handleLabelChange`.
 
 <details>
 
