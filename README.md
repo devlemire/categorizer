@@ -2223,12 +2223,19 @@ In this step we will dynamically `render` the labels of the active chart using a
           required
           type="number"
           value={ data[ index ] }
-          onChange={ () => this.handleDataChange(index) }
         />
       </div>
       ```
 
       </summary>
+* Create a `handleDataChange` class method:
+  * This method should take two parameters:
+    * `changedIndex` - The index to change.
+    * `event` - The change event object.
+  * This method should use `setState` to update `data`:
+    * `data` should be set to a <b>new</b> array.
+    * `data` should have the same order of elements.
+    * `data` the index that is changing should equal value of the `event` in <b>integer</b> format.
 
 <details>
 
