@@ -2206,7 +2206,7 @@ In this step we will dynamically `render` the labels of the active chart using a
 ### Instructions
 
 * Open `src/components/AddDataset/AddDataset.js`.
-* Create a map just below the `div` with a `className` of `"add-dataset__form-group"` and just above the `button` with a `className` of `"add-dataset__submit"`:
+* Create a map just above the `button` with a `className` of `"add-dataset__submit"`:
   * This map should keep track of the `label` and the `index`.
   * The map should return the following `JSX`:
     * <details>
@@ -2246,7 +2246,7 @@ In this step we will dynamically `render` the labels of the active chart using a
 
 <br />
 
-Let's begin by opening `src/components/AddDataset/AddDataset.js`. Then map over `labels` just below the `div` with a `className` of `"add-dataset__form-group"` and just above the `button` with a `className` of `"add-dataset__submit"`. This map should keep track of the `label` and the `index`:
+Let's begin by opening `src/components/AddDataset/AddDataset.js`. Then map over `labels` just above the `button` with a `className` of `"add-dataset__submit"`. This map should keep track of the `label` and the `index`:
 
 ```jsx
 <div className="add-dataset__form-group">
