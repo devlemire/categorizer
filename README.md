@@ -2201,7 +2201,7 @@ export default class AddDataset extends Component {
 
 ### Summary
 
-In this step we will..
+In this step we will dynamically `render` the labels of the active chart using a `map`. We'll then create a class method that will handle updating the values in the `data` array on state.
 
 ### Instructions
 
@@ -2282,9 +2282,26 @@ handleDataChange( changedIndex, event ) {
 }
 ```
 
-We'll also need a method to handle a change from the label input. `handleLabelChange` will take a single `event` parameter and will update `label` on state to equal `event.target.value`.
+Pass `handleDataChange` to the data inputs, binding in `render` and passing `index` as an argument: `onChange={ this.handleDataChange.bind( this, index ) }`.
 
-Bind `handleLabelChange` in the constructor and pass it to the appropriate input's `onChange` prop. Pass `handleDataChange` to the data inputs, binding in `render` and passing `index` as an argument: `onChange={ this.handleDataChange.bind( this, index ) }`.
+</details>
+
+### Solution
+
+
+## Step 17
+
+### Summary
+
+In this step we will..
+
+### Instructions
+
+* something
+
+<details>
+
+<summary> Detailed Instructions </summary>
 
 Lastly we need to be able to submit these datasets to Redux. Create a method `handleSubmit` that takes in an `event` parameter. This method will do the following:
 
@@ -2315,6 +2332,8 @@ componentWillReceiveProps( nextProps ) {
 Bug fixed! We're all done here!
 
 </details>
+
+### Solution
 
 ## Black Diamond
 
