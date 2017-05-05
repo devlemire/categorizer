@@ -2429,8 +2429,24 @@ In this step we will create a class method that will handle sending our data fro
 
 ### Instructions
 
-* something
-
+* Open `src/components/AddDataset/AddDataset.js`.
+* Create a `handleSubmit` class method:
+  * This method should take in an `event` parameter.
+  * This method should call `preventDefault` to stop the browser from refreshing on submit.
+  * This method should destructure state and props for easy referencing:
+    * Destructure `data` and `label` from state.
+    * Destructure `addDataset` and `labels` from props.
+  * This method should call the `addDataset` action creator with one parameter:
+    * The parameter should be an object with the following properties:
+      * `data` - Should equal `data` from state.
+      * `label` - Should equal `label` from state.
+  * This method should use `setState` to reset state to its default values.
+* Bind `this` to the `handleSubmit` method at the bottom of the `constructor` method.
+* Locate the `form` element with the `className` of `"add-dataset"`:
+  * Add an `onSubmit` attribute that calls the `handleSubmit` method.
+* Create a `componentWillReceiveProps` method:
+  * This method should take a parameter called `nextProps`.
+  * This method should use `setState` to update `data` to a new array of `0`s. The length of  `data` should equal the new `nextProps.labels` length.
 <details>
 
 <summary> Detailed Instructions </summary>
