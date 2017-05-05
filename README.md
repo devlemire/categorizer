@@ -2435,6 +2435,8 @@ In this step we will create a class method that will handle sending our data fro
 
 <summary> Detailed Instructions </summary>
 
+<br />
+
 Let's being by opening `src/components/AddDataset/AddDataset.js`. Now let's create a class method called `handleSubmit` that will take in an `event` parameter.
 
 ```js
@@ -2451,7 +2453,7 @@ handleSubmit(event) {
 }
 ```
 
-Then we'll want to destructure `data` and `label` from state and `addDataset` and `labels1` from `props` for easy referencing inside our method.
+Then we'll want to destructure `data` and `label` from state and `addDataset` and `labels` from `props` for easy referencing inside our method.
 
 ```js
 handleSubmit(event) {
@@ -2502,17 +2504,13 @@ Now all that's left is to hookup our `handleSubmit` method to the `JSX`. Let's b
 
 Uh oh, it looks like creating a chart with more labels than the active chart doesn't work properly! The extra inputs won't be given a default value and React will throw some angry warnings. What is happening here?
 
-The constructor is only invoked once, when the component is first created. This means that we are only creating the `data` array on state a single time, it never updates. To fix this we need to make use of one of React's lifecycle methods - `componentWillReceiveprops`. `componentWillReceiveProps` is called whenever props are passed to the component and takes a single argument `nextProps` - the new props being passed. What we need to do is check if `nextProps` does not equal `this.props`, and update `this.state.data` accordingly. It will look like this:
+The `constructor` method is only invoked once when the component is first created. This means that we are only creating the `data` array on state a single time and it never updates. To fix this we need to make use of one of React's lifecycle methods: `componentWillReceiveProps`. `componentWillReceiveProps` is called whenever props are passed to the component and takes a single argument `nextProps` which are the new props being passed. Let's add a `componentWillReceiveProps` right under our `constructor` method that uses `setState` to update the value of `data` on state.
 
 ```javascript
 componentWillReceiveProps( nextProps ) {
-	if ( nextProps !== this.props ) {
-		this.setState( { data: new Array( nextProps.labels.length ).fill( 0 ) } );
-	}
+  this.setState( { data: new Array( nextProps.labels.length ).fill( 0 ) } );
 }
 ```
-
-Bug fixed! We're all done here!
 
 </details>
 
