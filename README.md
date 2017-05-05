@@ -2425,7 +2425,7 @@ export default class AddDataset extends Component {
 
 ### Summary
 
-In this step we will create a class method that will handle sending our data from state to our reducer. We will also create a life cycle method `componentWillReceiveProps` to update our state with new props.
+In this step we will create a class method that will handle sending our data from state to our reducer. We will also create a life cycle method `componentWillReceiveProps` to update our state with new props to avoid errors.
 
 ### Instructions
 
@@ -2435,17 +2435,68 @@ In this step we will create a class method that will handle sending our data fro
 
 <summary> Detailed Instructions </summary>
 
-Lastly we need to be able to submit these datasets to Redux. Create a method `handleSubmit` that takes in an `event` parameter. This method will do the following:
+Let's being by opening `src/components/AddDataset/AddDataset.js`. Now let's create a class method called `handleSubmit` that will take in an `event` parameter.
 
-* Call `event.preventDefault` to stop the browser from taking its default action
-* Destructure `data` and `label` from `this.state`
-* Destructure `addDataset` and `labels` from `this.props`
-* Call the `addDataSet` action creator, passing an object with two properties as an argument
-	* `data` - Set equal to `data.map( datum => parseInt( datum, 10 ) )`
-	* `label` - Set equal to the `label` variable
-* Reset state back to its initial value
+```js
+handleSubmit(event) {
 
-Finally, bind `handleSubmit` in the constructor and pass it to the `form` element's `onSubmit` prop. You should now be able to create charts, navigate between charts, add datasets to existing charts, and see those datasets display!
+}
+```
+
+Since this method will be called on a form submition we'll need to call `preventDefault` off the `event` object to prevent a browser refresh.
+
+```js
+handleSubmit(event) {
+  event.preventDefault();
+}
+```
+
+Then we'll want to destructure `data` and `label` from state and `addDataset` and `labels1` from `props` for easy referencing inside our method.
+
+```js
+handleSubmit(event) {
+  event.preventDefault();
+  const { data, label } = this.state;
+  const { addDataset, labels } = this.props;
+}
+```
+
+After that we'll want to call our `addDataset` action creator to get our data to our `chart` reducer. Remember that our action creator takes one parameter. The argument we'll provide should be an object with two properties: `data` and `label`. `data` should equal the array of values for our labels on our chart and `label` should equal the name of the dataset. Remember that our state is holding our `data` values on `state.data` and state is also holding our `label` value on `state.label`.
+
+```js
+handleSubmit(event) {
+  event.preventDefault();
+  const { data, label } = this.state;
+  const { addDataset, labels } = this.props;
+
+  addDataset({
+    data,
+    label
+  });
+}
+```
+
+We'll then want to reset our state back to their default values to clean up the old values.
+
+```js
+handleSubmit(event) {
+  event.preventDefault();
+  const { data, label } = this.state;
+  const { addDataset, labels } = this.props;
+
+  addDataset({
+    data,
+    label
+  });
+
+  this.setState({
+    label: '',
+    data: new Array( labels.length ).fill(0)
+  });
+}
+```
+
+Now all that's left is to hookup our `handleSubmit` method to the `JSX`. Let's begin by binding `this` to `handleSubmit` at the bottom of the `constructor` method. Then locate the `form` element with the `className` of `"add-dataset"` and add an  `onSubmit` prop that calls our `handleSubmit` method.
 
 **But wait! A bug?**
 

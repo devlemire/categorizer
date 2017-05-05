@@ -16,6 +16,11 @@ export default class AddDataset extends Component {
     };
 
     this.handleLabelChange = this.handleLabelChange.bind( this );
+    this.handleSubmit = this.handleSubmit.bind( this );
+  }
+
+  componentWillReceiveProps( nextProps ) {
+    this.setState({ data: new Array( nextProps.labels.length ).fill(0) });
   }
 
   handleLabelChange(event) {
@@ -33,11 +38,27 @@ export default class AddDataset extends Component {
     });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const { data, label } = this.state;
+    const { addDataset, labels } = this.props;
+
+    addDataset({
+      data,
+      label
+    });
+
+    this.setState({
+      label: '',
+      data: new Array( labels.length ).fill(0)
+    });
+  }
+
   render() {
     const { labels } = this.props;
     const { data, label } = this.state;
     return (
-      <form className="add-dataset">
+      <form className="add-dataset" onSubmit={ this.handleSubmit }>
         <h3 className="add-dataset__header">Add Dataset</h3>
         <div className="add-dataset__form-group">
           <label className="add-dataset__label">Dataset Label:</label>
